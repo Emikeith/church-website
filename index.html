@@ -3,92 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EOTC Church | Official Site</title>
+    <title>EOTC Church Portal</title>
     <style>
-        :root { --red: #8B0000; --gold: #D4AF37; --text: #333; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fdfdfd; color: var(--text); overflow-x: hidden; }
+        :root { --red: #8B0000; --gold: #D4AF37; --bg: #fdfdfd; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; }
+
+        /* HEADER */
+        header { background: var(--red); color: white; text-align: center; padding: 30px 15px; border-bottom: 5px solid var(--gold); }
         
-        /* THE KEY FIX: No iFrames = No Scrollbars */
-        header { background: var(--red); color: white; text-align: center; padding: 40px 20px; border-bottom: 5px solid var(--gold); }
-        
-        nav { 
+        /* MAIN NAVIGATION */
+        .main-nav { 
             display: flex; background: white; position: sticky; top: 0; z-index: 1000; 
-            justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-wrap: wrap;
+            justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); flex-wrap: wrap;
         }
-        
         .nav-link { 
-            padding: 15px 20px; text-decoration: none; color: var(--red); 
-            font-weight: bold; text-transform: uppercase; font-size: 0.85rem; 
+            padding: 15px 18px; text-decoration: none; color: var(--red); 
+            font-weight: bold; text-transform: uppercase; font-size: 0.8rem; cursor: pointer;
         }
         .nav-link.active { background: var(--red); color: var(--gold); }
 
-        .section { display: none; max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s; }
-        .section.active { display: block; }
+        /* SUB-NAVIGATION BAR */
+        .sub-nav { 
+            background: #eee; display: flex; justify-content: center; 
+            padding: 5px 0; border-bottom: 1px solid #ddd; display: none; 
+        }
+        .sub-nav.active { display: flex; }
+        .sub-link { 
+            padding: 8px 15px; text-decoration: none; color: #555; 
+            font-size: 0.75rem; font-weight: bold; cursor: pointer;
+        }
+        .sub-link:hover { color: var(--red); }
+
+        /* CONTENT SECTIONS */
+        .page { display: none; max-width: 1000px; margin: 30px auto; padding: 20px; animation: fadeIn 0.4s; }
+        .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Traditional Card Style */
+        /* CARDS & COMPONENTS */
         .card { 
-            background: white; border-left: 8px solid var(--red); 
-            padding: 25px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
-            border-bottom: 2px solid var(--gold);
+            background: white; border-left: 6px solid var(--red); 
+            padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--gold);
         }
 
-        @media (max-width: 600px) {
-            .nav-link { flex: 1 1 45%; text-align: center; border: 1px solid #eee; }
+        /* MOBILE FIXES */
+        @media (max-width: 700px) {
+            .nav-link { flex: 1 1 30%; text-align: center; padding: 10px 5px; font-size: 0.7rem; }
+            .sub-nav { flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን</h1>
-    <div style="color: var(--gold); font-weight: bold;">ETHIOPIAN ORTHODOX TEWAHEDO CHURCH</div>
+    <h1 style="margin:0;">የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን</h1>
+    <div style="color: var(--gold); font-weight: bold; letter-spacing: 1px;">ETHIOPIAN ORTHODOX TEWAHEDO CHURCH</div>
 </header>
 
-<nav id="navbar">
-    <a href="#home" class="nav-link" onclick="show('home')">Home</a>
-    <a href="#leadership" class="nav-link" onclick="show('leadership')">Leadership</a>
-    <a href="#lyrics" class="nav-link" onclick="show('lyrics')">Lyrics</a>
-    <a href="#gallery" class="nav-link" onclick="show('gallery')">Gallery</a>
+<nav class="main-nav">
+    <a class="nav-link" id="m-home" onclick="showMain('home')">Home</a>
+    <a class="nav-link" id="m-ministries" onclick="showMain('ministries')">Ministries</a>
+    <a class="nav-link" id="m-payment" onclick="showMain('payment')">Payment & Donation</a>
+    <a class="nav-link" id="m-calendar" onclick="showMain('calendar')">Calendar & Events</a>
+    <a class="nav-link" id="m-contact" onclick="showMain('contact')">Contact Us</a>
 </nav>
 
-<section id="home" class="section">
-    <div class="card" style="text-align: center;">
-        <h2>እንኳን ደህና መጡ (Welcome)</h2>
-        <p>This is the official portal for our spiritual community. Explore our services, leadership, and sacred hymns.</p>
+<nav class="sub-nav" id="sub-home">
+    <a class="sub-link" onclick="showPage('home-main')">Home</a>
+    <a class="sub-link" onclick="showPage('about-us')">About Us</a>
+    <a class="sub-link" onclick="showPage('clergy')">Clergy</a>
+    <a class="sub-link" onclick="showPage('services')">Services</a>
+</nav>
+
+<nav class="sub-nav" id="sub-ministries">
+    <a class="sub-link" onclick="showPage('min-hub')">Ministry Hub</a>
+    <a class="sub-link" onclick="showPage('sunday-school')">Sunday School</a>
+</nav>
+
+<section id="home-main" class="page">
+    <div class="card">
+        <h2>Welcome / እንኳን ደህና መጡ</h2>
+        <p>This is the main home page content. Highlighting recent news and spiritual messages.</p>
     </div>
 </section>
 
-<section id="leadership" class="section">
+<section id="about-us" class="page">
     <div class="card">
-        <h3 style="color: var(--red);">የካናዳ ሀገረ ስብከት ሊቀ ጳጳስ</h3>
-        <p>Leadership details go here...</p>
+        <h2>About Our Church</h2>
+        <p>History and mission of our parish.</p>
     </div>
 </section>
 
-<section id="lyrics" class="section">
+<section id="clergy" class="page">
     <div class="card">
-        <h3>መዝሙር (Lyrics)</h3>
-        <p>Your master lyrics list here...</p>
+        <h2>Our Clergy</h2>
+        <p>Profiles of the Archbishop and Parish Priests.</p>
+    </div>
+</section>
+
+<section id="services" class="page">
+    <div class="card">
+        <h2>Our Services</h2>
+        <p>Liturgy, Kidase, and Prayer schedules.</p>
+    </div>
+</section>
+
+<section id="min-hub" class="page">
+    <div class="card">
+        <h2>Ministry Hub</h2>
+        <p>Explore the various service groups within our church.</p>
+    </div>
+</section>
+
+<section id="sunday-school" class="page">
+    <div class="card">
+        <h2>Sunday School</h2>
+        <p>Information regarding children and youth education.</p>
+    </div>
+</section>
+
+<section id="payment" class="page">
+    <div class="card">
+        <h2>Donations & Payments</h2>
+        <p>Securely support the church through our payment portals.</p>
+    </div>
+</section>
+
+<section id="calendar" class="page">
+    <div class="card">
+        <h2>Calendar & Events</h2>
+        <p>Upcoming feast days and community gatherings.</p>
+    </div>
+</section>
+
+<section id="contact" class="page">
+    <div class="card">
+        <h2>Contact Us</h2>
+        <p>Address, Phone, and Email contact information.</p>
     </div>
 </section>
 
 <script>
-    function show(id) {
-        // Hide all
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    function showMain(menuId) {
+        // Hide all sub-navs
+        document.querySelectorAll('.sub-nav').forEach(n => n.classList.remove('active'));
+        // Remove active class from main links
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        // Show selected
-        document.getElementById(id).classList.add('active');
-        document.querySelector(`[href="#${id}"]`).classList.add('active');
+        // Activate selected main link
+        document.getElementById('m-' + menuId).classList.add('active');
+
+        // Logic for sub-menus
+        if (menuId === 'home') {
+            document.getElementById('sub-home').classList.add('active');
+            showPage('home-main');
+        } else if (menuId === 'ministries') {
+            document.getElementById('sub-ministries').classList.add('active');
+            showPage('min-hub');
+        } else {
+            showPage(menuId);
+        }
+    }
+
+    function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        // Show selected page
+        document.getElementById(pageId).classList.add('active');
         window.scrollTo(0,0);
     }
 
-    // Handle initial link
-    window.onload = () => {
-        const hash = window.location.hash.substring(1) || 'home';
-        show(hash);
-    };
+    // Default load
+    window.onload = () => showMain('home');
 </script>
 
 </body>

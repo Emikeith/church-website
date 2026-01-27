@@ -3,169 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EOTC Church Portal</title>
+    <title>EOTC Church | Official Site</title>
     <style>
-        :root {
-            --blood-red: #8B0000;
-            --imperial-gold: #D4AF37;
-            --charcoal: #222;
-            --bg: #f4f4f4;
-        }
-
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--bg); color: var(--charcoal); }
-
-        /* HEADER & NAVIGATION */
-        header { background: var(--blood-red); color: white; text-align: center; padding: 20px 10px; border-bottom: 4px solid var(--imperial-gold); }
+        :root { --red: #8B0000; --gold: #D4AF37; --text: #333; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fdfdfd; color: var(--text); overflow-x: hidden; }
+        
+        /* THE KEY FIX: No iFrames = No Scrollbars */
+        header { background: var(--red); color: white; text-align: center; padding: 40px 20px; border-bottom: 5px solid var(--gold); }
         
         nav { 
-            display: flex; 
-            background: #fff; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            justify-content: center; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            flex-wrap: wrap;
+            display: flex; background: white; position: sticky; top: 0; z-index: 1000; 
+            justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-wrap: wrap;
         }
         
-        .tab-btn {
-            padding: 15px 20px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-weight: bold;
-            color: var(--blood-red);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            transition: 0.3s;
-            text-decoration: none; /* For link styling */
+        .nav-link { 
+            padding: 15px 20px; text-decoration: none; color: var(--red); 
+            font-weight: bold; text-transform: uppercase; font-size: 0.85rem; 
         }
-        .tab-btn.active { background: var(--blood-red); color: var(--imperial-gold); }
+        .nav-link.active { background: var(--red); color: var(--gold); }
 
-        /* LAYOUT CONTAINERS */
-        .content-section { display: none; padding: 20px; max-width: 1000px; margin: 20px auto; background: #fff; animation: fadeIn 0.4s; min-height: 80vh; }
-        .content-section.active { display: block; }
+        .section { display: none; max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s; }
+        .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* LEADERSHIP STYLES */
-        .leader-card { display: flex; gap: 25px; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
-        .leader-img { width: 240px; height: 320px; object-fit: cover; border: 4px solid #fff; outline: 1px solid var(--imperial-gold); }
-
-        /* LYRICS STYLE */
-        .lyrics-box { border-left: 6px solid var(--blood-red); padding: 20px; margin-bottom: 25px; background: #fafafa; }
-        .lyrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
-        .amharic { font-size: 1.1rem; font-weight: bold; color: var(--blood-red); line-height: 1.8; }
-        .english { font-style: italic; color: #555; line-height: 1.6; }
-
-        .pdf-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 15px;
-            background: var(--imperial-gold);
-            color: var(--blood-red);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border-radius: 4px;
+        /* Traditional Card Style */
+        .card { 
+            background: white; border-left: 8px solid var(--red); 
+            padding: 25px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+            border-bottom: 2px solid var(--gold);
         }
 
-        /* MOBILE FIXES */
-        @media (max-width: 700px) {
-            .leader-card, .lyrics-grid { flex-direction: column; grid-template-columns: 1fr; }
-            .leader-img { width: 100%; height: auto; }
-            .tab-btn { flex: 1 1 45%; padding: 10px; text-align: center; }
+        @media (max-width: 600px) {
+            .nav-link { flex: 1 1 45%; text-align: center; border: 1px solid #eee; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0; font-size: 1.5rem;">የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን</h1>
-    <div style="color: var(--imperial-gold); font-size: 0.9rem; margin-top:5px;">ETHIOPIAN ORTHODOX TEWAHEDO CHURCH</div>
+    <h1>የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን</h1>
+    <div style="color: var(--gold); font-weight: bold;">ETHIOPIAN ORTHODOX TEWAHEDO CHURCH</div>
 </header>
 
-<nav id="mainNav">
-    <a href="#leadership" class="tab-btn" onclick="openTab('leadership')">Leadership</a>
-    <a href="#notices" class="tab-btn" onclick="openTab('notices')">Notices</a>
-    <a href="#lyrics" class="tab-btn" onclick="openTab('lyrics')">Lyrics</a>
-    <a href="#gallery" class="tab-btn" onclick="openTab('gallery')">Gallery</a>
+<nav id="navbar">
+    <a href="#home" class="nav-link" onclick="show('home')">Home</a>
+    <a href="#leadership" class="nav-link" onclick="show('leadership')">Leadership</a>
+    <a href="#lyrics" class="nav-link" onclick="show('lyrics')">Lyrics</a>
+    <a href="#gallery" class="nav-link" onclick="show('gallery')">Gallery</a>
 </nav>
 
-<section id="leadership" class="content-section">
-    <h2 style="text-align:center">የቤተክርስቲያን መሪዎች (Leadership)</h2>
-    <div class="leader-card">
-        <img src="https://via.placeholder.com/240x320" class="leader-img" alt="Archbishop">
-        <div>
-            <span style="background:var(--blood-red); color:white; padding:3px 8px; font-size:0.7rem;">ARCHBISHOP</span>
-            <h3 style="margin:10px 0;">ብጹዕ አቡነ (ስም)</h3>
-            <p>Spiritual leader for the Diocese. (የሀገረ ስብከቱ ሊቀ ጳጳስ...)</p>
-        </div>
+<section id="home" class="section">
+    <div class="card" style="text-align: center;">
+        <h2>እንኳን ደህና መጡ (Welcome)</h2>
+        <p>This is the official portal for our spiritual community. Explore our services, leadership, and sacred hymns.</p>
     </div>
 </section>
 
-<section id="notices" class="content-section">
-    <h2 style="text-align:center">ማስታወቂያ (Notices)</h2>
-    <div class="lyrics-box">
-        <h3>Weekly Service</h3>
-        <p>Sunday Liturgy: 6:00 AM</p>
+<section id="leadership" class="section">
+    <div class="card">
+        <h3 style="color: var(--red);">የካናዳ ሀገረ ስብከት ሊቀ ጳጳስ</h3>
+        <p>Leadership details go here...</p>
     </div>
 </section>
 
-<section id="lyrics" class="content-section">
-    <h2 style="text-align:center">መዝሙር (Lyrics)</h2>
-    <div class="lyrics-box">
-        <h3 style="margin:0; color:var(--blood-red);">ሰላም ለኪ (Selam Leki)</h3>
-        <div class="lyrics-grid">
-            <div class="amharic">ሰላም ለኪ እያልን እንሰግድልሻለን...</div>
-            <div class="english">Peace be unto you, we bow down...</div>
-        </div>
-        <a href="#" class="pdf-btn">📄 Download PDF</a>
+<section id="lyrics" class="section">
+    <div class="card">
+        <h3>መዝሙር (Lyrics)</h3>
+        <p>Your master lyrics list here...</p>
     </div>
-</section>
-
-<section id="gallery" class="content-section">
-    <h2 style="text-align:center">ፎቶ ግራፍ (Gallery)</h2>
-    <div style="text-align:center; padding:50px;">Gallery Content Here...</div>
 </section>
 
 <script>
-    function openTab(tabName) {
-        // 1. Hide all sections
-        var sections = document.getElementsByClassName("content-section");
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.remove("active");
-        }
-
-        // 2. Deactivate all buttons
-        var buttons = document.getElementsByClassName("tab-btn");
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove("active");
-        }
-
-        // 3. Show current section and activate button
-        var activeSection = document.getElementById(tabName);
-        if (activeSection) {
-            activeSection.classList.add("active");
-            document.querySelector('a[href="#' + tabName + '"]').classList.add("active");
-        }
-        
-        window.scrollTo(0, 0);
+    function show(id) {
+        // Hide all
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        // Show selected
+        document.getElementById(id).classList.add('active');
+        document.querySelector(`[href="#${id}"]`).classList.add('active');
+        window.scrollTo(0,0);
     }
 
-    // LOGIC TO HANDLE DIRECT URL LINKS
-    function handleRouting() {
-        var hash = window.location.hash.substring(1); // Get name after #
-        if (hash) {
-            openTab(hash);
-        } else {
-            openTab('leadership'); // Default start tab
-        }
-    }
-
-    // Run on page load
-    window.addEventListener('load', handleRouting);
-    // Run if user clicks 'back' or 'forward' in browser
-    window.addEventListener('hashchange', handleRouting);
+    // Handle initial link
+    window.onload = () => {
+        const hash = window.location.hash.substring(1) || 'home';
+        show(hash);
+    };
 </script>
 
 </body>

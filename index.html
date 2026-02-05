@@ -27,16 +27,15 @@
     line-height: 1.6;
   }
 
-  /* 2. PREMIUM NAVIGATION (Synced with Clergy Page) */
+  /* 2. PREMIUM NAVIGATION */
   .main-nav {
     position: fixed; top: 0; width: 100%; height: 80px;
-    background: transparent; /* Initial transparent state */
+    background: transparent; 
     display: flex; justify-content: space-between; align-items: center;
     padding: 0 5%; z-index: 9999;
     transition: 0.4s ease;
   }
 
-  /* Navigation state on scroll */
   .main-nav.scrolled {
     background: var(--glass);
     height: 70px;
@@ -61,14 +60,12 @@
     height: 100%; display: flex; align-items: center;
   }
 
-  /* Animated Submenu Indicator */
   .menu-item.has-sub > a::after {
     content: ''; width: 5px; height: 5px; border-right: 2px solid var(--accent-gold); border-bottom: 2px solid var(--accent-gold);
     transform: rotate(45deg); margin-left: 8px; transition: 0.3s;
   }
   .menu-item:hover > a::after { transform: rotate(-135deg); margin-top: 5px; }
 
-  /* Sub-menu styling */
   .sub-menu {
     position: absolute; top: 80px; left: 0; background: var(--glass); min-width: 220px;
     display: none; flex-direction: column; border: 1px solid var(--accent-gold); border-top: none;
@@ -88,7 +85,6 @@
     margin-left: 10px; border: 1px solid white; text-decoration: none; font-size: 10px; animation: pulse 2s infinite;
   }
 
-  /* Mobile Toggle */
   .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
 
   @media (max-width: 1100px) {
@@ -126,7 +122,6 @@
 
   /* 4. CONTENT CARDS & LAYOUT */
   .container { width: 90%; max-width: 1200px; margin: -60px auto 80px; position: relative; z-index: 20; }
-  
   .card {
     background: var(--bg-card); border-radius: 12px; padding: 35px;
     box-shadow: 0 15px 45px rgba(0,0,0,0.1), 0 0 20px var(--glow);
@@ -135,7 +130,6 @@
 
   .section-label { color: var(--accent-gold); font-weight: 800; letter-spacing: 3px; font-size: 12px; margin-bottom: 15px; text-transform: uppercase; }
 
-  /* Gallery Grid */
   .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
   .gallery-item { background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--accent-gold); transition: 0.3s; }
   .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px var(--glow); }
@@ -144,11 +138,9 @@
   .img-frame img.active { opacity: 1; }
   .gallery-cap { padding: 15px; font-weight: 800; font-size: 14px; background: white; }
 
-  /* Building Tracker */
   .progress-bar { height: 15px; background: #e0d5b5; border-radius: 20px; margin: 20px 0; overflow: hidden; border: 1px solid var(--accent-gold); }
   .progress-fill { height: 100%; width: 65%; background: linear-gradient(90deg, var(--text-primary), var(--accent-gold)); transition: 2s; }
 
-  /* Event Item */
   .event-item { border-left: 4px solid var(--accent-gold); padding: 15px; margin-bottom: 15px; background: white; text-align: left; }
 
   @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); } 100% { box-shadow: 0 0 0 12px rgba(255,0,0,0); } }
@@ -163,9 +155,7 @@
     <div class="logo-sample">✥</div>
     <div class="nav-brand-text">DEBRE GENET WINNIPEG</div>
   </a>
-  
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
   <div class="nav-links" id="navLinks">
     <div class="menu-item has-sub">
       <a href="javascript:void(0)" onclick="toggleSub(this)">HOME</a>
@@ -206,7 +196,7 @@
 
 <section class="hero-vid-section">
   <div class="video-bg">
-    <iframe src="https://youtu.be/CMSl9QCcIHg/embed/P_P_K1_U-t0?autoplay=1&mute=1&controls=0&loop=1&playlist=P_P_K1_U-t0&rel=0&modestbranding=1" frameborder="0"></iframe>
+    <iframe src="https://www.youtube.com/embed/P_P_K1_U-t0?autoplay=1&mute=1&controls=0&loop=1&playlist=P_P_K1_U-t0&rel=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -264,14 +254,12 @@
 </footer>
 
 <script>
-  /* 1. NAVBAR SCROLL EFFECT */
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (window.scrollY > 80) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
   });
 
-  /* 2. MOBILE MENU LOGIC (Synced with Clergy) */
   function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
   
   function toggleSub(el) {
@@ -283,7 +271,6 @@
     }
   }
 
-  /* 3. ROTATING GALLERY */
   const slideStates = [0, 0];
   const frames = [
     document.getElementById('frame-0').getElementsByTagName('img'),
@@ -297,7 +284,6 @@
     });
   }, 5000);
 
-  /* 4. DYNAMIC NOTICES */
   const notices = ["እንኳን ለብርሃነ ጥምቀቱ በሰላም አደረሳችሁ::", "Building Project Goal: $1.2M.", "Sunday School: Every Sunday at 10:30 AM."];
   let nIdx = 0;
   setInterval(() => {
@@ -310,7 +296,6 @@
     }, 500);
   }, 6000);
 
-  /* 5. GOOGLE SHEETS FETCH */
   const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMZieFTAsbcpW9ROmJzlRuVJv34SEYx-5q-jg40his0eVg0D5Jef5x4yFJvfWizjGToIBB1Ycu2KLE/pub?output=csv";
   async function fetchEvents() {
     try {
@@ -337,7 +322,5 @@
   }
   fetchEvents();
 </script>
-
 </body>
 </html>
-

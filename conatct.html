@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Contact Us - Debre Genet Winnipeg</title>
+<style>
+  /* --- SACRED PALETTE & FONTS --- */
+  :root {
+    --text-primary: #630F16;      
+    --accent-gold: #D4A017;       
+    --bg-page: #F9E8B2;           
+    --bg-card: #FFF8E1;           
+    --white: #ffffff;
+    --glass: rgba(99, 15, 22, 0.96);
+    --glow: rgba(212, 160, 23, 0.45);
+  }
+
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  body { 
+    margin: 0; padding: 0; 
+    background: var(--bg-page); 
+    font-family: 'Nyala', 'Abyssinica SIL', serif; 
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  
+  body::after {
+    content: "✥"; position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); font-size: 60vh;
+    color: var(--accent-gold); opacity: 0.04; z-index: -1; pointer-events: none;
+  }
+
+  /* --- NAVIGATION --- */
+  .main-nav {
+    position: fixed; top: 0; width: 100%; height: 80px;
+    background: var(--glass);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%; z-index: 9999;
+    border-bottom: 3px solid var(--accent-gold);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .nav-brand-group { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+  .logo-sample {
+    width: 45px; height: 45px; background: var(--accent-gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: var(--text-primary); border: 2px solid white;
+  }
+  .nav-brand-text { color: var(--accent-gold); font-weight: 900; font-size: 18px; letter-spacing: 1px; }
+
+  .nav-links { display: flex; gap: 5px; height: 100%; align-items: center; }
+  .menu-item { position: relative; height: 100%; display: flex; align-items: center; }
+  .menu-item > a {
+    color: #FDF5E6; text-decoration: none; font-weight: bold; font-size: 12px;
+    padding: 0 15px; text-transform: uppercase; transition: 0.3s;
+    height: 100%; display: flex; align-items: center;
+  }
+
+  .active-page { background: var(--accent-gold) !important; color: var(--text-primary) !important; }
+
+  .sub-menu {
+    position: absolute; top: 80px; left: 0;
+    background: var(--glass); min-width: 220px;
+    display: none; flex-direction: column;
+    border: 1px solid var(--accent-gold); border-top: none;
+  }
+  .sub-menu a { color: #FDF5E6; padding: 12px 20px; text-decoration: none; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .sub-menu a:hover { background: var(--accent-gold); color: var(--text-primary); }
+  .menu-item:hover .sub-menu { display: flex; }
+
+  .btn-live {
+    background: #FF0000; color: white !important; padding: 8px 16px; border-radius: 50px;
+    display: flex; align-items: center; gap: 8px; font-weight: 900 !important; 
+    margin-left: 10px; border: 1px solid white; text-decoration: none; font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
+
+  /* --- HERO SECTION --- */
+  .hub-hero {
+    background: var(--bg-card); text-align: center;
+    padding: 140px 20px 60px 20px;
+    border-bottom: 8px double var(--accent-gold);
+    width: 100%; box-shadow: 0 0 20px var(--glow);
+  }
+
+  .scripture-wrap {
+    width: 90%; max-width: 850px; margin: 0 auto 30px auto; padding: 25px;
+    text-align: center; border: 2px solid var(--accent-gold); background: var(--bg-card);
+    position: relative;
+  }
+  .scripture-wrap::before {
+    content: "✥"; position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-card); padding: 0 15px; color: var(--accent-gold); font-size: 24px;
+  }
+  .verse-am { font-size: 22px; font-weight: bold; display: block; margin-bottom: 8px; }
+  .verse-en { font-style: italic; color: #555; display: block; }
+
+  /* --- CONTACT GRID --- */
+  .section-tag { 
+    width: 92%; max-width: 1100px; margin: 50px auto 25px auto;
+    border-bottom: 3px solid var(--accent-gold); padding-bottom: 10px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .tag-am { font-size: 24px; font-weight: bold; }
+  .tag-en { font-size: 14px; color: var(--accent-gold); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+
+  .contact-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 25px; width: 92%; max-width: 1100px; margin: 0 auto; 
+  }
+
+  .contact-card { 
+    background: var(--white); padding: 30px; 
+    border-radius: 8px; border-left: 5px solid var(--text-primary);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
+  }
+  .contact-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px var(--glow); }
+
+  .ministry-title { 
+    font-size: 20px; font-weight: bold; margin-bottom: 15px; color: var(--text-primary);
+    display: block; border-bottom: 1px solid #eee; padding-bottom: 10px;
+  }
+  .contact-detail { margin-bottom: 12px; font-size: 15px; }
+  .contact-detail strong { color: var(--accent-gold); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* --- MAP --- */
+  .map-outer {
+    width: 92%; max-width: 1100px; margin: 40px auto 80px auto;
+    border: 4px solid var(--accent-gold); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1); height: 450px;
+  }
+
+  @media (max-width: 1100px) {
+    .menu-toggle { display: block; }
+    .nav-links {
+      position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+      background: var(--text-primary); flex-direction: column;
+      align-items: flex-start; padding: 100px 30px; transition: 0.4s;
+    }
+    .nav-links.active { right: 0; }
+    .menu-item { width: 100%; }
+    .menu-item > a { width: 100%; height: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  }
+
+  .footer { 
+    width: 100%; text-align: center; padding: 60px 20px; 
+    background: var(--bg-card); border-top: 4px solid var(--accent-gold); 
+    color: var(--text-primary); font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="main-nav">
+  <a href="index.html" class="nav-brand-group">
+    <div class="logo-sample">✥</div>
+    <div class="nav-brand-text">DEBRE GENET</div>
+  </a>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="nav-links" id="navLinks">
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">HOME ▾</a>
+      <div class="sub-menu"><a href="clergy.html">Clergy</a><a href="services.html">Services</a><a href="about.html">About Us</a></div>
+    </div>
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES ▾</a>
+      <div class="sub-menu"><a href="ministry-hub.html">Ministry Hub</a><a href="sunday-school.html">Sunday School</a><a href="abinet.html">Abinet School</a><a href="care.html">Pastoral Care</a><a href="sponsorship.html">Sponsorship</a></div>
+    </div>
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR ▾</a>
+      <div class="sub-menu"><a href="full-calendar.html">Monthly Calendar</a><a href="upcoming.html">Upcoming Events</a></div>
+    </div>
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS ▾</a>
+      <div class="sub-menu"><a href="donations.html">Donations</a><a href="building.html">Building Project</a></div>
+    </div>
+    <div class="menu-item"><a href="contact.html" class="active-page">CONTACT US</a></div>
+    <a href="https://youtube.com/live" target="_blank" class="btn-live">● LIVE NOW</a>
+  </div>
+</nav>
+
+<header class="hub-hero">
+  <div class="scripture-wrap">
+    <span class="verse-am">"ለምኑ ይሰጣችሁማል፤ ፈልጉ ታገኙማላችሁ"</span>
+    <span class="verse-en">"Ask, and it will be given to you; seek, and you will find."</span>
+    <span style="font-size: 11px; opacity: 0.8; display: block; margin-top: 5px;">ማቴዎስ ፯፡፯ | Matthew 7:7</span>
+  </div>
+  <h1 style="margin:0; font-size: clamp(30px, 7vw, 50px);">አግኙን</h1>
+  <p style="color: var(--accent-gold); font-weight: 800; letter-spacing: 4px; text-transform: uppercase;">Get In Touch</p>
+</header>
+
+<div class="section-tag">
+  <span class="tag-am">ዋና መሥሪያ ቤት</span>
+  <span class="tag-en">Main Office</span>
+</div>
+
+<div class="contact-grid">
+  <div class="contact-card" style="border-left-color: var(--accent-gold);">
+    <span class="ministry-title">ጠቅላላ መረጃ (General Inquiries)</span>
+    <div class="contact-detail"><strong>የቤተክርስቲያን አድራሻ (Address)</strong>353 Mountain Ave, Winnipeg, MB R2W 1J9</div>
+    <div class="contact-detail"><strong>ስልክ (Phone)</strong>+1 (204) 555-0123</div>
+    <div class="contact-detail"><strong>ኢሜይል (Email)</strong>office@debregenetwinnipeg.ca</div>
+  </div>
+
+  <div class="contact-card">
+    <span class="ministry-title">መንፈሳዊ አገልግሎት (Pastoral Care)</span>
+    <div class="contact-detail"><strong>የነፍስ አባት (Head Priest)</strong>Memeher [Name]</div>
+    <div class="contact-detail"><strong>ምክክር (Counseling)</strong>By Appointment / በቀጠሮ</div>
+    <div class="contact-detail"><strong>አስቸኳይ ስልክ (Emergency)</strong>+1 (204) 555-0199</div>
+  </div>
+</div>
+
+<div class="section-tag">
+  <span class="tag-am">የአገልግሎት ክፍሎች</span>
+  <span class="tag-en">Ministry Hub</span>
+</div>
+
+<div class="contact-grid">
+  <div class="contact-card">
+    <span class="ministry-title">ሰበካ ጉባኤ (Sebeka Gubae)</span>
+    <div class="contact-detail"><strong>ጸሐፊ (Secretary)</strong>[Name]</div>
+    <div class="contact-detail"><strong>ኢሜይል (Email)</strong>admin@debregenetwinnipeg.ca</div>
+  </div>
+
+  <div class="contact-card">
+    <span class="ministry-title">ሰንበት ትምህርት ቤት (Sunday School)</span>
+    <div class="contact-detail"><strong>አስተባባሪ (Coordinator)</strong>[Name]</div>
+    <div class="contact-detail"><strong>ኢሜይል (Email)</strong>youth@debregenetwinnipeg.ca</div>
+  </div>
+
+  <div class="contact-card">
+    <span class="ministry-title">ህንፃ ግንባታ (Building Project)</span>
+    <div class="contact-detail"><strong>ሰብሳቢ (Committee Lead)</strong>[Name]</div>
+    <div class="contact-detail"><strong>ስልክ (Hotline)</strong>+1 (204) 555-0888</div>
+  </div>
+</div>
+
+<div class="section-tag">
+  <span class="tag-am">መገኛችን</span>
+  <span class="tag-en">Our Location</span>
+</div>
+
+<div class="map-outer">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2568.513224765636!2d-97.1353235234857!3d49.9265144714972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42ea2f7d1f5b0001%3A0x8898b0f836592655!2s353%20Mountain%20Ave%2C%20Winnipeg%2C%20MB%20R2W%201J9!5e0!3m2!1sen!2sca!4v1700000000000!5m2!1sen!2sca" 
+    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+  </iframe>
+</div>
+
+<footer class="footer">
+  353 Mountain Ave, Winnipeg, MB R2W 1J9<br>
+  Debre Genet EOTC Winnipeg © 2026<br><br>
+  <strong>"Peace be to this house." - Luke 10:5</strong>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+  function toggleSub(el) { 
+    if (window.innerWidth <= 1100) {
+      const parent = el.parentElement;
+      const isOpen = parent.classList.contains('open');
+      document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
+      if (!isOpen) parent.classList.add('open');
+    } 
+  }
+</script>
+
+</body>
+</html>

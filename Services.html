@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Services Portal - Debre Genet EOTC Winnipeg</title>
+<style>
+  :root {
+    --text-primary: #630F16;      /* Deep Red/Burgundy */
+    --accent-gold: #D4A017;       /* Main Gold Accent */
+    --bg-page: #F9E8B2;           /* Page Background */
+    --bg-card: #FFF8E1;           /* Light Cream Card */
+    --subtle-silver: #C0C0C0;     /* Subtle Silver Grey */
+    --white: #ffffff;
+  }
+
+  /* 1. BASE STYLES & BACKGROUND WATERMARK */
+  body { 
+    margin: 0; padding: 0; 
+    background: var(--bg-page); 
+    font-family: 'Nyala', 'Abyssinica SIL', serif; 
+    color: var(--text-primary); 
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  body::after {
+    content: "♰";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60vh;
+    color: var(--accent-gold);
+    opacity: 0.04; 
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .container { width: 100%; display: flex; flex-direction: column; align-items: center; padding-bottom: 100px; }
+
+  /* 2. SCRIPTURE BOX */
+  .scripture-wrap {
+    width: 90%; max-width: 800px; margin: 40px 0 20px 0; padding: 30px;
+    text-align: center; border: 2px solid var(--accent-gold); position: relative; 
+    background: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .scripture-wrap::before {
+    content: "♰"; position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-page); padding: 0 15px; color: var(--text-primary); font-size: 28px;
+  }
+  .verse-am { color: var(--text-primary); font-size: 24px; font-weight: bold; margin-bottom: 12px; display: block; }
+  .verse-en { color: #555; font-size: 16px; font-style: italic; display: block; line-height: 1.4; }
+  .verse-ref { display: block; margin-top: 10px; font-size: 12px; font-weight: bold; color: var(--accent-gold); text-transform: uppercase; }
+
+  /* 3. MAJESTIC HEADER */
+  .portal-header { 
+    text-align: center; 
+    padding: 60px 20px; 
+    background: var(--bg-card); 
+    width: 100%; 
+    border-bottom: 8px double var(--accent-gold); 
+    box-sizing: border-box;
+    margin-bottom: 50px;
+  }
+  .portal-title-am { color: var(--text-primary); font-size: clamp(32px, 8vw, 48px); font-weight: bold; margin: 0; }
+  .portal-title-en { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 4px; margin-top: 10px; font-weight: 800; }
+
+  /* 4. SERVICES GRID */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    width: 92%;
+    max-width: 1100px;
+  }
+
+  /* 5. SERVICE CARD */
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--subtle-silver);
+    border-top: 6px solid var(--text-primary);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+  }
+  .service-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+
+  .card-header { margin-bottom: 20px; border-bottom: 1px solid rgba(212, 160, 23, 0.2); padding-bottom: 15px; }
+  .service-title-am { font-size: 24px; font-weight: bold; color: var(--text-primary); display: block; }
+  .service-title-en { font-size: 13px; color: var(--accent-gold); text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+  
+  .desc-group { margin-bottom: 20px; }
+  .label { font-size: 11px; font-weight: 800; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px; }
+  .desc-am { font-size: 17px; line-height: 1.5; color: var(--text-primary); display: block; font-weight: 500; }
+  .desc-en { font-size: 14px; line-height: 1.4; color: #666; font-style: italic; display: block; margin-top: 6px; }
+
+  .payment-tag {
+    display: inline-block;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    padding: 5px 12px;
+    border: 1px solid var(--subtle-silver);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 15px;
+    letter-spacing: 1px;
+  }
+
+  .btn-proceed {
+    margin-top: auto;
+    background: var(--text-primary);
+    color: var(--bg-card);
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    border: 1px solid transparent;
+  }
+  .btn-proceed:hover { background: var(--accent-gold); color: var(--white); }
+
+  .footer-notice {
+    width: 100%; text-align: center; padding: 60px 0; 
+    background: var(--bg-card); border-top: 4px solid var(--accent-gold); 
+    color: var(--text-primary); font-size: 14px; margin-top: 80px; 
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="scripture-wrap">
+    <span class="verse-am">"ለቅዱሳን በሚሆን አገልግሎት ለሚረዱት እግዚአብሔር ፍቅራችሁን አይረሳምና"</span>
+    <span class="verse-en">"For God is not unjust to forget your work and labor of love which you have shown toward His name."</span>
+    <span class="verse-ref">ዕብራውያን 6:10 | Hebrews 6:10</span>
+  </div>
+
+  <header class="portal-header">
+    <h1 class="portal-title-am">የአገልግሎቶችና የክፍያ ማእከል</h1>
+    <h2 class="portal-title-en">Services & Online Payments Portal</h2>
+  </header>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="card-header">
+        <span class="service-title-am">የአባልነት አገልግሎት</span>
+        <span class="service-title-en">Church Membership</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">መግለጫ / Description</span>
+        <span class="desc-am">የቤተክርስቲያኑ ቋሚ አባል በመሆን መንፈሳዊ ግዴታን ለመወጣት የሚያስችል ምዝገባ::</span>
+        <span class="desc-en">Become a registered member of our parish to support the church and community.</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">የክፍያ ሁኔታ / Payment</span>
+        <span class="desc-am">ወርሃዊ ክፍያ በ e-Transfer ወይም Zeffy መፈጸም ይቻላል::</span>
+        <span class="desc-en">Monthly contributions accepted via Interac e-Transfer or Zeffy.</span>
+        <span class="payment-tag">METHOD: E-TRANSFER / ZEFFY</span>
+      </div>
+      <a href="/membership" class="btn-proceed">OPEN REGISTRATION</a>
+    </div>
+
+    <div class="service-card">
+      <div class="card-header">
+        <span class="service-title-am">የክርስትና አገልግሎት</span>
+        <span class="service-title-en">Holy Baptism</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">መግለጫ / Description</span>
+        <span class="desc-am">ለልጆች ወይም ለአዋቂዎች የሚሰጥ የክርስትና ስርዓት ምዝገባ::</span>
+        <span class="desc-en">Application for the Sacrament of Baptism and preparatory information.</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">የክፍያ ሁኔታ / Payment</span>
+        <span class="desc-am">የአገልግሎት ክፍያ በ Zeffy ወይም በኢሜል ዝውውር መክፈል ይቻላል::</span>
+        <span class="desc-en">Service fees can be processed via Zeffy or Interac e-Transfer.</span>
+        <span class="payment-tag">METHOD: ZEFFY / E-TRANSFER</span>
+      </div>
+      <a href="/baptism" class="btn-proceed">REQUEST BAPTISM</a>
+    </div>
+
+    <div class="service-card" style="border-top-color: var(--accent-gold);">
+      <div class="card-header">
+        <span class="service-title-am">አብረን እንገንባ</span>
+        <span class="service-title-en">Together We Build</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">መግለጫ / Description</span>
+        <span class="desc-am">ለአዲሱ ቤተክርስቲያን ግንባታ የሚውል ልዩ የገቢ ማሰባሰቢያ ፕሮጀክት::</span>
+        <span class="desc-en">Our historic project to build a permanent sanctuary for our parish.</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">የክፍያ ሁኔታ / Payment</span>
+        <span class="desc-am">በ Zeffy (ከክፍያ ነፃ) ወይም በ e-Transfer መርዳት ይቻላል::</span>
+        <span class="desc-en">Support us via Zeffy (0% fees) or direct Interac e-Transfer.</span>
+        <span class="payment-tag">METHOD: ZEFFY (PREFERED)</span>
+      </div>
+      <a href="/building-project" class="btn-proceed">VIEW PROGRESS & GIVE</a>
+    </div>
+
+    <div class="service-card">
+      <div class="card-header">
+        <span class="service-title-am">አስራትና በኩራት</span>
+        <span class="service-title-en">Tithing & First Fruits</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">መግለጫ / Description</span>
+        <span class="desc-am"> ከአስር አንድን ለእግዚአብሔር ቤት ማቅረብ::</span>
+        <span class="desc-en">Fulfill the biblical commandment of tithing one-tenth to the House of God.</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">የክፍያ ሁኔታ / Payment</span>
+        <span class="desc-am">በ e-Transfer ወይም በ Zeffy በኩል መላክ ይቻላል::</span>
+        <span class="desc-en">Submit your tithes securely via e-Transfer or our Zeffy portal.</span>
+        <span class="payment-tag">METHOD: E-TRANSFER / ZEFFY</span>
+      </div>
+      <a href="/tithing" class="btn-proceed">GIVE OFFERING</a>
+    </div>
+
+    <div class="service-card">
+      <div class="card-header">
+        <span class="service-title-am">የስም መጥሪያ / ዝክር</span>
+        <span class="service-title-en">Commemoration</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">መግለጫ / Description</span>
+        <span class="desc-am">በቅዳሴ ጊዜ እንዲታሰቡ የሚፈልጉትን የክርስቲያን ስም ማስመዝገብ::</span>
+        <span class="desc-en">Submit Christian names to be commemorated during Divine Liturgy.</span>
+      </div>
+      <div class="desc-group">
+        <span class="label">የክፍያ ሁኔታ / Payment</span>
+        <span class="desc-am">ለዝክር የሚሆን ስጦታ በ e-Transfer ወይም Zeffy መክፈል ይቻላል::</span>
+        <span class="desc-en">Small offerings for name-calling can be sent via e-Transfer.</span>
+        <span class="payment-tag">METHOD: E-TRANSFER</span>
+      </div>
+      <a href="/commemoration" class="btn-proceed">SUBMIT NAMES</a>
+    </div>
+
+  </div>
+
+  <footer class="footer-notice">
+    ለጥያቄዎች ወይም ለተጨማሪ መረጃ በቤተክርስቲያኑ ጽሕፈት ቤት በኩል ያግኙን:: <br><br>
+    <strong>For assistance, please contact the Church Administration Office.</strong><br>
+    353 Mountain Ave, Winnipeg, MB R2W 1J9
+  </footer>
+
+</div>
+
+</body>
+</html>

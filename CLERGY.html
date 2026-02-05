@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Administration & Clergy - Debre Genet Winnipeg</title>
+<style>
+  :root {
+    --text-primary: #630F16;      /* Deep Burgundy */
+    --accent-gold: #D4A017;       /* Gold */
+    --bg-page: #F9E8B2;           /* Page Background */
+    --bg-card: #FFF8E1;           /* Cream Card */
+    --white: #ffffff;
+    --subtle-silver: #C0C0C0;
+  }
+
+  /* 1. LAYOUT & WATERMARK */
+  body { 
+    margin: 0; padding: 0; 
+    background: var(--bg-page); 
+    font-family: 'Nyala', 'Abyssinica SIL', serif; 
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+  
+  body::after {
+    content: "♰";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60vh;
+    color: var(--accent-gold);
+    opacity: 0.04; 
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .container { width: 100%; display: flex; flex-direction: column; align-items: center; padding-bottom: 100px; }
+
+  /* 2. SCRIPTURE BOX (TOP PRIORITY) */
+  .scripture-wrap {
+    width: 90%; max-width: 800px; margin: 40px 0 20px 0; padding: 30px;
+    text-align: center; border: 2px solid var(--accent-gold); position: relative; 
+    background: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    z-index: 2;
+  }
+  .scripture-wrap::before {
+    content: "♰"; position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-page); padding: 0 15px; color: var(--text-primary); font-size: 28px;
+  }
+  .d-am { color: var(--text-primary); font-size: 20px; font-weight: bold; margin-bottom: 10px; display: block; }
+  .d-en { color: #555; font-size: 15px; font-style: italic; display: block; line-height: 1.4; }
+  .verse-ref { display: block; margin-top: 10px; font-size: 12px; font-weight: bold; color: var(--accent-gold); text-transform: uppercase; }
+
+  /* 3. MAJESTIC HEADER */
+  .clergy-header { 
+    text-align: center; 
+    padding: 60px 20px; 
+    background: var(--bg-card); 
+    width: 100%; 
+    border-top: 8px double var(--accent-gold); 
+    border-bottom: 8px double var(--accent-gold); 
+    box-sizing: border-box;
+    margin-bottom: 60px;
+  }
+  .main-title-am { color: var(--text-primary); font-size: clamp(32px, 8vw, 48px); font-weight: bold; margin: 0; }
+  .main-title-en { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 4px; margin-top: 10px; font-weight: 800; }
+
+  /* 4. CLERGY CARDS GRID/LIST */
+  .leader-card {
+    width: 90%; max-width: 280px; background-color: var(--bg-card); 
+    border: 1px solid var(--subtle-silver);
+    display: flex; flex-direction: column; margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+  }
+  .leader-card:hover { transform: translateY(-5px); }
+
+  /* Hierarchy Specific Styling */
+  .archbishop-card { 
+    border: 5px solid var(--accent-gold) !important; 
+    outline: 2px solid var(--text-primary);
+    outline-offset: -10px;
+  }
+  .head-priest-card { 
+    border: 5px solid var(--text-primary) !important;
+    border-top: 5px solid var(--accent-gold) !important;
+    border-bottom: 5px solid var(--accent-gold) !important;
+  }
+
+  /* 5. IMAGE SLIDER SYSTEM */
+  .image-wrap {
+    width: 100%; height: 320px;
+    position: relative; overflow: hidden; background: #000;
+  }
+
+  .slider-img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center top;
+    opacity: 0; animation: imageFade 12s infinite;
+  }
+
+  .img-1 { animation-delay: 0s; }
+  .img-2 { animation-delay: 4s; }
+  .img-3 { animation-delay: 8s; }
+
+  @keyframes imageFade {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    33% { opacity: 1; }
+    43% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* 6. CONTENT STYLES */
+  .content-side { padding: 35px 25px; text-align: center; }
+  .name-am { color: var(--text-primary); font-size: 24px; font-weight: bold; margin-bottom: 5px; }
+  .title-en { color: var(--accent-gold); font-size: 13px; text-transform: uppercase; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px; }
+  .bio-am { color: #222; font-size: 17px; line-height: 1.6; margin-bottom: 10px; }
+  .bio-en { color: #666; font-size: 14px; font-style: italic; margin-bottom: 25px; }
+
+  .btn {
+    display: inline-block; 
+    background: var(--text-primary); 
+    color: var(--white) !important;
+    padding: 14px 30px; 
+    text-decoration: none; 
+    border: 1.5px solid var(--accent-gold);
+    font-weight: bold; 
+    font-size: 12px; 
+    text-transform: uppercase;
+    transition: 0.3s ease;
+    letter-spacing: 1px;
+  }
+  .btn:hover { background: var(--accent-gold); border-color: var(--text-primary); }
+
+  /* 7. DESKTOP ADAPTATION */
+  @media (min-width: 900px) {
+    .leader-card { max-width: 950px; flex-direction: row; height: 400px; }
+    .image-wrap { width: 40%; height: 100%; }
+    .content-side { width: 60%; text-align: left; padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .btn { align-self: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="scripture-wrap">
+    <span class="d-am">“የእግዚአብሔርን ቃል የነገሯችሁን መሪዎቻችሁን አስቡ፤ የኑሯቸውንም ፍሬ እየተመለከታችሁ በእምነታቸው ምሰሏቸው።”</span>
+    <span class="d-en">“Remember your leaders, who spoke the word of God to you. Consider the outcome of their way of life and imitate their faith.”</span>
+    <span class="verse-ref">ዕብራውያን ፲፫፡፯ | Hebrews 13:7</span>
+  </div>
+
+  <header class="clergy-header">
+    <div class="main-title-am">አስተዳደር እና ካህናት</div>
+    <div class="main-title-en">Administration & Clergy</div>
+  </header>
+
+  <div class="leader-card archbishop-card">
+    <div class="image-wrap">
+      <div class="slider-img img-1" style="background-image: url('https://images.unsplash.com/photo-1548544149-4835e62ee5b3?q=80&w=800');"></div>
+      <div class="slider-img img-2" style="background-image: url('https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=800');"></div>
+      <div class="slider-img img-3" style="background-image: url('https://images.unsplash.com/photo-1551728147-3806198f450f?q=80&w=800');"></div>
+    </div>
+    <div class="content-side">
+      <div style="color: var(--accent-gold); font-size: 32px; margin-bottom: 5px;">✥</div>
+      <div class="name-am">ብፁዕ አቡነ (ስም)</div>
+      <div class="title-en">Archbishop of the Diocese</div>
+      <p class="bio-am">የሀገረ ስብከቱ ሊቀ ጳጳስ በመሆን መንፈሳዊ መመሪያን የሚሰጡን።</p>
+      <p class="bio-en">Presiding Archbishop providing apostolic guidance and spiritual fatherhood to our region.</p>
+      <a href="/bio-archbishop" class="btn">Full Biography</a>
+    </div>
+  </div>
+
+  <div class="leader-card head-priest-card">
+    <div class="image-wrap">
+      <div class="slider-img img-1" style="background-image: url('https://images.unsplash.com/photo-1543165796-5426273fd328?q=80&w=800');"></div>
+      <div class="slider-img img-2" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800');"></div>
+      <div class="slider-img img-3" style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800');"></div>
+    </div>
+    <div class="content-side">
+      <div style="color: var(--text-primary); font-size: 32px; margin-bottom: 5px;">♰</div>
+      <div class="name-am">መልአከ ሰላም ቀሲስ (ስም)</div>
+      <div class="title-en">Head Priest & Administrator</div>
+      <p class="bio-am">የቤተ ክርስቲያናችን አስተዳዳሪ በመሆን በመንፈሳዊ አገልግሎት ላይ ይገኛሉ።</p>
+      <p class="bio-en">Serving as our Head Priest, overseeing the liturgical life and administration of the parish.</p>
+      <a href="/bio-head-priest" class="btn">Full Biography</a>
+    </div>
+  </div>
+
+  <div class="leader-card">
+    <div class="image-wrap">
+      <div class="slider-img img-1" style="background-image: url('https://images.unsplash.com/photo-1621244249243-436b79b5eea8?q=80&w=800');"></div>
+      <div class="slider-img img-2" style="background-image: url('https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=800');"></div>
+      <div class="slider-img img-3" style="background-image: url('https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=800');"></div>
+    </div>
+    <div class="content-side">
+      <div class="name-am">ቀሲስ (ስም)</div>
+      <div class="title-en">Assistant Priest</div>
+      <p class="bio-am">በቅዳሴ እና በትምህርተ ወንጌል ምእመናንን በማገልገል ላይ ይገኛሉ።</p>
+      <p class="bio-en">Dedicated to serving the congregation through the holy sacraments and spiritual teaching.</p>
+      <a href="/bio-priest-2" class="btn">Full Biography</a>
+    </div>
+  </div>
+
+  <footer style="text-align:center; padding:60px; font-size:13px; color: var(--text-primary); opacity: 0.8; line-height: 1.8;">
+    Debre Genet Ethiopian Orthodox Tewahedo Church<br>
+    353 Mountain Ave, Winnipeg, MB R2W 1J9<br>
+    © 2026 Debre Genet EOTC Winnipeg
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -76,7 +76,6 @@
   
   .nav-brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   
-  /* UNIQUE BRANDING STYLE */
   .logo-sample {
     width: 38px; height: 38px; 
     border-radius: 50%;
@@ -143,7 +142,7 @@
     100% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
   }
 
-  /* 3. HERO CONTENT */
+  /* 3. HERO CONTENT & TITLE FLAG LINE */
   .hero-header { 
     padding: 40px 5%; text-align: center;
     background: linear-gradient(rgba(253, 245, 230, 0.8), rgba(253, 245, 230, 0.9)), url('church.jpg');
@@ -159,6 +158,19 @@
   }
   @keyframes divineShine { to { background-position: 200% center; } }
   .title-sub-am { font-size: clamp(18px, 3.5vw, 26px); font-weight: 700; color: var(--burgundy); margin: 8px 0; }
+
+  /* TRICOLOR TITLE ACCENT */
+  .flag-line-container {
+    width: 120px;
+    margin: 12px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .flag-row { height: 2px; width: 100%; border-radius: 1px; }
+  .fr-green { background: var(--ethio-green); }
+  .fr-yellow { background: var(--ethio-yellow); }
+  .fr-red { background: var(--ethio-red); }
 
   /* 4. CONTENT WRAPPER */
   .container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 15px 5%; }
@@ -287,6 +299,12 @@
     <div class="title-sub-am">ቅድስት ማርያም ወቅዱስ ገብርኤል ወቅድስት አርሴማ</div>
     <div style="font-weight: bold; letter-spacing: 1px; color: var(--burgundy); font-size: 14px;">St. Mary • St. Gabriel • St. Arsema</div>
     <div style="font-weight: 900; letter-spacing: 4px; color: var(--gold); font-size: 10px; margin-top: 10px;">WINNIPEG, MANITOBA</div>
+    
+    <div class="flag-line-container">
+      <div class="flag-row fr-green"></div>
+      <div class="flag-row fr-yellow"></div>
+      <div class="flag-row fr-red"></div>
+    </div>
   </header>
 
   <div class="notice-frame">

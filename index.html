@@ -37,34 +37,21 @@
   /* --- COMPACT DIOCESE BANNER --- */
   .crown-header {
     width: 100%; background: var(--burgundy);
-    padding: 0 0 15px 0; text-align: center;
+    padding: 20px 0 15px 0; text-align: center;
     position: relative;
     overflow: hidden;
   }
-  
-  /* The Flag Line bottom border */
-  .crown-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 6px; 
-    background: linear-gradient(to bottom, 
-      var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
-      var(--ethio-yellow) 33.33%, var(--ethio-yellow) 66.66%, 
-      var(--ethio-red) 66.66%, var(--ethio-red) 100%);
-  }
 
-  /* FULL-WIDTH FLAG BACKGROUND WITH WIND ANIMATION */
+  /* FULL-WIDTH FLAG BAND (RESTRICTED TO LOGO HEIGHT) */
   .logo-flag-row {
     width: 100%;
-    height: 80px;
+    height: 70px; /* Matching logo size exactly */
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
     position: relative;
+    overflow: hidden;
     /* Base flag stripes */
     background: linear-gradient(to bottom, 
       var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
@@ -72,12 +59,11 @@
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
 
-  /* Wave Effect Overlay */
+  /* Wind Animation Overlay */
   .logo-flag-row::before {
     content: "";
     position: absolute;
     top: 0; left: 0; width: 200%; height: 100%;
-    /* Creates shifting shadows/highlights like moving fabric */
     background: linear-gradient(
       90deg, 
       rgba(255,255,255,0) 0%, 
@@ -97,7 +83,7 @@
   }
 
   .church-logo-container {
-    width: 65px; height: 65px;
+    width: 60px; height: 60px;
     background: white; border-radius: 50%;
     border: 3px solid white;
     display: flex; align-items: center; justify-content: center;
@@ -105,15 +91,7 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     flex-shrink: 0;
     z-index: 10;
-    animation: logoFlutter 4s infinite ease-in-out;
   }
-
-  @keyframes logoFlutter {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-2px) rotate(1deg); }
-    75% { transform: translateY(2px) rotate(-1deg); }
-  }
-
   .church-logo-container img { width: 100%; height: 100%; object-fit: cover; }
 
   .crown-en-gold {
@@ -167,7 +145,6 @@
     border-bottom: 2px solid transparent;
   }
 
-  /* ACTIVE PAGE INDICATOR */
   .active-page { border-bottom: 2px solid var(--gold) !important; color: var(--gold) !important; }
 
   .sub-menu {
@@ -184,7 +161,6 @@
   .sub-menu a:hover { background: var(--gold); color: var(--burgundy); }
   .menu-item:hover .sub-menu { display: flex; }
 
-  /* TRICOLOR HAMBURGER */
   .menu-toggle { 
     display: none; 
     flex-direction: column; 
@@ -258,7 +234,6 @@
 
   .footer { width: 100%; text-align: center; padding: 40px 5%; background: var(--burgundy); color: var(--gold); border-top: 5px solid var(--gold); margin-top: 50px; }
 
-  /* MOBILE FIXES */
   @media (max-width: 1100px) {
     .menu-toggle { display: flex; }
     .nav-links {
@@ -271,8 +246,6 @@
     .menu-item > a { width: 100%; height: 50px; font-size: 16px; display: flex; align-items: center; border-bottom: none !important; }
     .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); padding-left: 20px; border: none; }
     .menu-item.open .sub-menu { display: flex; }
-    .btn-live { width: 100%; justify-content: center; margin: 15px 0; }
-    .sub-menu a.active-page { background: var(--gold); color: var(--burgundy) !important; border: none !important; }
   }
 </style>
 </head>

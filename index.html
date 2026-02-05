@@ -4,120 +4,111 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Debre Genet EOTC Winnipeg - Home</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700;900&family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700;900&family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet">
 <style>
+  /* --- SACRED PALETTE & FONTS --- */
   :root {
-    --burgundy: #630F16;
-    --gold: #D4A017;
-    --gold-glow: rgba(212, 160, 23, 0.4);
-    --cream: #FDF5E6;
-    --glass: rgba(43, 6, 10, 0.92);
+    --text-primary: #630F16;      /* Deep Burgundy */
+    --accent-gold: #D4A017;       /* Gold */
+    --bg-page: #F9E8B2;           /* Page Background */
+    --bg-card: #FFF8E1;           /* Cream Card */
     --white: #ffffff;
+    --glass: rgba(99, 15, 22, 0.96);
+    --glow: rgba(212, 160, 23, 0.45);
   }
 
+  /* 1. GLOBAL RESET */
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
-  body {
-    font-family: 'Noto Serif Ethiopic', serif;
-    background-color: var(--cream);
-    color: var(--burgundy);
+  body { 
+    background: var(--bg-page); 
+    font-family: 'Noto Serif Ethiopic', serif; 
+    color: var(--text-primary);
     overflow-x: hidden;
+    line-height: 1.6;
   }
 
-  /* --- UNIQUE DESKTOP NAVIGATION --- */
+  /* 2. PREMIUM NAVIGATION (Synced with Clergy Page) */
   .main-nav {
-    position: fixed; top: 0; width: 100%; height: 90px;
-    background: transparent; /* Initial state */
+    position: fixed; top: 0; width: 100%; height: 80px;
+    background: transparent; /* Initial transparent state */
     display: flex; justify-content: space-between; align-items: center;
-    padding: 0 5%; z-index: 10000;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0 5%; z-index: 9999;
+    transition: 0.4s ease;
   }
 
-  /* Navigation state when scrolled */
+  /* Navigation state on scroll */
   .main-nav.scrolled {
-    height: 75px;
     background: var(--glass);
-    backdrop-filter: blur(15px);
-    border-bottom: 3px solid var(--gold);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    height: 70px;
+    border-bottom: 3px solid var(--accent-gold);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
-
+  
   .nav-brand-group { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-  .logo-icon {
-    width: 45px; height: 45px; background: var(--gold); border-radius: 50%;
+  .logo-sample {
+    width: 45px; height: 45px; background: var(--accent-gold); border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 26px; color: var(--burgundy); border: 2px solid white;
-    box-shadow: 0 0 15px var(--gold-glow);
+    font-size: 28px; color: var(--text-primary); border: 2px solid white;
   }
-  .nav-brand-text { color: white; font-weight: 900; font-family: 'Montserrat'; letter-spacing: 1.5px; font-size: 18px; }
+  .nav-brand-text { color: white; font-weight: 900; font-size: clamp(14px, 2vw, 18px); letter-spacing: 1px; font-family: 'Montserrat'; }
 
-  /* Desktop Menu Links */
   .nav-links { display: flex; gap: 5px; height: 100%; align-items: center; }
-  
   .menu-item { position: relative; height: 100%; display: flex; align-items: center; }
-  
   .menu-item > a {
-    color: white; text-decoration: none; font-size: 12px; font-weight: 700;
-    padding: 0 20px; text-transform: uppercase; height: 100%;
-    display: flex; align-items: center; transition: 0.3s;
-    letter-spacing: 1px;
+    color: #FDF5E6; text-decoration: none; font-weight: bold; font-size: 11px;
+    padding: 0 15px; text-transform: uppercase; transition: 0.3s;
+    height: 100%; display: flex; align-items: center;
   }
 
-  /* Custom Animated Arrow */
-  .menu-item > a::after {
-    content: ''; width: 6px; height: 6px;
-    border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
-    transform: rotate(45deg); margin-left: 10px;
-    transition: 0.3s ease; opacity: 0.7;
+  /* Animated Submenu Indicator */
+  .menu-item.has-sub > a::after {
+    content: ''; width: 5px; height: 5px; border-right: 2px solid var(--accent-gold); border-bottom: 2px solid var(--accent-gold);
+    transform: rotate(45deg); margin-left: 8px; transition: 0.3s;
   }
-
-  .menu-item:hover > a { color: var(--gold); }
   .menu-item:hover > a::after { transform: rotate(-135deg); margin-top: 5px; }
 
-  /* Submenu Design */
+  /* Sub-menu styling */
   .sub-menu {
-    position: absolute; top: 90px; left: 0;
-    background: var(--glass); min-width: 240px;
-    display: none; flex-direction: column;
-    border-bottom: 4px solid var(--gold);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-    border-top: 1px solid rgba(255,255,255,0.1);
+    position: absolute; top: 80px; left: 0; background: var(--glass); min-width: 220px;
+    display: none; flex-direction: column; border: 1px solid var(--accent-gold); border-top: none;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
   }
-  .main-nav.scrolled .sub-menu { top: 75px; }
-
+  .main-nav.scrolled .sub-menu { top: 70px; }
   .sub-menu a {
-    color: #eee; padding: 15px 25px; text-decoration: none;
-    font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: 0.2s;
+    color: #FDF5E6; padding: 12px 20px; text-decoration: none; font-size: 11px; 
+    text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
   }
-  .sub-menu a:hover { background: var(--gold); color: var(--burgundy); font-weight: 800; padding-left: 30px; }
+  .sub-menu a:hover { background: var(--accent-gold); color: var(--text-primary); padding-left: 25px; }
   .menu-item:hover .sub-menu { display: flex; }
 
-  /* Active State matching Clergy page */
-  .active-page { background: var(--gold) !important; color: var(--burgundy) !important; }
-  .active-page::after { border-color: var(--burgundy) !important; }
+  .btn-live {
+    background: #FF0000; color: white !important; padding: 8px 16px; border-radius: 50px;
+    display: flex; align-items: center; gap: 8px; font-weight: 900 !important; 
+    margin-left: 10px; border: 1px solid white; text-decoration: none; font-size: 10px; animation: pulse 2s infinite;
+  }
 
-  /* --- MOBILE STYLES (Hamburger) --- */
-  .menu-toggle { display: none; color: var(--gold); font-size: 30px; cursor: pointer; }
+  /* Mobile Toggle */
+  .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
 
   @media (max-width: 1100px) {
-    .menu-toggle { display: block; }
+    .menu-toggle { display: block; z-index: 10001; }
     .nav-links {
       position: fixed; top: 0; right: -100%; width: 85%; height: 100vh;
-      background: var(--burgundy); flex-direction: column; padding: 100px 30px; transition: 0.4s ease;
-      overflow-y: auto; align-items: flex-start;
+      background: var(--text-primary); flex-direction: column;
+      align-items: flex-start; padding: 100px 30px; transition: 0.4s ease-in-out; overflow-y: auto;
     }
     .nav-links.active { right: 0; }
     .menu-item { width: 100%; height: auto; flex-direction: column; align-items: flex-start; }
-    .menu-item > a { width: 100%; height: 60px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.3); }
+    .menu-item > a { width: 100%; height: 60px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); justify-content: space-between; }
+    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); }
     .menu-item.open .sub-menu { display: flex; }
     .main-nav { background: var(--glass) !important; height: 75px !important; }
   }
 
-  /* --- HERO VIDEO SECTION --- */
+  /* 3. HERO VIDEO SECTION */
   .hero-vid-section {
-    position: relative; height: 95vh; width: 100%; overflow: hidden;
+    position: relative; height: 85vh; width: 100%; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
   }
@@ -127,48 +118,56 @@
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     pointer-events: none;
   }
-  .overlay { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.2), rgba(67, 10, 15, 0.8)); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(67, 10, 15, 0.8)); }
 
-  .hero-content { position: relative; z-index: 10; text-align: center; color: white; }
-  .hero-content h1 { font-size: clamp(50px, 12vw, 95px); font-weight: 900; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-  .hero-content p { font-family: 'Montserrat'; letter-spacing: 5px; color: var(--gold); font-size: 18px; margin-top: 10px; }
+  .hero-content { position: relative; z-index: 10; text-align: center; color: white; padding-bottom: 50px; }
+  .hero-content h1 { font-size: clamp(45px, 10vw, 90px); font-weight: 900; margin-bottom: 10px; }
+  .hero-content p { font-family: 'Montserrat'; letter-spacing: 4px; color: var(--accent-gold); font-weight: 600; font-size: clamp(12px, 3vw, 18px); }
 
-  /* --- SHARED COMPONENTS --- */
-  .container { max-width: 1200px; margin: -50px auto 100px; padding: 0 20px; position: relative; z-index: 20; }
-  .notice-card {
-    background: var(--white); border-radius: 12px; padding: 40px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15); border-top: 6px solid var(--gold); text-align: center;
-  }
-  .section-title {
-    text-align: center; margin: 80px 0 40px; font-size: 32px; font-weight: 900;
-    position: relative;
-  }
-  .section-title::after {
-    content: '✥'; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%);
-    color: var(--gold); font-size: 20px;
+  /* 4. CONTENT CARDS & LAYOUT */
+  .container { width: 90%; max-width: 1200px; margin: -60px auto 80px; position: relative; z-index: 20; }
+  
+  .card {
+    background: var(--bg-card); border-radius: 12px; padding: 35px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.1), 0 0 20px var(--glow);
+    border-top: 5px solid var(--accent-gold); margin-bottom: 40px; text-align: center;
   }
 
-  .btn-live {
-    background: #FF0000; color: white !important; padding: 10px 20px; border-radius: 50px;
-    font-weight: 900 !important; font-size: 11px; text-decoration: none; border: 2px solid white;
-    animation: pulse 2s infinite; margin-left: 15px;
-  }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); } 100% { box-shadow: 0 0 0 10px rgba(255,0,0,0); } }
+  .section-label { color: var(--accent-gold); font-weight: 800; letter-spacing: 3px; font-size: 12px; margin-bottom: 15px; text-transform: uppercase; }
 
+  /* Gallery Grid */
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+  .gallery-item { background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--accent-gold); transition: 0.3s; }
+  .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px var(--glow); }
+  .img-frame { width: 100%; height: 250px; position: relative; }
+  .img-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 1s ease-in-out; }
+  .img-frame img.active { opacity: 1; }
+  .gallery-cap { padding: 15px; font-weight: 800; font-size: 14px; background: white; }
+
+  /* Building Tracker */
+  .progress-bar { height: 15px; background: #e0d5b5; border-radius: 20px; margin: 20px 0; overflow: hidden; border: 1px solid var(--accent-gold); }
+  .progress-fill { height: 100%; width: 65%; background: linear-gradient(90deg, var(--text-primary), var(--accent-gold)); transition: 2s; }
+
+  /* Event Item */
+  .event-item { border-left: 4px solid var(--accent-gold); padding: 15px; margin-bottom: 15px; background: white; text-align: left; }
+
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); } 100% { box-shadow: 0 0 0 12px rgba(255,0,0,0); } }
+
+  footer { background: var(--text-primary); color: var(--accent-gold); padding: 80px 20px; text-align: center; }
 </style>
 </head>
 <body>
 
 <nav class="main-nav" id="navbar">
   <a href="index.html" class="nav-brand-group">
-    <div class="logo-icon">✥</div>
-    <div class="nav-brand-text">DEBRE GENET</div>
+    <div class="logo-sample">✥</div>
+    <div class="nav-brand-text">DEBRE GENET WINNIPEG</div>
   </a>
   
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
   <div class="nav-links" id="navLinks">
-    <div class="menu-item">
+    <div class="menu-item has-sub">
       <a href="javascript:void(0)" onclick="toggleSub(this)">HOME</a>
       <div class="sub-menu">
         <a href="clergy.html">Clergy</a>
@@ -177,7 +176,7 @@
         <a href="faith.html">Our Faith</a>
       </div>
     </div>
-    <div class="menu-item">
+    <div class="menu-item has-sub">
       <a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES</a>
       <div class="sub-menu">
         <a href="ministry-hub.html">Ministry Hub</a>
@@ -186,14 +185,14 @@
         <a href="care.html">Pastoral Care</a>
       </div>
     </div>
-    <div class="menu-item">
+    <div class="menu-item has-sub">
       <a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR</a>
       <div class="sub-menu">
         <a href="calendar.html">Monthly Calendar</a>
         <a href="upcoming.html">Upcoming Events</a>
       </div>
     </div>
-    <div class="menu-item">
+    <div class="menu-item has-sub">
       <a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS</a>
       <div class="sub-menu">
         <a href="donations.html">Donations</a>
@@ -207,56 +206,74 @@
 
 <section class="hero-vid-section">
   <div class="video-bg">
-    <iframe src="https://youtu.be/CMSl9QCcIHg?autoplay=1&mute=1&controls=0&loop=1&playlist=P_P_K1_U-t0&rel=0&modestbranding=1" frameborder="0"></iframe>
+    <iframe src="https://www.youtube.com/embed/P_P_K1_U-t0?autoplay=1&mute=1&controls=0&loop=1&playlist=P_P_K1_U-t0&rel=0&modestbranding=1" frameborder="0"></iframe>
   </div>
-  <div class="overlay"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 class="church-name-am">ደብረ ገነት</h1>
+    <h1>ደብረ ገነት</h1>
     <p>ST. MARY & ST. GABRIEL CATHEDRAL</p>
-    <div style="margin-top:20px; font-weight:bold; letter-spacing:3px;">WINNIPEG, MANITOBA</div>
+    <div style="margin-top:20px; font-weight:bold; letter-spacing:2px; font-size:12px;">ESTABLISHED 1994</div>
   </div>
 </section>
 
 <div class="container">
-  <div class="notice-card">
-    <div style="color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px; font-size: 12px;">DAILY BLESSING</div>
-    <h2 id="dynamic-notice">እንኳን በደህና መጡ::</h2>
+  <div class="card">
+    <div class="section-label">Notice / ማሳሰቢያ</div>
+    <h2 id="dynamic-notice" style="transition: 0.5s;">እንኳን በደህና መጡ::</h2>
   </div>
 
-  <h2 class="section-title">Sacred Gallery</h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-    <div class="notice-card" style="padding:0; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?w=800" style="width:100%; height:300px; object-fit:cover;">
-        <div style="padding:20px; font-weight:900;">Holy Timket / ጥምቀት</div>
+  <div class="section-label" style="text-align:center; margin-bottom:30px; font-size:16px;">Sacred Gallery / የፎቶ መዝገብ</div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="img-frame" id="frame-0">
+        <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?w=800" class="active">
+        <img src="https://images.unsplash.com/photo-1548689816-c399f954f3bb?w=800">
+      </div>
+      <div class="gallery-cap">Holy Timket / ጥምቀት</div>
     </div>
-    <div class="notice-card" style="padding:0; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1590076215667-875d4ef2d97e?w=800" style="width:100%; height:300px; object-fit:cover;">
-        <div style="padding:20px; font-weight:900;">Sunday School / ሰንበት ትምህርት ቤት</div>
+    <div class="gallery-item">
+      <div class="img-frame" id="frame-1">
+        <img src="https://images.unsplash.com/photo-1590076215667-875d4ef2d97e?w=800" class="active">
+        <img src="https://images.unsplash.com/photo-1523050853063-bd8012fec0c8?w=800">
+      </div>
+      <div class="gallery-cap">Sunday School / ሰንበት ትምህርት ቤት</div>
     </div>
+  </div>
+
+  <div class="card" style="margin-top:50px;">
+    <div class="section-label">Building Project Progress</div>
+    <div style="display:flex; justify-content:space-between; font-weight:800; font-size:14px;">
+        <span>Funds Raised</span>
+        <span>$780,000 / $1.2M</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <p style="font-size:13px; font-style:italic; color:#777;">Help us build our future sanctuary.</p>
+  </div>
+
+  <div class="section-label" style="text-align:center; margin-bottom:30px; font-size:16px;">Upcoming Events / መጪ መርሃ ግብሮች</div>
+  <div id="eventList">
+    <div class="event-item">Loading sacred events...</div>
   </div>
 </div>
 
-<footer style="background: var(--burgundy); color: white; padding: 80px 20px; text-align: center;">
-    <div style="font-size: 40px; color: var(--gold); margin-bottom: 20px;">✥</div>
-    <p style="font-family: 'Montserrat'; font-weight: 800; letter-spacing: 2px;">DEBRE GENET EOTC WINNIPEG</p>
-    <p style="opacity: 0.7; margin-top: 10px;">353 Mountain Ave, Winnipeg, MB R2W 1J9</p>
+<footer>
+  <div style="font-size: 35px; margin-bottom: 20px;">✥</div>
+  <p style="font-family: 'Montserrat'; font-weight: 800; letter-spacing: 2px;">DEBRE GENET EOTC WINNIPEG</p>
+  <p style="font-size: 14px; opacity: 0.8; margin-top: 10px;">353 Mountain Ave, Winnipeg, MB R2W 1J9</p>
+  <div style="margin-top:40px; font-size:10px; opacity:0.5;">© 2026 Debre Genet EOTC. All Rights Reserved.</div>
 </footer>
 
 <script>
-  // Navbar Scroll Logic
-  window.addEventListener('scroll', function() {
+  /* 1. NAVBAR SCROLL EFFECT */
+  window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
-    if (window.scrollY > 100) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    if (window.scrollY > 80) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
   });
 
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('active');
-  }
-
+  /* 2. MOBILE MENU LOGIC (Synced with Clergy) */
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+  
   function toggleSub(el) {
     if (window.innerWidth <= 1100) {
       const parent = el.parentElement;
@@ -266,30 +283,60 @@
     }
   }
 
-  // Active Link Detection (matching your Clergy logic)
-  document.addEventListener("DOMContentLoaded", () => {
-    const currentUrl = window.location.href.toLowerCase();
-    const allLinks = document.querySelectorAll(".nav-links a");
-    allLinks.forEach(link => {
-      const href = link.getAttribute("href").toLowerCase();
-      if (currentUrl.endsWith(href)) {
-        link.classList.add("active-page");
-        const sub = link.closest(".sub-menu");
-        if (sub) sub.previousElementSibling.classList.add("active-page");
-      }
+  /* 3. ROTATING GALLERY */
+  const slideStates = [0, 0];
+  const frames = [
+    document.getElementById('frame-0').getElementsByTagName('img'),
+    document.getElementById('frame-1').getElementsByTagName('img')
+  ];
+  setInterval(() => {
+    frames.forEach((imgs, idx) => {
+      imgs[slideStates[idx]].classList.remove('active');
+      slideStates[idx] = (slideStates[idx] + 1) % imgs.length;
+      imgs[slideStates[idx]].classList.add('active');
     });
-  });
+  }, 5000);
 
-  // Dynamic Notice
+  /* 4. DYNAMIC NOTICES */
   const notices = ["እንኳን ለብርሃነ ጥምቀቱ በሰላም አደረሳችሁ::", "Building Project Goal: $1.2M.", "Sunday School: Every Sunday at 10:30 AM."];
   let nIdx = 0;
   setInterval(() => {
     const el = document.getElementById('dynamic-notice');
-    el.innerText = notices[nIdx];
-    nIdx = (nIdx + 1) % notices.length;
-  }, 5000);
+    el.style.opacity = 0;
+    setTimeout(() => {
+      nIdx = (nIdx + 1) % notices.length;
+      el.innerText = notices[nIdx];
+      el.style.opacity = 1;
+    }, 500);
+  }, 6000);
+
+  /* 5. GOOGLE SHEETS FETCH */
+  const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMZieFTAsbcpW9ROmJzlRuVJv34SEYx-5q-jg40his0eVg0D5Jef5x4yFJvfWizjGToIBB1Ycu2KLE/pub?output=csv";
+  async function fetchEvents() {
+    try {
+      const res = await fetch(SHEET_URL);
+      const data = await res.text();
+      const rows = data.split('\n').slice(1);
+      const today = new Date();
+      today.setHours(0,0,0,0);
+
+      const events = rows.map(r => {
+        const c = r.split(',').map(x => x.trim().replace(/^"|"$/g, ''));
+        const d = new Date(c[0].split('-')[0], c[0].split('-')[1]-1, c[0].split('-')[2]);
+        return { date: d, title: c[1], time: c[3] };
+      }).filter(e => e.date >= today).sort((a,b) => a.date - b.date).slice(0, 3);
+
+      document.getElementById('eventList').innerHTML = events.map(e => `
+        <div class="event-item">
+          <div style="font-size:11px; font-weight:bold; color:var(--accent-gold);">${e.date.toDateString().toUpperCase()}</div>
+          <div style="font-size:16px; font-weight:800; color:var(--text-primary);">${e.title}</div>
+          <div style="font-size:12px; opacity:0.7;">Time: ${e.time}</div>
+        </div>
+      `).join('');
+    } catch(e) { document.getElementById('eventList').innerHTML = "<p>Check the calendar page for updates.</p>"; }
+  }
+  fetchEvents();
 </script>
 
 </body>
 </html>
-

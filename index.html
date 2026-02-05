@@ -15,7 +15,6 @@
     --white: #ffffff;
     --glass: rgba(99, 15, 22, 0.96);
     --glow: rgba(212, 160, 23, 0.45);
-    --sacred-blue: rgba(135, 206, 235, 0.7); /* Sky Blue overlay */
   }
 
   /* 1. GLOBAL RESET */
@@ -103,36 +102,52 @@
     .main-nav { background: var(--glass) !important; height: 75px !important; }
   }
 
-  /* 3. HERO VIDEO SECTION OPTIMIZATION */
+  /* 3. CINEMATIC HERO SECTION */
   .hero-vid-section {
     position: relative; height: 85vh; width: 100%; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
-    background: #87CEEB; /* Sky blue placeholder while loading */
+    background: #2a0407; /* Sacred fallback color */
   }
+
   .video-bg { 
-    position: absolute; inset: 0; z-index: -1; 
-    background: #87CEEB; /* Matches sky blue to prevent black pop */
+    position: absolute; inset: 0; z-index: 1; 
+    background: #2a0407;
+    overflow: hidden;
   }
+
   .video-bg iframe {
     width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.1);
     pointer-events: none;
-    opacity: 0; /* Hidden initially */
-    transition: opacity 2s ease-in; /* Smooth fade in once loaded */
+    opacity: 0;
+    transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), transform 10s ease-out;
   }
-  .video-bg iframe.loaded { opacity: 1; }
 
-  /* Sacred Sky Blue Overlay */
+  /* Once loaded, we remove the "scale" and fade in for a cinematic zoom-out feel */
+  .video-bg iframe.loaded { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+  /* BEAUTIFUL MULTI-LAYERED OVERLAY */
   .hero-overlay { 
-    position: absolute; inset: 0; 
-    background: linear-gradient(135deg, rgba(135, 206, 235, 0.5) 0%, rgba(99, 15, 22, 0.7) 100%); 
-    z-index: 2;
+    position: absolute; inset: 0; z-index: 2; 
+    background: linear-gradient(to bottom, 
+      rgba(0,0,0,0.6) 0%, 
+      rgba(99, 15, 22, 0.2) 40%, 
+      rgba(212, 160, 23, 0.1) 70%,
+      rgba(67, 10, 15, 0.9) 100%);
   }
 
   .hero-content { position: relative; z-index: 10; text-align: center; color: white; padding-bottom: 50px; }
-  .hero-content h1 { font-size: clamp(45px, 10vw, 90px); font-weight: 900; margin-bottom: 10px; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-  .hero-content p { font-family: 'Montserrat'; letter-spacing: 4px; color: var(--accent-gold); font-weight: 600; font-size: clamp(12px, 3vw, 18px); }
+  .hero-content h1 { 
+    font-size: clamp(45px, 10vw, 90px); font-weight: 900; margin-bottom: 10px; 
+    text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    letter-spacing: -1px;
+  }
+  .hero-content p { 
+    font-family: 'Montserrat'; letter-spacing: 4px; color: var(--accent-gold); 
+    font-weight: 600; font-size: clamp(12px, 3vw, 18px); 
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  }
 
   /* 4. CONTENT CARDS & LAYOUT */
   .container { width: 90%; max-width: 1200px; margin: -60px auto 80px; position: relative; z-index: 20; }
@@ -211,8 +226,8 @@
 <section class="hero-vid-section">
   <div class="video-bg">
     <iframe 
-      id="hero-video"
-      src="https://www.youtube.com/embed/CMSl9QCcIHg?autoplay=1&mute=1&controls=0&loop=1&playlist=CMSl9QCcIHg&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1" 
+      id="heroFrame"
+      src="https://www.youtube.com/embed/CMSl9QCcIHg?autoplay=1&mute=1&controls=0&loop=1&playlist=CMSl9QCcIHg&rel=0&modestbranding=1&iv_load_policy=3&showinfo=0&disablekb=1" 
       frameborder="0" 
       allow="autoplay; encrypted-media" 
       allowfullscreen

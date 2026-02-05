@@ -39,6 +39,7 @@
     width: 100%; background: var(--burgundy);
     padding: 0 0 15px 0; text-align: center;
     position: relative;
+    overflow: hidden;
   }
   
   /* The Flag Line bottom border */
@@ -55,31 +56,64 @@
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
 
-  /* FULL-WIDTH FLAG BACKGROUND SECTION */
+  /* FULL-WIDTH FLAG BACKGROUND WITH WIND ANIMATION */
   .logo-flag-row {
     width: 100%;
-    height: 70px; /* Matching logo size + small padding */
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
-    /* Continuous background stripes */
+    position: relative;
+    /* Base flag stripes */
     background: linear-gradient(to bottom, 
       var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
       var(--ethio-yellow) 33.33%, var(--ethio-yellow) 66.66%, 
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
 
+  /* Wave Effect Overlay */
+  .logo-flag-row::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 200%; height: 100%;
+    /* Creates shifting shadows/highlights like moving fabric */
+    background: linear-gradient(
+      90deg, 
+      rgba(255,255,255,0) 0%, 
+      rgba(255,255,255,0.2) 25%, 
+      rgba(0,0,0,0.15) 50%, 
+      rgba(255,255,255,0.2) 75%, 
+      rgba(255,255,255,0) 100%
+    );
+    background-size: 50% 100%;
+    animation: flagWave 4s infinite linear;
+    pointer-events: none;
+  }
+
+  @keyframes flagWave {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   .church-logo-container {
-    width: 60px; height: 60px;
+    width: 65px; height: 65px;
     background: white; border-radius: 50%;
     border: 3px solid white;
     display: flex; align-items: center; justify-content: center;
     overflow: hidden; 
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     flex-shrink: 0;
-    z-index: 2;
+    z-index: 10;
+    animation: logoFlutter 4s infinite ease-in-out;
   }
+
+  @keyframes logoFlutter {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-2px) rotate(1deg); }
+    75% { transform: translateY(2px) rotate(-1deg); }
+  }
+
   .church-logo-container img { width: 100%; height: 100%; object-fit: cover; }
 
   .crown-en-gold {
@@ -248,7 +282,7 @@
   <div class="logo-flag-row">
     <div class="church-logo-container">
       <img src="logo.png" alt="" onerror="this.style.display='none';">
-      <span style="color:var(--ethio-red); font-size: 24px; font-weight: bold;">✥</span>
+      <span style="color:var(--ethio-red); font-size: 24px; font-weight: bold; z-index: 11;">✥</span>
     </div>
   </div>
 

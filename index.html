@@ -34,10 +34,10 @@
     line-height: 1.4; 
   }
 
-  /* --- COMPACT DIOCESE BANNER (Updated Logo Section) --- */
+  /* --- COMPACT DIOCESE BANNER --- */
   .crown-header {
     width: 100%; background: var(--burgundy);
-    padding: 10px 0 15px 0; text-align: center;
+    padding: 0 0 15px 0; text-align: center;
     position: relative;
   }
   
@@ -55,36 +55,30 @@
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
 
-  /* NEW: Logo and Side Stripes Layout */
-  .logo-row-container {
+  /* FULL-WIDTH FLAG BACKGROUND SECTION */
+  .logo-flag-row {
+    width: 100%;
+    height: 70px; /* Matching logo size + small padding */
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     margin-bottom: 10px;
+    /* Continuous background stripes */
+    background: linear-gradient(to bottom, 
+      var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
+      var(--ethio-yellow) 33.33%, var(--ethio-yellow) 66.66%, 
+      var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
-
-  .flag-stripes {
-    flex: 1;
-    height: 60px; /* Matching logo-container height */
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stripe-green { background-color: var(--ethio-green); flex: 1; }
-  .stripe-yellow { background-color: var(--ethio-yellow); flex: 1; }
-  .stripe-red { background-color: var(--ethio-red); flex: 1; }
 
   .church-logo-container {
-    width: 60px; height: 60px; margin: 0 15px;
+    width: 60px; height: 60px;
     background: white; border-radius: 50%;
-    border: 3px solid transparent;
-    background-image: linear-gradient(white, white), var(--ethio-gradient);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
+    border: 3px solid white;
     display: flex; align-items: center; justify-content: center;
-    overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    overflow: hidden; 
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
     flex-shrink: 0;
+    z-index: 2;
   }
   .church-logo-container img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -251,22 +245,10 @@
 <body>
 
 <header class="crown-header">
-  <div class="logo-row-container">
-    <div class="flag-stripes">
-      <div class="stripe-green"></div>
-      <div class="stripe-yellow"></div>
-      <div class="stripe-red"></div>
-    </div>
-    
+  <div class="logo-flag-row">
     <div class="church-logo-container">
       <img src="logo.png" alt="" onerror="this.style.display='none';">
       <span style="color:var(--ethio-red); font-size: 24px; font-weight: bold;">✥</span>
-    </div>
-
-    <div class="flag-stripes">
-      <div class="stripe-green"></div>
-      <div class="stripe-yellow"></div>
-      <div class="stripe-red"></div>
     </div>
   </div>
 

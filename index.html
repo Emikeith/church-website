@@ -34,11 +34,27 @@
     line-height: 1.4; 
   }
 
-  /* --- COMPACT DIOCESE BANNER --- */
+  /* --- COMPACT DIOCESE BANNER (With Tricolor Bottom Border) --- */
   .crown-header {
     width: 100%; background: var(--burgundy);
-    padding: 10px 5%; text-align: center; border-bottom: 3px solid var(--gold);
+    padding: 10px 5% 15px 5%; text-align: center;
+    position: relative;
   }
+  
+  /* The Flag Line replacing the single gold line */
+  .crown-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px; /* Total thickness */
+    background: linear-gradient(to bottom, 
+      var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
+      var(--ethio-yellow) 33.33%, var(--ethio-yellow) 66.66%, 
+      var(--ethio-red) 66.66%, var(--ethio-red) 100%);
+  }
+
   .church-logo-container {
     width: 60px; height: 60px; margin: 0 auto 5px auto;
     background: white; border-radius: 50%;
@@ -64,7 +80,7 @@
     margin-bottom: 2px;
   }
 
-  /* 2. NAVIGATION (Height Reduced & Unique Branding) */
+  /* 2. NAVIGATION */
   .main-nav {
     position: sticky; top: 0; width: 100%; height: 65px;
     background: var(--glass);
@@ -142,7 +158,7 @@
     100% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
   }
 
-  /* 3. HERO CONTENT & TITLE FLAG LINE */
+  /* 3. HERO CONTENT */
   .hero-header { 
     padding: 40px 5%; text-align: center;
     background: linear-gradient(rgba(253, 245, 230, 0.8), rgba(253, 245, 230, 0.9)), url('church.jpg');
@@ -158,19 +174,6 @@
   }
   @keyframes divineShine { to { background-position: 200% center; } }
   .title-sub-am { font-size: clamp(18px, 3.5vw, 26px); font-weight: 700; color: var(--burgundy); margin: 8px 0; }
-
-  /* TRICOLOR TITLE ACCENT */
-  .flag-line-container {
-    width: 120px;
-    margin: 12px auto 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .flag-row { height: 2px; width: 100%; border-radius: 1px; }
-  .fr-green { background: var(--ethio-green); }
-  .fr-yellow { background: var(--ethio-yellow); }
-  .fr-red { background: var(--ethio-red); }
 
   /* 4. CONTENT WRAPPER */
   .container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 15px 5%; }
@@ -299,12 +302,6 @@
     <div class="title-sub-am">ቅድስት ማርያም ወቅዱስ ገብርኤል ወቅድስት አርሴማ</div>
     <div style="font-weight: bold; letter-spacing: 1px; color: var(--burgundy); font-size: 14px;">St. Mary • St. Gabriel • St. Arsema</div>
     <div style="font-weight: 900; letter-spacing: 4px; color: var(--gold); font-size: 10px; margin-top: 10px;">WINNIPEG, MANITOBA</div>
-    
-    <div class="flag-line-container">
-      <div class="flag-row fr-green"></div>
-      <div class="flag-row fr-yellow"></div>
-      <div class="flag-row fr-red"></div>
-    </div>
   </header>
 
   <div class="notice-frame">

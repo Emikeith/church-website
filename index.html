@@ -6,415 +6,449 @@
 <title>Debre Genet EOTC Winnipeg</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  /* --- SACRED PALETTE --- */
-  :root {
-    --burgundy: #630F16;
-    --gold: #D4A017;
-    --gold-light: #F3E197;
-    --gold-shine: linear-gradient(135deg, #D4A017 0%, #F3E197 50%, #D4A017 100%);
-    --ethio-green: #009739;
-    --ethio-yellow: #FFD100;
-    --ethio-red: #EF3340;
-    --ethio-gradient: linear-gradient(to right, #009739, #FFD100, #EF3340);
-    --cream: #FDF5E6;
-    --bg-card: rgba(255, 255, 255, 0.98);
-    --glass: rgba(99, 15, 22, 0.96);
-    --overlay: rgba(0, 0, 0, 0.9);
-  }
+  /* --- SACRED PALETTE --- */
+  :root {
+    --burgundy: #630F16;
+    --gold: #D4A017;
+    --gold-light: #F3E197;
+    --gold-shine: linear-gradient(135deg, #D4A017 0%, #F3E197 50%, #D4A017 100%);
+    --ethio-green: #009739;
+    --ethio-yellow: #FFD100;
+    --ethio-red: #EF3340;
+    --ethio-gradient: linear-gradient(to right, #009739, #FFD100, #EF3340);
+    --cream: #FDF5E6;
+    --bg-card: rgba(255, 255, 255, 0.98);
+    --glass: rgba(99, 15, 22, 0.96);
+    --overlay: rgba(0, 0, 0, 0.9);
+  }
 
-  /* 1. GLOBAL RESET */
-  * { box-sizing: border-box; }
-  html, body { 
-    margin: 0; padding: 0; min-height: 100vh; width: 100%;
-    font-family: 'Nyala', 'Abyssinica SIL', serif;
-    color: var(--burgundy);
-    background-color: var(--cream);
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    line-height: 1.4; 
-  }
+  /* 1. GLOBAL RESET */
+  * { box-sizing: border-box; }
+  html, body { 
+    margin: 0; padding: 0; min-height: 100vh; width: 100%;
+    font-family: 'Nyala', 'Abyssinica SIL', serif;
+    color: var(--burgundy);
+    background-color: var(--cream);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    line-height: 1.4; 
+  }
 
-  /* --- COMPACT DIOCESE BANNER --- */
-  .crown-header {
-    width: 100%; background: var(--burgundy);
-    padding: 10px 5%; text-align: center; border-bottom: 3px solid var(--gold);
-  }
-  .church-logo-container {
-    width: 60px; height: 60px; margin: 0 auto 5px auto;
-    background: white; border-radius: 50%;
-    border: 3px solid transparent;
-    background-image: linear-gradient(white, white), var(--ethio-gradient);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  }
-  .church-logo-container img { width: 100%; height: 100%; object-fit: cover; }
-  .crown-en-gold {
-    font-size: clamp(11px, 2.2vw, 15px);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    line-height: 1.1;
-    background: var(--gold-shine);
+  /* --- COMPACT DIOCESE BANNER --- */
+  .crown-header {
+    width: 100%; background: var(--burgundy);
+    padding: 10px 5%; text-align: center; border-bottom: 3px solid var(--gold);
+  }
+  .church-logo-container {
+    width: 60px; height: 60px; margin: 0 auto 5px auto;
+    background: white; border-radius: 50%;
+    border: 3px solid transparent;
+    background-image: linear-gradient(white, white), var(--ethio-gradient);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+  .church-logo-container img { width: 100%; height: 100%; object-fit: cover; }
+  .crown-en-gold {
+    font-size: clamp(11px, 2.2vw, 15px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    line-height: 1.1;
+    background: var(--gold-shine);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    font-family: 'Noto Serif Ethiopic', serif;
+    margin-bottom: 2px;
+  }
+
+  /* 2. NAVIGATION (Height Reduced & Unique Branding) */
+  .main-nav {
+    position: sticky; top: 0; width: 100%; height: 65px;
+    background: var(--glass);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%; z-index: 10000;
+    border-bottom: 3px solid var(--gold);
+    backdrop-filter: blur(12px);
+  }
+  
+  .nav-brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-sample {
+    width: 38px; height: 38px; 
+    background: white; 
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; border: 2px solid white;
+    /* Unique Tricolor Cross */
+    background: var(--ethio-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
+  }
+  .nav-brand-text { 
+    font-weight: 900; font-size: 18px; letter-spacing: 1px; 
+    /* Unique Tricolor Name */
+    background: var(--ethio-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links { display: flex; gap: 3px; height: 100%; align-items: center; }
+  .menu-item { position: relative; height: 100%; display: flex; align-items: center; }
+  .menu-item > a {
+    color: var(--cream); text-decoration: none; font-weight: bold; font-size: 10px;
+    padding: 0 10px; text-transform: uppercase; transition: 0.3s;
+  }
+
+  /* ACTIVE PAGE INDICATOR */
+  .active-page { border-bottom: 2px solid var(--gold) !important; color: var(--gold) !important; }
+
+  .sub-menu {
+    position: absolute; top: 65px; left: 0;
+    background: var(--glass); min-width: 180px;
+    display: none; flex-direction: column;
+    border: 1px solid var(--gold); border-top: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  }
+  .sub-menu a {
+    color: var(--cream); padding: 10px 18px; text-decoration: none;
+    font-size: 10px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .sub-menu a:hover { background: var(--gold); color: var(--burgundy); }
+  .menu-item:hover .sub-menu { display: flex; }
+
+  .btn-live {
+    background: #FF0000; color: white !important; padding: 6px 12px; border-radius: 50px;
+    display: flex; align-items: center; gap: 6px; animation: pulseRed 2s infinite;
+    font-weight: 900 !important; margin-left: 10px; border: 1px solid white;
+    text-decoration: none; font-size: 10px;
+  }
+  @keyframes pulseRed {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    100% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
+  }
+
+  /* TRICOLOR HAMBURGER MENU */
+  .menu-toggle { 
+    display: none; 
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    cursor: pointer; 
+    z-index: 10001; 
+  }
+  .menu-toggle span {
     display: block;
-    font-family: 'Noto Serif Ethiopic', serif;
-    margin-bottom: 2px;
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
   }
+  .bar-green { background-color: var(--ethio-green); }
+  .bar-yellow { background-color: var(--ethio-yellow); }
+  .bar-red { background-color: var(--ethio-red); }
 
-  /* 2. NAVIGATION (Height Reduced) */
-  .main-nav {
-    position: sticky; top: 0; width: 100%; height: 65px;
-    background: var(--glass);
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0 5%; z-index: 10000;
-    border-bottom: 3px solid var(--gold);
-    backdrop-filter: blur(12px);
-  }
-  
-  .nav-brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .logo-sample {
-    width: 38px; height: 38px; 
-    background: var(--ethio-gradient); 
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; color: white; border: 2px solid white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  }
-  .nav-brand-text { color: var(--gold); font-weight: 900; font-size: 16px; letter-spacing: 1px; }
-
-  .nav-links { display: flex; gap: 3px; height: 100%; align-items: center; }
-  .menu-item { position: relative; height: 100%; display: flex; align-items: center; }
-  .menu-item > a {
-    color: var(--cream); text-decoration: none; font-weight: bold; font-size: 10px;
-    padding: 0 10px; text-transform: uppercase; transition: 0.3s;
-    border-bottom: 2px solid transparent;
-  }
-
-  /* ACTIVE PAGE INDICATOR */
-  .active-page { border-bottom: 2px solid var(--gold) !important; color: var(--gold) !important; }
-
-  .sub-menu {
-    position: absolute; top: 65px; left: 0;
-    background: var(--glass); min-width: 180px;
-    display: none; flex-direction: column;
-    border: 1px solid var(--gold); border-top: none;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-  }
-  .sub-menu a {
-    color: var(--cream); padding: 10px 18px; text-decoration: none;
-    font-size: 10px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .sub-menu a:hover { background: var(--gold); color: var(--burgundy); }
-  .menu-item:hover .sub-menu { display: flex; }
-
-  .btn-live {
-    background: #FF0000; color: white !important; padding: 6px 12px; border-radius: 50px;
-    display: flex; align-items: center; gap: 6px; animation: pulseRed 2s infinite;
-    font-weight: 900 !important; margin-left: 10px; border: 1px solid white;
-    text-decoration: none; font-size: 10px;
-  }
-  @keyframes pulseRed {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-    100% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
-  }
-
-  .menu-toggle { display: none; color: var(--gold); font-size: 28px; cursor: pointer; z-index: 10001; }
-
-  /* 3. HERO CONTENT (Tightened) */
-  .hero-header { 
-    padding: 40px 5%; text-align: center;
-    background: linear-gradient(rgba(253, 245, 230, 0.8), rgba(253, 245, 230, 0.9)), url('church.jpg');
-    background-size: cover; background-position: center;
-    border-bottom: 8px double var(--gold); width: 100%;
-  }
-  .church-name-am {
-    font-size: clamp(38px, 8vw, 75px); 
-    font-weight: 900; margin: 0;
-    background: linear-gradient(to right, #009739, #FFD100, #EF3340, #009739);
-    background-size: 200% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    animation: divineShine 5s linear infinite;
+  /* 3. HERO CONTENT */
+  .hero-header { 
+    padding: 40px 5%; text-align: center;
+    background: linear-gradient(rgba(253, 245, 230, 0.8), rgba(253, 245, 230, 0.9)), url('church.jpg');
+    background-size: cover; background-position: center;
+    border-bottom: 8px double var(--gold); width: 100%;
+  }
+  .church-name-am {
+    font-size: clamp(38px, 8vw, 75px); 
+    font-weight: 900; margin: 0;
+    background: var(--ethio-gradient);
+    background-size: 200% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: divineShine 5s linear infinite;
     line-height: 1.1;
-  }
-  @keyframes divineShine { to { background-position: 200% center; } }
-  .title-sub-am { font-size: clamp(18px, 3.5vw, 26px); font-weight: 700; color: var(--burgundy); margin: 8px 0; line-height: 1.2; }
+  }
+  @keyframes divineShine { to { background-position: 200% center; } }
+  .title-sub-am { font-size: clamp(18px, 3.5vw, 26px); font-weight: 700; color: var(--burgundy); margin: 8px 0; }
 
-  /* 4. CONTENT WRAPPER */
-  .container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 15px 5%; }
-  
-  .notice-frame { width: 95%; max-width: 850px; margin: 20px auto; padding: 3px; background: var(--gold); border-radius: 4px; }
-  .notice-inner { background: #fff; border: 2px double var(--burgundy); padding: 15px; text-align: center; }
-  .notice-label { background: var(--burgundy); color: var(--gold); padding: 3px 10px; font-size: 9px; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; display: inline-block;}
-  #dynamic-notice { font-size: clamp(16px, 3.5vw, 22px); font-weight: bold; color: var(--burgundy); transition: 0.5s; }
-  .fade-out { opacity: 0; }
+  /* 4. CONTENT WRAPPER */
+  .container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 15px 5%; }
+  
+  .notice-frame { width: 95%; max-width: 850px; margin: 20px auto; padding: 3px; background: var(--gold); border-radius: 4px; }
+  .notice-inner { background: #fff; border: 2px double var(--burgundy); padding: 15px; text-align: center; }
+  .notice-label { background: var(--burgundy); color: var(--gold); padding: 3px 10px; font-size: 9px; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; display: inline-block;}
+  #dynamic-notice { font-size: clamp(16px, 3.5vw, 22px); font-weight: bold; color: var(--burgundy); transition: 0.5s; }
+  .fade-out { opacity: 0; }
 
-  .section-tag { width: 100%; color: var(--burgundy); font-weight: bold; font-size: 13px; border-bottom: 2px solid var(--gold); margin: 30px 0 20px 0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 2.5px; text-align: center; }
+  .section-tag { width: 100%; color: var(--burgundy); font-weight: bold; font-size: 13px; border-bottom: 2px solid var(--gold); margin: 30px 0 20px 0; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 2.5px; text-align: center; }
 
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 1100px; }
-  .gallery-item { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1); cursor: pointer; background: #fff; }
-  .img-container { width: 100%; height: 260px; position: relative; }
-  .gallery-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s; }
-  .gallery-image.active { opacity: 1; }
-  .gallery-caption { padding: 12px; text-align: center; font-weight: bold; color: var(--burgundy); font-size: 14px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 1100px; }
+  .gallery-item { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1); cursor: pointer; background: #fff; }
+  .img-container { width: 100%; height: 260px; position: relative; }
+  .gallery-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s; }
+  .gallery-image.active { opacity: 1; }
+  .gallery-caption { padding: 12px; text-align: center; font-weight: bold; color: var(--burgundy); font-size: 14px; }
 
-  .video-container { width: 100%; max-width: 800px; border: 4px solid var(--gold); border-radius: 8px; overflow: hidden; }
-  .video-aspect { position: relative; padding-bottom: 56.25%; height: 0; }
-  .video-aspect iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .video-container { width: 100%; max-width: 800px; border: 4px solid var(--gold); border-radius: 8px; overflow: hidden; }
+  .video-aspect { position: relative; padding-bottom: 56.25%; height: 0; }
+  .video-aspect iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-  .project-box { width: 100%; max-width: 800px; background: white; padding: 25px; border-radius: 12px; border-left: 10px solid var(--burgundy); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
-  .track { width: 100%; height: 20px; background: #eee; border-radius: 20px; margin: 12px 0; overflow: hidden; border: 1px solid var(--gold); }
-  .fill { width: 65%; height: 100%; background: linear-gradient(to right, #4a0a10, var(--burgundy)); }
+  .project-box { width: 100%; max-width: 800px; background: white; padding: 25px; border-radius: 12px; border-left: 10px solid var(--burgundy); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+  .track { width: 100%; height: 20px; background: #eee; border-radius: 20px; margin: 12px 0; overflow: hidden; border: 1px solid var(--gold); }
+  .fill { width: 65%; height: 100%; background: linear-gradient(to right, #4a0a10, var(--burgundy)); }
 
-  .event-item { background: white; margin-bottom: 15px; padding: 20px; border-left: 8px solid var(--burgundy); width: 100%; max-width: 800px; }
+  .event-item { background: white; margin-bottom: 15px; padding: 20px; border-left: 8px solid var(--burgundy); width: 100%; max-width: 800px; }
 
-  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay); display: none; justify-content: center; align-items: center; z-index: 10001; }
-  #lightbox img { max-width: 90%; max-height: 80%; border: 3px solid var(--gold); }
+  #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay); display: none; justify-content: center; align-items: center; z-index: 10001; }
+  #lightbox img { max-width: 90%; max-height: 80%; border: 3px solid var(--gold); }
 
-  .footer { width: 100%; text-align: center; padding: 40px 5%; background: var(--burgundy); color: var(--gold); border-top: 5px solid var(--gold); margin-top: 50px; }
+  .footer { width: 100%; text-align: center; padding: 40px 5%; background: var(--burgundy); color: var(--gold); border-top: 5px solid var(--gold); margin-top: 50px; }
 
-  /* MOBILE FIXES */
-  @media (max-width: 1100px) {
-    .menu-toggle { display: block; }
-    .nav-links {
-      position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
-      background: var(--burgundy); flex-direction: column; align-items: flex-start;
-      padding: 80px 30px; transition: 0.4s; overflow-y: auto;
-    }
-    .nav-links.active { right: 0; }
-    .menu-item { width: 100%; height: auto; flex-direction: column; align-items: flex-start; }
-    .menu-item > a { width: 100%; height: 50px; font-size: 15px; display: flex; align-items: center; border-bottom: none !important; }
-    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); padding-left: 20px; border: none; top:0; }
-    .menu-item.open .sub-menu { display: flex; }
-    .btn-live { width: 100%; justify-content: center; margin: 15px 0; }
-    .sub-menu a.active-page { background: var(--gold); color: var(--burgundy) !important; border: none !important; }
-  }
+  /* MOBILE FIXES */
+  @media (max-width: 1100px) {
+    .menu-toggle { display: flex; }
+    .nav-links {
+      position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+      background: var(--burgundy); flex-direction: column; align-items: flex-start;
+      padding: 100px 30px; transition: 0.4s; overflow-y: auto;
+    }
+    .nav-links.active { right: 0; }
+    .menu-item { width: 100%; height: auto; flex-direction: column; align-items: flex-start; }
+    .menu-item > a { width: 100%; height: 50px; font-size: 16px; display: flex; align-items: center; border-bottom: none !important; }
+    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); padding-left: 20px; border: none; }
+    .menu-item.open .sub-menu { display: flex; }
+    .btn-live { width: 100%; justify-content: center; margin: 15px 0; }
+    .sub-menu a.active-page { background: var(--gold); color: var(--burgundy) !important; border: none !important; }
+  }
 </style>
 </head>
 <body>
 
 <header class="crown-header">
-  <div class="church-logo-container">
-    <img src="logo.png" alt="" onerror="this.style.display='none';">
-    <span style="color:var(--ethio-red); font-size: 24px; font-weight: bold;">✥</span>
-  </div>
-  <span class="crown-en-gold">Ethiopian Orthodox Tewahedo </span>
-  <span class="crown-en-gold">Southern Canada Diocese</span>
-  <span class="crown-en-gold">St. Mary, St. Gabriel, St. Arsema Cathedral</span>
-  <span class="crown-en-gold">Winnipeg, Manitoba</span>
+  <div class="church-logo-container">
+    <img src="logo.png" alt="" onerror="this.style.display='none';">
+    <span style="color:var(--ethio-red); font-size: 24px; font-weight: bold;">✥</span>
+  </div>
+  <span class="crown-en-gold">Ethiopian Orthodox Tewahedo </span>
+  <span class="crown-en-gold">Southern Canada Diocese</span>
+  <span class="crown-en-gold">St. Mary, St. Gabriel, St. Arsema Cathedral</span>
+  <span class="crown-en-gold">Winnipeg, Manitoba</span>
 </header>
 
 <nav class="main-nav">
-  <a href="index.html" class="nav-brand-group">
-    <div class="logo-sample">♰</div>
-    <div class="nav-brand-text">DEBRE GENET</div>
-  </a>
-  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">☰</div>
-  
-  <div class="nav-links" id="navLinks">
-    <div class="menu-item">
-      <a href="javascript:void(0)" onclick="toggleSub(this)">HOME ▾</a>
-      <div class="sub-menu">
-        <a href="index.html">Home</a>
-        <a href="clergy.html">Clergy</a>
-        <a href="services.html">Services</a>
-        <a href="faith.html">Our Faith</a>
-        <a href="about.html">About Us</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES ▾</a>
-      <div class="sub-menu">
-        <a href="ministry-hub.html">Ministry Hub</a>
-        <a href="sunday-school.html">Sunday School</a>
-        <a href="abinet.html">Abinet School</a>
-        <a href="pastorial-care.html">Pastorial Care</a>
-        <a href="sponsorship.html">Sponsorship</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR ▾</a>
-      <div class="sub-menu">
-        <a href="calendar.html">Calendar</a>
-        <a href="upcoming-events.html">Upcoming Events</a>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS ▾</a>
-      <div class="sub-menu">
-        <a href="payments.html">Payments</a>
-        <a href="donations.html">Donations</a>
-        <a href="building-project.html">Building Project</a>
-      </div>
-    </div>
-
-    <div class="menu-item"><a href="contact.html">CONTACT US</a></div>
-
-    <a href="https://youtube.com/live" target="_blank" class="btn-live">● LIVE NOW</a>
+  <a href="index.html" class="nav-brand-group">
+    <div class="logo-sample">♰</div>
+    <div class="nav-brand-text">DEBRE GENET</div>
+  </a>
+  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span class="bar-green"></span>
+    <span class="bar-yellow"></span>
+    <span class="bar-red"></span>
   </div>
+  
+  <div class="nav-links" id="navLinks">
+    <div class="menu-item">
+      <a href="javascript:void(0)" onclick="toggleSub(this)">HOME ▾</a>
+      <div class="sub-menu">
+        <a href="index.html">Home</a>
+        <a href="clergy.html">Clergy</a>
+        <a href="services.html">Services</a>
+        <a href="faith.html">Our Faith</a>
+        <a href="about.html">About Us</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES ▾</a>
+      <div class="sub-menu">
+        <a href="ministry-hub.html">Ministry Hub</a>
+        <a href="sunday-school.html">Sunday School</a>
+        <a href="abinet.html">Abinet School</a>
+        <a href="pastorial-care.html">Pastorial Care</a>
+        <a href="sponsorship.html">Sponsorship</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR ▾</a>
+      <div class="sub-menu">
+        <a href="calendar.html">Calendar</a>
+        <a href="upcoming-events.html">Upcoming Events</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS ▾</a>
+      <div class="sub-menu">
+        <a href="payments.html">Payments</a>
+        <a href="donations.html">Donations</a>
+        <a href="building-project.html">Building Project</a>
+      </div>
+    </div>
+
+    <div class="menu-item"><a href="contact.html">CONTACT US</a></div>
+
+    <a href="https://youtube.com/live" target="_blank" class="btn-live">● LIVE NOW</a>
+  </div>
 </nav>
 
 <div class="container">
-  <header class="hero-header">
-    <h1 class="church-name-am">ደብረ ገነት</h1>
-    <div class="title-sub-am">ቅድስት ማርያም ወቅዱስ ገብርኤል ወቅድስት አርሴማ</div>
-    <div style="font-weight: bold; letter-spacing: 1px; color: var(--burgundy); font-size: 14px;">St. Mary • St. Gabriel • St. Arsema</div>
-    <div style="font-weight: 900; letter-spacing: 4px; color: var(--gold); font-size: 10px; margin-top: 10px;">WINNIPEG, MANITOBA</div>
-  </header>
+  <header class="hero-header">
+    <h1 class="church-name-am">ደብረ ገነት</h1>
+    <div class="title-sub-am">ቅድስት ማርያም ወቅዱስ ገብርኤል ወቅድስት አርሴማ</div>
+    <div style="font-weight: bold; letter-spacing: 1px; color: var(--burgundy); font-size: 14px;">St. Mary • St. Gabriel • St. Arsema</div>
+    <div style="font-weight: 900; letter-spacing: 4px; color: var(--gold); font-size: 10px; margin-top: 10px;">WINNIPEG, MANITOBA</div>
+  </header>
 
-  <div class="notice-frame">
-    <div class="notice-inner">
-      <div class="notice-label">Notice / ማሳሰቢያ</div>
-      <div id="dynamic-notice">እንኳን በደህና መጡ::</div>
-    </div>
-  </div>
+  <div class="notice-frame">
+    <div class="notice-inner">
+      <div class="notice-label">Notice / ማሳሰቢያ</div>
+      <div id="dynamic-notice">እንኳን በደህና መጡ::</div>
+    </div>
+  </div>
 
-  <div class="section-tag">Sacred Gallery / የፎቶ መዝገብ</div>
-  <div class="gallery-grid">
-    <div class="gallery-item" onclick="openLightbox(0)">
-      <div class="img-container" id="container-0">
-        <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?w=800" class="gallery-image active">
-        <img src="https://images.unsplash.com/photo-1548689816-c399f954f3bb?w=800" class="gallery-image">
-      </div>
-      <div class="gallery-caption">Holy Timket / ጥምቀት</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox(1)">
-      <div class="img-container" id="container-1">
-        <img src="https://images.unsplash.com/photo-1590076215667-875d4ef2d97e?w=800" class="gallery-image active">
-        <img src="https://images.unsplash.com/photo-1523050853063-bd8012fec0c8?w=800" class="gallery-image">
-      </div>
-      <div class="gallery-caption">Sunday School / ሰንበት ትምህርት ቤት</div>
-    </div>
-  </div>
+  <div class="section-tag">Sacred Gallery / የፎቶ መዝገብ</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(0)">
+      <div class="img-container" id="container-0">
+        <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?w=800" class="gallery-image active">
+        <img src="https://images.unsplash.com/photo-1548689816-c399f954f3bb?w=800" class="gallery-image">
+      </div>
+      <div class="gallery-caption">Holy Timket / ጥምቀት</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(1)">
+      <div class="img-container" id="container-1">
+        <img src="https://images.unsplash.com/photo-1590076215667-875d4ef2d97e?w=800" class="gallery-image active">
+        <img src="https://images.unsplash.com/photo-1523050853063-bd8012fec0c8?w=800" class="gallery-image">
+      </div>
+      <div class="gallery-caption">Sunday School / ሰንበት ትምህርት ቤት</div>
+    </div>
+  </div>
 
-  <div class="section-tag">Latest Sermon / ትምህርተ ወንጌል</div>
-  <div class="video-container">
-    <div class="video-aspect">
-      <iframe src="https://www.youtube.com/embed/videoseries?list=UUrJheShnfyHxDFO0kESPdlw" allowfullscreen></iframe>
-    </div>
-  </div>
+  <div class="section-tag">Latest Sermon / ትምህርተ ወንጌል</div>
+  <div class="video-container">
+    <div class="video-aspect">
+      <iframe src="https://www.youtube.com/embed/videoseries?list=UUrJheShnfyHxDFO0kESPdlw" allowfullscreen></iframe>
+    </div>
+  </div>
 
-  <div class="section-tag">Building Project / የህንፃ ግንባታ</div>
-  <div class="project-box">
-    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
-      <span>Fundraising Progress</span>
-      <span style="color: var(--burgundy);">$780,000 / $1.2M</span>
-    </div>
-    <div class="track"><div class="fill"></div></div>
-    <p style="font-size: 13px;">Your contributions help us build a home for our spiritual community.</p>
-  </div>
+  <div class="section-tag">Building Project / የህንፃ ግንባታ</div>
+  <div class="project-box">
+    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
+      <span>Fundraising Progress</span>
+      <span style="color: var(--burgundy);">$780,000 / $1.2M</span>
+    </div>
+    <div class="track"><div class="fill"></div></div>
+    <p style="font-size: 13px;">Your contributions help us build a home for our spiritual community.</p>
+  </div>
 
-  <div class="section-tag">Upcoming Events / መጪ መርሃ ግብሮች</div>
-  <div id="eventList" style="width:100%; display:flex; flex-direction:column; align-items:center;"></div>
+  <div class="section-tag">Upcoming Events / መጪ መርሃ ግብሮች</div>
+  <div id="eventList" style="width:100%; display:flex; flex-direction:column; align-items:center;"></div>
 
-  <footer class="footer">
-    <div style="font-size: 24px; margin-bottom: 15px;">♰</div>
-    <p style="font-size: 14px;">353 Mountain Ave, Winnipeg, MB R2W 1J9</p>
-    <div style="margin-top: 30px; font-size: 11px; opacity: 0.7;">© 2026 Debre Genet EOTC</div>
-  </footer>
+  <footer class="footer">
+    <div style="font-size: 24px; margin-bottom: 15px;">♰</div>
+    <p style="font-size: 14px;">353 Mountain Ave, Winnipeg, MB R2W 1J9</p>
+    <div style="margin-top: 30px; font-size: 11px; opacity: 0.7;">© 2026 Debre Genet EOTC</div>
+  </footer>
 </div>
 
 <div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src="" alt=""></div>
 
 <script>
-  // Same scripts as original
-  function toggleMenu() {
-    const nav = document.getElementById('navLinks');
-    const toggle = document.getElementById('menuToggle');
-    nav.classList.toggle('active');
-    toggle.innerText = nav.classList.contains('active') ? '✕' : '☰';
-    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
-  }
+  // TOGGLE MOBILE NAV
+  function toggleMenu() {
+    const nav = document.getElementById('navLinks');
+    nav.classList.toggle('active');
+    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
+  }
 
-  function toggleSub(el) { 
-    if (window.innerWidth <= 1100) {
-      const parent = el.parentElement;
-      const wasOpen = parent.classList.contains('open');
-      document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('open'));
-      if (!wasOpen) parent.classList.add('open');
-    } 
-  }
+  // MOBILE ACCORDION: Toggle sub-menus
+  function toggleSub(el) { 
+    if (window.innerWidth <= 1100) {
+      const parent = el.parentElement;
+      const wasOpen = parent.classList.contains('open');
+      document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('open'));
+      if (!wasOpen) parent.classList.add('open');
+    } 
+  }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
-    const allLinks = document.querySelectorAll(".nav-links a");
-    allLinks.forEach(link => {
-      if (link.getAttribute("href") === currentPath) {
-        link.classList.add("active-page");
-        const subMenu = link.closest(".sub-menu");
-        if (subMenu) subMenu.previousElementSibling.classList.add("active-page");
-      }
-    });
-  });
+  // ACTIVE PAGE INDICATOR
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const allLinks = document.querySelectorAll(".nav-links a");
+    allLinks.forEach(link => {
+      if (link.getAttribute("href") === currentPath) {
+        link.classList.add("active-page");
+        const subMenu = link.closest(".sub-menu");
+        if (subMenu) subMenu.previousElementSibling.classList.add("active-page");
+      }
+    });
+  });
 
-  const slideStates = [0, 0];
-  const containers = [
-    document.getElementById('container-0').getElementsByClassName('gallery-image'),
-    document.getElementById('container-1').getElementsByClassName('gallery-image')
-  ];
-  function rotate() {
-    containers.forEach((imgs, idx) => {
-      imgs[slideStates[idx]].classList.remove('active');
-      slideStates[idx] = (slideStates[idx] + 1) % imgs.length;
-      imgs[slideStates[idx]].classList.add('active');
-    });
-  }
-  setInterval(rotate, 4000);
+  // GALLERY ROTATION
+  const slideStates = [0, 0];
+  const containers = [
+    document.getElementById('container-0').getElementsByClassName('gallery-image'),
+    document.getElementById('container-1').getElementsByClassName('gallery-image')
+  ];
+  function rotate() {
+    containers.forEach((imgs, idx) => {
+      imgs[slideStates[idx]].classList.remove('active');
+      slideStates[idx] = (slideStates[idx] + 1) % imgs.length;
+      imgs[slideStates[idx]].classList.add('active');
+    });
+  }
+  setInterval(rotate, 4000);
 
-  function openLightbox(idx) {
-    document.getElementById('lightbox-img').src = containers[idx][slideStates[idx]].src;
-    document.getElementById('lightbox').style.display = 'flex';
-  }
-  function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+  function openLightbox(idx) {
+    document.getElementById('lightbox-img').src = containers[idx][slideStates[idx]].src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+  function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-  const notices = ["እንኳን ለብርሃነ ጥምቀቱ በሰላም አደረሳችሁ::", "Building Project Goal: $1.2M.", "Sunday School: Every Sunday at 10:30 AM."];
-  let nIdx = 0;
-  setInterval(() => {
-    const el = document.getElementById('dynamic-notice');
-    if(el){
-        el.classList.add('fade-out');
-        setTimeout(() => {
-          nIdx = (nIdx + 1) % notices.length;
-          el.innerText = notices[nIdx];
-          el.classList.remove('fade-out');
-        }, 500);
-    }
-  }, 5000);
+  // NOTICES
+  const notices = ["እንኳን ለብርሃነ ጥምቀቱ በሰላም አደረሳችሁ::", "Building Project Goal: $1.2M.", "Sunday School: Every Sunday at 10:30 AM."];
+  let nIdx = 0;
+  setInterval(() => {
+    const el = document.getElementById('dynamic-notice');
+    if(el){
+        el.classList.add('fade-out');
+        setTimeout(() => {
+          nIdx = (nIdx + 1) % notices.length;
+          el.innerText = notices[nIdx];
+          el.classList.remove('fade-out');
+        }, 500);
+    }
+  }, 5000);
 
-  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMZieFTAsbcpW9ROmJzlRuVJv34SEYx-5q-jg40his0eVg0D5Jef5x4yFJvfWizjGToIBB1Ycu2KLE/pub?output=csv";
-  async function fetchEvents() {
-    try {
-      const response = await fetch(SHEET_CSV_URL);
-      const data = await response.text();
-      const rows = data.split('\n').slice(1);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+  // EVENTS
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMZieFTAsbcpW9ROmJzlRuVJv34SEYx-5q-jg40his0eVg0D5Jef5x4yFJvfWizjGToIBB1Ycu2KLE/pub?output=csv";
+  async function fetchEvents() {
+    try {
+      const response = await fetch(SHEET_CSV_URL);
+      const data = await response.text();
+      const rows = data.split('\n').slice(1);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
 
-      let events = rows.map(row => {
-        const cols = row.split(',').map(c => c.trim().replace(/^"|"$/g, ''));
-        if (!cols[0]) return null;
-        const dateParts = cols[0].split('-');
-        return { date: new Date(dateParts[0], dateParts[1] - 1, dateParts[2]), title: cols[1], start: cols[3], end: cols[4] };
-      })
-      .filter(e => e && e.date >= today)
-      .sort((a, b) => a.date - b.date).slice(0, 10);
+      let events = rows.map(row => {
+        const cols = row.split(',').map(c => c.trim().replace(/^"|"$/g, ''));
+        if (!cols[0]) return null;
+        const dateParts = cols[0].split('-');
+        return { date: new Date(dateParts[0], dateParts[1] - 1, dateParts[2]), title: cols[1], start: cols[3], end: cols[4] };
+      })
+      .filter(e => e && e.date >= today)
+      .sort((a, b) => a.date - b.date).slice(0, 10);
 
-      document.getElementById('eventList').innerHTML = events.map(e => `
-        <div class="event-item">
-          <span style="color: var(--gold); font-weight: bold;">${e.date.toDateString()}</span>
-          <div style="font-size: 20px; font-weight: bold;">${e.title}</div>
-          <div style="font-size:13px; opacity: 0.8;">◈ Time: ${e.start} - ${e.end}</div>
-        </div>
-      `).join('');
-    } catch (e) { 
-      document.getElementById('eventList').innerHTML = '<p>Offline.</p>'; 
-    }
-  }
-  fetchEvents();
+      document.getElementById('eventList').innerHTML = events.map(e => `
+        <div class="event-item">
+          <span style="color: var(--gold); font-weight: bold;">${e.date.toDateString()}</span>
+          <div style="font-size: 20px; font-weight: bold;">${e.title}</div>
+          <div style="font-size:13px; opacity: 0.8;">◈ Time: ${e.start} - ${e.end}</div>
+        </div>
+      `).join('');
+    } catch (e) { 
+      document.getElementById('eventList').innerHTML = '<p>Offline.</p>'; 
+    }
+  }
+  fetchEvents();
 </script>
 </body>
 </html>

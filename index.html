@@ -34,63 +34,77 @@
     line-height: 1.4; 
   }
 
-  /* --- COMPACT DIOCESE BANNER --- */
+  /* --- HEADER WITH SPLIT FLAG WINGS --- */
   .crown-header {
     width: 100%; background: var(--burgundy);
-    padding: 20px 0 15px 0; text-align: center;
+    padding: 20px 0; text-align: center;
     position: relative;
     overflow: hidden;
   }
 
-  /* FULL-WIDTH FLAG BAND (RESTRICTED TO LOGO HEIGHT) */
-  .logo-flag-row {
+  /* Container for the logo and the two wings */
+  .logo-wing-wrapper {
     width: 100%;
-    height: 70px; /* Matching logo size exactly */
+    height: 70px; /* Height of the logo + border */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
     position: relative;
-    overflow: hidden;
-    /* Base flag stripes */
+    margin-bottom: 15px;
+  }
+
+  /* Common style for both left and right wings */
+  .flag-wing {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(50% - 35px); /* Half width minus half logo radius */
+    height: 60px; /* Matching stripe height to logo */
     background: linear-gradient(to bottom, 
       var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
       var(--ethio-yellow) 33.33%, var(--ethio-yellow) 66.66%, 
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
 
-  /* Wind Animation Overlay */
-  .logo-flag-row::before {
+  /* Left wing touches the left side of the circle */
+  .flag-wing.left {
+    left: 0;
+    /* This creates the curved cut-out to "touch" the circle perfectly */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    -webkit-mask-image: radial-gradient(circle at 100% 50%, transparent 35px, black 36px);
+    mask-image: radial-gradient(circle at 100% 50%, transparent 35px, black 36px);
+  }
+
+  /* Right wing touches the right side of the circle */
+  .flag-wing.right {
+    right: 0;
+    -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 35px, black 36px);
+    mask-image: radial-gradient(circle at 0% 50%, transparent 35px, black 36px);
+  }
+
+  /* Animated shine for the flag cloth effect */
+  .flag-wing::after {
     content: "";
     position: absolute;
     top: 0; left: 0; width: 200%; height: 100%;
-    background: linear-gradient(
-      90deg, 
-      rgba(255,255,255,0) 0%, 
-      rgba(255,255,255,0.2) 25%, 
-      rgba(0,0,0,0.15) 50%, 
-      rgba(255,255,255,0.2) 75%, 
-      rgba(255,255,255,0) 100%
-    );
-    background-size: 50% 100%;
-    animation: flagWave 4s infinite linear;
-    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: wingShine 6s infinite linear;
   }
 
-  @keyframes flagWave {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  @keyframes wingShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0%); }
   }
 
   .church-logo-container {
-    width: 60px; height: 60px;
+    width: 70px; height: 70px;
     background: white; border-radius: 50%;
-    border: 3px solid white;
+    border: 4px solid white;
     display: flex; align-items: center; justify-content: center;
     overflow: hidden; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    flex-shrink: 0;
     z-index: 10;
+    position: relative;
   }
   .church-logo-container img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -119,16 +133,13 @@
   }
   
   .nav-brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  
   .logo-sample {
-    width: 38px; height: 38px; 
-    border-radius: 50%;
+    width: 38px; height: 38px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 24px; font-weight: bold;
     background: var(--ethio-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
   }
   .nav-brand-text { 
     font-weight: 900; font-size: 18px; letter-spacing: 1px; 
@@ -161,13 +172,7 @@
   .sub-menu a:hover { background: var(--gold); color: var(--burgundy); }
   .menu-item:hover .sub-menu { display: flex; }
 
-  .menu-toggle { 
-    display: none; 
-    flex-direction: column; 
-    justify-content: space-between;
-    width: 28px; height: 20px;
-    cursor: pointer; z-index: 10001; 
-  }
+  .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 28px; height: 20px; cursor: pointer; z-index: 10001; }
   .menu-toggle span { display: block; height: 4px; width: 100%; border-radius: 2px; }
   .bar-green { background: var(--ethio-green); }
   .bar-yellow { background: var(--ethio-yellow); }
@@ -179,10 +184,7 @@
     font-weight: 900 !important; margin-left: 10px; border: 1px solid white;
     text-decoration: none; font-size: 10px;
   }
-  @keyframes pulseRed {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-    100% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
-  }
+  @keyframes pulseRed { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); } 100% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); } }
 
   /* 3. HERO CONTENT */
   .hero-header { 
@@ -192,10 +194,8 @@
     border-bottom: 8px double var(--gold); width: 100%;
   }
   .church-name-am {
-    font-size: clamp(38px, 8vw, 75px); 
-    font-weight: 900; margin: 0;
-    background: var(--ethio-gradient);
-    background-size: 200% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-size: clamp(38px, 8vw, 75px); font-weight: 900; margin: 0;
+    background: var(--ethio-gradient); background-size: 200% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     animation: divineShine 5s linear infinite; line-height: 1.1;
   }
   @keyframes divineShine { to { background-position: 200% center; } }
@@ -203,7 +203,6 @@
 
   /* 4. CONTENT WRAPPER */
   .container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 15px 5%; }
-  
   .notice-frame { width: 95%; max-width: 850px; margin: 20px auto; padding: 3px; background: var(--gold); border-radius: 4px; }
   .notice-inner { background: #fff; border: 2px double var(--burgundy); padding: 15px; text-align: center; }
   .notice-label { background: var(--burgundy); color: var(--gold); padding: 3px 10px; font-size: 9px; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; display: inline-block;}
@@ -252,11 +251,15 @@
 <body>
 
 <header class="crown-header">
-  <div class="logo-flag-row">
+  <div class="logo-wing-wrapper">
+    <div class="flag-wing left"></div>
+    
     <div class="church-logo-container">
       <img src="logo.png" alt="" onerror="this.style.display='none';">
       <span style="color:var(--ethio-red); font-size: 24px; font-weight: bold; z-index: 11;">✥</span>
     </div>
+
+    <div class="flag-wing right"></div>
   </div>
 
   <span class="crown-en-gold">Ethiopian Orthodox Tewahedo </span>
@@ -287,7 +290,6 @@
         <a href="about.html">About Us</a>
       </div>
     </div>
-
     <div class="menu-item">
       <a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES ▾</a>
       <div class="sub-menu">
@@ -298,7 +300,6 @@
         <a href="sponsorship.html">Sponsorship</a>
       </div>
     </div>
-
     <div class="menu-item">
       <a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR ▾</a>
       <div class="sub-menu">
@@ -306,7 +307,6 @@
         <a href="upcoming-events.html">Upcoming Events</a>
       </div>
     </div>
-
     <div class="menu-item">
       <a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS ▾</a>
       <div class="sub-menu">
@@ -315,9 +315,7 @@
         <a href="building-project.html">Building Project</a>
       </div>
     </div>
-
     <div class="menu-item"><a href="contact.html">CONTACT US</a></div>
-
     <a href="https://youtube.com/live" target="_blank" class="btn-live">● LIVE NOW</a>
   </div>
 </nav>
@@ -472,10 +470,4 @@
         </div>
       `).join('');
     } catch (e) { 
-      document.getElementById('eventList').innerHTML = '<p>Offline.</p>'; 
-    }
-  }
-  fetchEvents();
-</script>
-</body>
-</html>
+      document.getElementById('event

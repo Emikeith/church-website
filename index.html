@@ -42,6 +42,7 @@
     overflow: hidden;
   }
 
+  /* Container for the logo and the two wings */
   .logo-wing-wrapper {
     width: 100%;
     height: 70px; 
@@ -52,6 +53,7 @@
     margin-bottom: 15px;
   }
 
+  /* Common style for both left and right wings */
   .flag-wing {
     position: absolute;
     top: 50%;
@@ -64,18 +66,19 @@
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
 
+  /* Left wing */
   .flag-wing.left {
     left: 0;
-    -webkit-mask-image: radial-gradient(circle at 100% 50%, transparent 35px, black 36px);
-    mask-image: radial-gradient(circle at 100% 50%, transparent 35px, black 36px);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
 
+  /* Right wing */
   .flag-wing.right {
     right: 0;
-    -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 35px, black 36px);
-    mask-image: radial-gradient(circle at 0% 50%, transparent 35px, black 36px);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
 
+  /* Animated shine for the flag cloth effect */
   .flag-wing::after {
     content: "";
     position: absolute;
@@ -99,7 +102,6 @@
     z-index: 10;
     position: relative;
   }
-  /* Logo Image Scaling */
   .church-logo-container img { width: 100%; height: 100%; object-fit: contain; }
 
   .crown-en-gold {
@@ -249,7 +251,7 @@
     <div class="flag-wing left"></div>
     
     <div class="church-logo-container">
-      <img src="logo.gif" alt="Debre Genet Logo" onerror="this.style.display='none';">
+      <img src="logo.gif" alt="Church Logo">
     </div>
 
     <div class="flag-wing right"></div>

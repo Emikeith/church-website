@@ -42,10 +42,9 @@
     overflow: hidden;
   }
 
-  /* Container for the logo and the two wings */
   .logo-wing-wrapper {
     width: 100%;
-    height: 70px; /* Height of the logo + border */
+    height: 70px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,36 +52,30 @@
     margin-bottom: 15px;
   }
 
-  /* Common style for both left and right wings */
   .flag-wing {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: calc(50% - 35px); /* Half width minus half logo radius */
-    height: 60px; /* Matching stripe height to logo */
+    width: calc(50% - 35px); 
+    height: 60px; 
     background: linear-gradient(to bottom, 
       var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
       var(--ethio-yellow) 33.33%, var(--ethio-yellow) 66.66%, 
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
   }
 
-  /* Left wing touches the left side of the circle */
   .flag-wing.left {
     left: 0;
-    /* This creates the curved cut-out to "touch" the circle perfectly */
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     -webkit-mask-image: radial-gradient(circle at 100% 50%, transparent 35px, black 36px);
     mask-image: radial-gradient(circle at 100% 50%, transparent 35px, black 36px);
   }
 
-  /* Right wing touches the right side of the circle */
   .flag-wing.right {
     right: 0;
     -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 35px, black 36px);
     mask-image: radial-gradient(circle at 0% 50%, transparent 35px, black 36px);
   }
 
-  /* Animated shine for the flag cloth effect */
   .flag-wing::after {
     content: "";
     position: absolute;
@@ -106,7 +99,8 @@
     z-index: 10;
     position: relative;
   }
-  .church-logo-container img { width: 100%; height: 100%; object-fit: cover; }
+  /* Logo Image Scaling */
+  .church-logo-container img { width: 100%; height: 100%; object-fit: contain; }
 
   .crown-en-gold {
     font-size: clamp(11px, 2.2vw, 15px);
@@ -253,11 +247,11 @@
 <header class="crown-header">
   <div class="logo-wing-wrapper">
     <div class="flag-wing left"></div>
-
+    
     <div class="church-logo-container">
-      <img src="my-church-logo.gif" alt="Church Logo" onerror="this.style.display='none';">
-      <span style="color:var(--ethio-red); font-size: 24px; font-weight: bold; z-index: 11;">✥</span>
+      <img src="logo.gif" alt="Debre Genet Logo" onerror="this.style.display='none';">
     </div>
+
     <div class="flag-wing right"></div>
   </div>
 
@@ -469,5 +463,10 @@
         </div>
       `).join('');
     } catch (e) { 
-      document.getElementById('event
-
+      document.getElementById('eventList').innerHTML = '<p>Offline.</p>'; 
+    }
+  }
+  fetchEvents();
+</script>
+</body>
+</html>

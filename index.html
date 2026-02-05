@@ -34,75 +34,47 @@
     line-height: 1.4; 
   }
 
-  /* --- HEADER WITH SPLIT FLAG WINGS --- */
+  /* --- HEADER WITH SEAMLESS FLAG --- */
   .crown-header {
-    width: 100%; background: var(--burgundy);
-    padding: 20px 0; text-align: center;
+    width: 100%; 
+    background: white; /* Removed Burgundy Top */
+    padding: 0; /* Tightened for seamless look */
+    text-align: center;
     position: relative;
     overflow: hidden;
   }
 
-  /* Container for the logo and the two wings */
-  .logo-wing-wrapper {
+  /* Flag background that spans full width behind logo */
+  .flag-backdrop {
     width: 100%;
-    height: 70px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 15px;
-  }
-
-  /* Common style for both left and right wings */
-  .flag-wing {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: calc(50% - 35px); 
-    height: 60px; 
+    height: 80px;
     background: linear-gradient(to bottom, 
       var(--ethio-green) 0%, var(--ethio-green) 33.33%, 
       var(--ethio-yellow) 33.33%, var(--ethio-yellow) 66.66%, 
       var(--ethio-red) 66.66%, var(--ethio-red) 100%);
-  }
-
-  /* Left wing */
-  .flag-wing.left {
-    left: 0;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  }
-
-  /* Right wing */
-  .flag-wing.right {
-    right: 0;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  }
-
-  /* Animated shine for the flag cloth effect */
-  .flag-wing::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 200%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    animation: wingShine 6s infinite linear;
-  }
-
-  @keyframes wingShine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(0%); }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
 
   .church-logo-container {
-    width: 70px; height: 70px;
+    width: 90px; height: 90px;
     background: white; border-radius: 50%;
-    border: 4px solid white;
+    border: 6px solid white; /* Thick white border to blend into circle */
     display: flex; align-items: center; justify-content: center;
     overflow: hidden; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     z-index: 10;
     position: relative;
+    margin-top: 10px; /* Slight overlap effect */
   }
   .church-logo-container img { width: 100%; height: 100%; object-fit: contain; }
+
+  .text-container {
+    padding: 15px 0;
+    background: white;
+  }
 
   .crown-en-gold {
     font-size: clamp(11px, 2.2vw, 15px);
@@ -110,13 +82,24 @@
     text-transform: uppercase;
     letter-spacing: 1.2px;
     line-height: 1.1;
-    background: var(--gold-shine);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--burgundy); /* Changed from gold for legibility on white */
     display: block;
     font-family: 'Noto Serif Ethiopic', serif;
     margin-bottom: 2px;
   }
+
+  /* Tiny three-row line below Winnipeg */
+  .tiny-flag-divider {
+    width: 100%;
+    height: 6px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  .tiny-row { height: 2px; width: 100%; }
+  .green-row { background: var(--ethio-green); }
+  .yellow-row { background: var(--ethio-yellow); }
+  .red-row { background: var(--ethio-red); }
 
   /* 2. NAVIGATION */
   .main-nav {
@@ -247,20 +230,24 @@
 <body>
 
 <header class="crown-header">
-  <div class="logo-wing-wrapper">
-    <div class="flag-wing left"></div>
-    
+  <div class="flag-backdrop">
     <div class="church-logo-container">
       <img src="my-church-logo.gif" alt="Church Logo">
     </div>
-
-    <div class="flag-wing right"></div>
   </div>
 
-  <span class="crown-en-gold">Ethiopian Orthodox Tewahedo </span>
-  <span class="crown-en-gold">Southern Canada Diocese</span>
-  <span class="crown-en-gold">St. Mary, St. Gabriel, St. Arsema Cathedral</span>
-  <span class="crown-en-gold">Winnipeg, Manitoba</span>
+  <div class="text-container">
+    <span class="crown-en-gold">Ethiopian Orthodox Tewahedo</span>
+    <span class="crown-en-gold">Southern Canada Diocese</span>
+    <span class="crown-en-gold">St. Mary, St. Gabriel, St. Arsema Cathedral</span>
+    <span class="crown-en-gold">Winnipeg, Manitoba</span>
+    
+    <div class="tiny-flag-divider">
+      <div class="tiny-row green-row"></div>
+      <div class="tiny-row yellow-row"></div>
+      <div class="tiny-row red-row"></div>
+    </div>
+  </div>
 </header>
 
 <nav class="main-nav">
@@ -472,4 +459,3 @@
 </script>
 </body>
 </html>
-

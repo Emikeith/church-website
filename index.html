@@ -107,15 +107,16 @@
     .main-nav { background: var(--glass) !important; height: 75px !important; }
   }
 
-  /* 3. HERO SECTION OPTIMIZATIONS */
+  /* 3. HERO SECTION BRIGHTENED */
   .hero-vid-section {
     position: relative; height: 85vh; width: 100%; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
-    background: #1a0204;
+    /* UPDATED: Initial background is now Cream Gold instead of Black */
+    background: linear-gradient(135deg, #FFF8E1 0%, #F9E8B2 100%);
   }
 
-  .video-bg { position: absolute; inset: 0; z-index: 1; background: #1a0204; }
+  .video-bg { position: absolute; inset: 0; z-index: 1; }
   .video-bg iframe {
     width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -125,7 +126,12 @@
 
   .hero-overlay { 
     position: absolute; inset: 0; z-index: 2; 
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(67, 10, 15, 0.8)); 
+    /* UPDATED: Brighter, Engaging Overlay (Light Gold & White Pearlescent) */
+    background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(212, 160, 23, 0.3) 50%, 
+                rgba(99, 15, 22, 0.5) 100%);
+    backdrop-filter: brightness(1.1);
   }
 
   /* --- DYNAMIC ETHIOPIAN TEXT ANIMATION --- */
@@ -144,7 +150,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 5s linear infinite;
-    text-shadow: 0px 0px 10px rgba(212, 160, 23, 0.2);
+    /* Added text shadow for better contrast on bright background */
+    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));
   }
 
   @keyframes shine {
@@ -152,7 +159,11 @@
   }
 
   .hero-content h1 { font-size: clamp(45px, 10vw, 90px); font-weight: 900; margin-bottom: 10px; }
-  .hero-content p { font-family: 'Montserrat'; letter-spacing: 4px; font-weight: 600; font-size: clamp(12px, 3vw, 18px); margin-bottom: 5px; }
+  .hero-content p { 
+    font-family: 'Montserrat'; letter-spacing: 4px; font-weight: 600; 
+    font-size: clamp(12px, 3vw, 18px); margin-bottom: 5px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5); /* Added for legibility */
+  }
 
   /* 4. CONTENT CARDS & LAYOUT */
   .container { width: 90%; max-width: 1200px; margin: -60px auto 80px; position: relative; z-index: 20; }
@@ -237,8 +248,8 @@
   <div class="hero-content">
     <h1 class="ethio-animate">ደብረ ገነት</h1>
     <p class="ethio-animate">ETHIOPIAN ORTHODOX TEWAHEDO</p>
-    <p style="color: white; opacity: 0.9;">ST. MARY, ST. GABRIEL, ST. ARSEMA CATHEDRAL</p>
-    <div style="margin-top:20px; font-weight:bold; letter-spacing:2px; font-size:12px; color: var(--accent-gold);">ESTABLISHED 1997</div>
+    <p style="color: white; opacity: 0.9; font-weight: bold;">ST. MARY, ST. GABRIEL, ST. ARSEMA CATHEDRAL</p>
+    <div style="margin-top:20px; font-weight:bold; letter-spacing:2px; font-size:12px; color: var(--accent-gold); text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">ESTABLISHED 1997</div>
   </div>
 </section>
 
@@ -362,6 +373,3 @@
 </script>
 </body>
 </html>
-
-
-

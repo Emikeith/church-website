@@ -21,7 +21,6 @@
         body { background-color: var(--bg); font-family: 'Montserrat', sans-serif; color: var(--text); line-height: 1.6; }
         .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
 
-        /* --- MODERN HEADER --- */
         header {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
@@ -41,11 +40,7 @@
         .search-input:focus { background: #fff; border-color: var(--primary); box-shadow: 0 10px 25px rgba(0,119,204,0.1); }
         .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); opacity: 0.4; }
 
-        /* --- CATEGORY PILLS --- */
-        .cat-scroll {
-            display: flex; gap: 8px; overflow-x: auto; padding: 15px 20px;
-            scrollbar-width: none; -ms-overflow-style: none;
-        }
+        .cat-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 15px 20px; scrollbar-width: none; }
         .cat-scroll::-webkit-scrollbar { display: none; }
         .cat-chip {
             padding: 10px 20px; border-radius: 12px; background: var(--card);
@@ -54,7 +49,6 @@
         }
         .cat-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); transform: scale(1.05); }
 
-        /* --- MEZMUR LIST --- */
         .grid { max-width: 600px; margin: 0 auto; padding: 0 20px 120px; }
         .card {
             background: var(--card); border-radius: 20px; padding: 18px;
@@ -71,7 +65,6 @@
         .m-title { font-size: 17px; font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
         .m-sub { font-size: 11px; font-weight: 800; color: var(--gold); text-transform: uppercase; }
 
-        /* --- DRAWER --- */
         #drawer {
             position: fixed; bottom: -100%; left: 0; width: 100%; height: 96vh;
             background: var(--card); z-index: 2000; border-radius: 32px 32px 0 0;
@@ -79,14 +72,12 @@
             display: flex; flex-direction: column;
         }
         #drawer.active { bottom: 0; }
-        
         .handle { width: 40px; height: 5px; background: #E2E8F0; border-radius: 10px; margin: 12px auto; }
         .drawer-header { padding: 0 25px 15px; display: flex; justify-content: space-between; align-items: center; }
 
         .viewport { flex: 1; overflow-y: auto; padding: 20px 25px; position: relative; }
         .lyric-text { white-space: pre-line; font-size: 21px; line-height: 2.2; text-align: center; padding-bottom: 40px; color: var(--text); }
 
-        /* --- STICKY FLOATING HINT --- */
         #scrollHint {
             position: sticky; bottom: 20px; margin: 0 auto; width: fit-content;
             padding: 10px 20px; background: var(--primary); color: white;
@@ -95,7 +86,6 @@
             display: none; align-items: center; gap: 8px; animation: bounce 2s infinite;
         }
 
-        /* --- PLAYER BAR --- */
         .player-area {
             background: #F8FAFC; border-top: 1px solid #EDF2F7;
             padding: 20px 20px calc(20px + var(--safe-bottom));
@@ -110,7 +100,6 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        /* --- SKELETON LOADING --- */
         .skeleton { height: 80px; background: #eee; margin-bottom: 12px; border-radius: 20px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
@@ -157,8 +146,8 @@
     </div>
 
     <script>
-        // Replace with your Published CSV URL from Google Sheets
-        const SHEET_CSV_URL = https://docs.google.com/spreadsheets/d/e/2PACX-1vQsq3NgPNxQbtyDSL6yGGslLfyjiDkR-1qPZivnk4f0xko9eaqWkOTxD8K83xi2qXno4EEorjQPEJgQ/pubhtml;
+        // UPDATED LINK: Changed from /pubhtml to /pub?output=csv
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQsq3NgPNxQbtyDSL6yGGslLfyjiDkR-1qPZivnk4f0xko9eaqWkOTxD8K83xi2qXno4EEorjQPEJgQ/pub?output=csv';
 
         let allMezmurs = [];
 
@@ -167,16 +156,19 @@
                 const res = await fetch(SHEET_CSV_URL);
                 const csvText = await res.text();
                 
-                // Parser for CSV with quoted multi-line lyrics
-                const rows = csvText.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*(\r|\n|$))/g);
+                // Enhanced CSV Parser for complex text and quotes
+                const rows = parseCSV(csvText);
                 const temp = [];
-                for(let i = 5; i < rows.length; i += 5) {
+                
+                // Starting from i=1 to skip the header row
+                for(let i = 1; i < rows.length; i++) {
+                    if (rows[i].length < 4) continue;
                     temp.push({
-                        title: rows[i].replace(/"/g, ''),
-                        cat: rows[i+1].replace(/"/g, ''),
-                        lyrics: rows[i+2].replace(/^"|"$/g, '').replace(/""/g, '"'),
-                        url: rows[i+3].replace(/"/g, ''),
-                        displayCat: rows[i+4].replace(/"/g, '')
+                        title: rows[i][0],
+                        cat: rows[i][1],
+                        lyrics: rows[i][2],
+                        url: rows[i][3],
+                        displayCat: rows[i][4] || rows[i][1]
                     });
                 }
                 allMezmurs = temp;
@@ -185,15 +177,34 @@
                 document.getElementById('loadingArea').style.display = 'none';
                 document.getElementById('mezmurList').style.display = 'block';
             } catch (e) {
-                document.getElementById('loadingArea').innerHTML = "<p style='text-align:center'>Error loading mezmurs. Check CSV Link.</p>";
+                document.getElementById('loadingArea').innerHTML = "<p style='text-align:center; padding: 20px;'>Error loading mezmurs. Please ensure your Google Sheet is published as CSV.</p>";
             }
+        }
+
+        // Professional CSV Parser to handle lyrics with commas and newlines
+        function parseCSV(str) {
+            const arr = [];
+            let quote = false;
+            for (let row = col = c = 0; c < str.length; c++) {
+                let cc = str[c], nc = str[c+1];
+                arr[row] = arr[row] || [];
+                arr[row][col] = arr[row][col] || '';
+                if (cc == '"' && quote && nc == '"') { arr[row][col] += cc; ++c; continue; }
+                if (cc == '"') { quote = !quote; continue; }
+                if (cc == ',' && !quote) { ++col; continue; }
+                if (cc == '\r' && nc == '\n' && !quote) { ++row; col = 0; ++c; continue; }
+                if (cc == '\n' && !quote) { ++row; col = 0; continue; }
+                if (cc == '\r' && !quote) { ++row; col = 0; continue; }
+                arr[row][col] += cc;
+            }
+            return arr;
         }
 
         function renderList(data) {
             const list = document.getElementById('mezmurList');
             list.innerHTML = data.map((m, idx) => `
                 <div class="card" onclick="openMezmur(${idx})">
-                    <div class="icon-box">${m.url.includes('youtu') ? '📹' : '🎵'}</div>
+                    <div class="icon-box">${m.url.toLowerCase().includes('youtu') ? '📹' : '🎵'}</div>
                     <div style="flex:1">
                         <span class="m-title ethiopic">${m.title}</span>
                         <span class="m-sub">${m.displayCat}</span>
@@ -207,6 +218,7 @@
             const cats = [...new Set(allMezmurs.map(m => m.cat))];
             const bar = document.getElementById('catBar');
             cats.forEach(c => {
+                if(!c) return;
                 const label = allMezmurs.find(m => m.cat === c).displayCat;
                 bar.innerHTML += `<div class="cat-chip" onclick="filterCat('${c}', this)">${label}</div>`;
             });
@@ -219,11 +231,15 @@
             document.getElementById('l-cat').innerText = m.displayCat;
 
             const player = document.getElementById('mediaPlayer');
-            if(m.url.includes('youtu')) {
-                const id = m.url.split('v=')[1]?.split('&')[0] || m.url.split('/').pop();
-                player.innerHTML = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${id}?autoplay=1"></iframe></div>`;
-            } else {
+            if(m.url.toLowerCase().includes('youtu')) {
+                let id = "";
+                if(m.url.includes('v=')) id = m.url.split('v=')[1].split('&')[0];
+                else id = m.url.split('/').pop();
+                player.innerHTML = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay"></iframe></div>`;
+            } else if (m.url.length > 5) {
                 player.innerHTML = `<audio controls autoplay src="${m.url}"></audio>`;
+            } else {
+                player.innerHTML = `<p style="text-align:center; font-size:12px; color:var(--text-soft)">No audio available</p>`;
             }
 
             document.getElementById('drawer').classList.add('active');
@@ -233,7 +249,7 @@
             view.scrollTop = 0;
             setTimeout(() => {
                 const hint = document.getElementById('scrollHint');
-                hint.style.display = (view.scrollHeight > view.clientHeight + 50) ? 'flex' : 'none';
+                hint.style.display = (view.scrollHeight > view.clientHeight + 60) ? 'flex' : 'none';
                 hint.style.opacity = '1';
             }, 600);
             document.body.style.overflow = 'hidden';
@@ -267,4 +283,3 @@
     </script>
 </body>
 </html>
-

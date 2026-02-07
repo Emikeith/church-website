@@ -107,50 +107,36 @@
     .main-nav { background: var(--glass) !important; height: 75px !important; }
   }
 
-  /* 3. HERO SECTION - JEWEL TONE OPTIMIZATION */
+  /* 3. HERO SECTION OPTIMIZATIONS */
   .hero-vid-section {
     position: relative; height: 85vh; width: 100%; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
-    /* Better Option: Deep Emerald to Navy Silk Gradient for the 'Loading' phase */
-    background: radial-gradient(circle, #0a2e1d 0%, #051a11 100%);
+    background: #1a0204;
   }
 
-  .video-bg { position: absolute; inset: 0; z-index: 1; }
+  .video-bg { position: absolute; inset: 0; z-index: 1; background: #1a0204; }
   .video-bg iframe {
     width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     pointer-events: none; opacity: 0; transition: opacity 2s ease-in;
-    filter: saturate(1.2) contrast(1.1);
   }
   .video-bg iframe.loaded { opacity: 1; }
 
   .hero-overlay { 
     position: absolute; inset: 0; z-index: 2; 
-    /* Rich Vibrant Overlay: Adds depth and makes text pop */
-    background: linear-gradient(135deg, 
-                rgba(10, 46, 29, 0.4) 0%, 
-                rgba(0, 0, 0, 0.1) 50%, 
-                rgba(99, 15, 22, 0.5) 100%);
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(67, 10, 15, 0.8)); 
   }
 
-  /* --- HIGH-VISIBILITY DYNAMIC TEXT --- */
-  .hero-content { 
-    position: relative; 
-    z-index: 10; 
-    text-align: center; 
-    color: white; 
-    padding: 20px;
-    max-width: 900px;
-  }
+  /* --- DYNAMIC ETHIOPIAN TEXT ANIMATION --- */
+  .hero-content { position: relative; z-index: 10; text-align: center; color: white; padding-bottom: 50px; }
   
   .ethio-animate {
     background: linear-gradient(to right, 
-      #00ff62 20%, 
-      #fff04b 40%, 
-      #ff4d4d 60%, 
-      #00ff62 80%);
+      var(--ethio-green) 20%, 
+      var(--ethio-yellow) 40%, 
+      var(--ethio-red) 60%, 
+      var(--ethio-green) 80%);
     background-size: 200% auto;
     color: #fff;
     background-clip: text;
@@ -158,43 +144,15 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 5s linear infinite;
-    /* BETTER OPTION: Strong black outline (Stroke) + Vivid Glow */
-    filter: drop-shadow(0px 0px 2px rgba(0,0,0,1)) 
-            drop-shadow(0px 0px 12px rgba(212, 160, 23, 0.9));
-    font-weight: 900;
+    text-shadow: 0px 0px 10px rgba(212, 160, 23, 0.2);
   }
 
   @keyframes shine {
     to { background-position: 200% center; }
   }
 
-  .hero-content h1 { font-size: clamp(50px, 12vw, 100px); margin-bottom: 5px; line-height: 1; }
-  
-  .hero-content p { 
-    font-family: 'Montserrat'; 
-    letter-spacing: 5px; 
-    font-weight: 800; 
-    font-size: clamp(14px, 4vw, 22px); 
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    /* High contrast text shadow */
-    text-shadow: 0 4px 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.5);
-  }
-
-  .est-tag {
-    margin-top: 25px;
-    display: inline-block;
-    padding: 5px 20px;
-    border: 1px solid var(--accent-gold);
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(5px);
-    border-radius: 50px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    font-size: 11px;
-    color: var(--accent-gold);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  }
+  .hero-content h1 { font-size: clamp(45px, 10vw, 90px); font-weight: 900; margin-bottom: 10px; }
+  .hero-content p { font-family: 'Montserrat'; letter-spacing: 4px; font-weight: 600; font-size: clamp(12px, 3vw, 18px); margin-bottom: 5px; }
 
   /* 4. CONTENT CARDS & LAYOUT */
   .container { width: 90%; max-width: 1200px; margin: -60px auto 80px; position: relative; z-index: 20; }
@@ -279,8 +237,8 @@
   <div class="hero-content">
     <h1 class="ethio-animate">ደብረ ገነት</h1>
     <p class="ethio-animate">ETHIOPIAN ORTHODOX TEWAHEDO</p>
-    <p style="color: white;">ST. MARY, ST. GABRIEL, ST. ARSEMA CATHEDRAL</p>
-    <div class="est-tag">ESTABLISHED 1997</div>
+    <p style="color: white; opacity: 0.9;">ST. MARY, ST. GABRIEL, ST. ARSEMA CATHEDRAL</p>
+    <div style="margin-top:20px; font-weight:bold; letter-spacing:2px; font-size:12px; color: var(--accent-gold);">ESTABLISHED 1997</div>
   </div>
 </section>
 

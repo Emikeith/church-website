@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacred Mezmurs & Practice | Debre Genet EOTC</title>
+    <title>Sacred Mezmurs | Debre Genet EOTC Winnipeg</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sky-bg: #F0F5FA;
+            --sky-bg: #F4F8FB;
             --sky-main: #0077CC;
             --sky-deep: #003366;
             --holy-gold: #D4AF37;
             --text-dark: #1A2530;
             --text-soft: #607D8B;
             --white: #FFFFFF;
-            --shadow: 0 10px 40px rgba(0, 119, 204, 0.12);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --shadow: 0 12px 40px rgba(0, 119, 204, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--sky-bg); font-family: 'Montserrat', sans-serif; color: var(--text-dark); }
+        body { background-color: var(--sky-bg); font-family: 'Montserrat', sans-serif; color: var(--text-dark); line-height: 1.6; }
         .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
 
-        /* --- STICKY HEADER --- */
-        .hymnal-header {
+        /* --- HEADER & NAVIGATION --- */
+        header {
             background: var(--white);
-            padding: 40px 20px 20px;
+            padding: 30px 20px 15px;
             text-align: center;
             border-bottom: 1px solid #E1F0FF;
             position: sticky; top: 0; z-index: 1000;
         }
 
-        .search-container { max-width: 700px; margin: 20px auto 0; position: relative; }
+        .search-container { max-width: 600px; margin: 15px auto 0; position: relative; }
         .search-input {
             width: 100%; padding: 16px 25px; border-radius: 50px;
             border: 2px solid var(--sky-bg); background: var(--sky-bg);
@@ -38,94 +39,111 @@
         }
         .search-input:focus { border-color: var(--sky-main); background: #fff; box-shadow: var(--shadow); }
 
-        /* --- CATEGORY CAROUSEL --- */
         .category-scroll {
             display: flex; gap: 10px; overflow-x: auto;
-            padding: 20px 5%; background: var(--white);
+            padding: 15px 5%; background: var(--white);
             scrollbar-width: none; border-bottom: 1px solid #E1F0FF;
         }
+        .category-scroll::-webkit-scrollbar { display: none; }
         .cat-chip {
-            padding: 10px 22px; border-radius: 50px; background: var(--sky-bg);
+            padding: 8px 18px; border-radius: 50px; background: var(--sky-bg);
             color: var(--sky-deep); font-size: 11px; font-weight: 800;
             white-space: nowrap; cursor: pointer; transition: 0.3s;
+            border: 1px solid transparent;
         }
-        .cat-chip.active { background: var(--sky-main); color: var(--white); box-shadow: 0 4px 15px rgba(0, 119, 204, 0.3); }
+        .cat-chip.active { background: var(--sky-main); color: var(--white); border-color: var(--sky-main); }
 
         /* --- MEZMUR LIST --- */
-        .mezmur-grid { max-width: 900px; margin: 30px auto; padding: 0 20px 100px; }
+        .mezmur-grid { max-width: 800px; margin: 20px auto; padding: 0 20px 100px; }
         .mezmur-card {
-            background: var(--white); border-radius: 20px; padding: 22px;
-            margin-bottom: 15px; display: flex; align-items: center; gap: 18px;
+            background: var(--white); border-radius: 20px; padding: 20px;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 15px;
             box-shadow: var(--shadow); cursor: pointer; transition: 0.3s;
         }
-        .mezmur-card:hover { transform: translateY(-3px); box-shadow: 0 15px 45px rgba(0, 119, 204, 0.18); }
-        .m-icon { width: 50px; height: 50px; background: var(--sky-bg); color: var(--sky-main); border-radius: 50%; display: grid; place-items: center; font-weight: 800; }
+        .mezmur-card:hover { transform: translateX(5px); }
+        .m-icon { width: 45px; height: 45px; background: var(--sky-light); color: var(--sky-main); border-radius: 12px; display: grid; place-items: center; font-weight: 800; }
         .m-info { flex: 1; }
-        .m-title { font-size: 18px; font-weight: 700; color: var(--sky-deep); display: block; }
-        .m-meta { font-size: 11px; color: var(--holy-gold); font-weight: 800; text-transform: uppercase; margin-top: 4px; }
+        .m-title { font-size: 17px; font-weight: 700; color: var(--sky-deep); display: block; }
+        .m-meta { font-size: 10px; color: var(--holy-gold); font-weight: 800; text-transform: uppercase; margin-top: 2px; }
 
-        /* --- LYRIC DRAWER --- */
+        /* --- MODERN LYRIC DRAWER --- */
         #lyricDrawer {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 92vh;
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 94vh;
             background: var(--white); z-index: 2000; border-radius: 30px 30px 0 0;
-            box-shadow: 0 -15px 50px rgba(0,0,0,0.15); transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex; flex-direction: column;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.15); transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex; flex-direction: column; overflow: hidden;
         }
         #lyricDrawer.active { bottom: 0; }
+
         .drawer-close { position: absolute; top: 20px; right: 25px; font-size: 32px; color: var(--text-soft); cursor: pointer; z-index: 2100; }
 
-        .drawer-scroll-area { padding: 50px 30px 180px; overflow-y: auto; flex: 1; }
-        .lyric-body {
-            white-space: pre-line; font-size: 22px; line-height: 2;
-            color: var(--text-dark); text-align: center; max-width: 600px; margin: 0 auto;
+        /* Scrollable Lyric Section */
+        .drawer-scroll-area { 
+            padding: 60px 25px 40px; 
+            overflow-y: auto; 
+            flex: 1; 
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* --- PLAYER BAR --- */
+        .lyric-title-block { text-align: center; margin-bottom: 40px; }
+        .lyric-body {
+            white-space: pre-line; font-size: 20px; line-height: 2.2;
+            color: var(--text-dark); text-align: center; max-width: 550px; margin: 0 auto;
+        }
+
+        /* Essential Spacer: Prevents lyrics from being hidden by the player */
+        .lyric-spacer { height: 250px; width: 100%; }
+
+        /* --- FLOATING MEDIA PLAYER --- */
         .media-player-container {
             position: absolute; bottom: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            padding: 20px; border-top: 1px solid var(--sky-light);
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
-            z-index: 2050; text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 20px 20px 40px; /* Extra bottom padding for mobile home indicators */
+            border-top: 1px solid rgba(0, 119, 204, 0.1);
+            z-index: 2050;
         }
-        .player-wrapper { width: 100%; max-width: 500px; margin: 0 auto; border-radius: 12px; overflow: hidden; }
-        .player-wrapper iframe { width: 100%; aspect-ratio: 16/9; border-radius: 12px; }
-        audio { width: 100%; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
+        .player-inner { max-width: 500px; margin: 0 auto; }
+        .player-label { font-size: 9px; font-weight: 800; color: var(--sky-main); letter-spacing: 2px; text-align: center; margin-bottom: 12px; display: block; }
+        
+        .video-wrapper { width: 100%; aspect-ratio: 16/9; border-radius: 15px; overflow: hidden; background: #000; box-shadow: var(--shadow); }
+        .video-wrapper iframe { width: 100%; height: 100%; border: none; }
+        
+        audio { width: 100%; height: 45px; border-radius: 50px; }
 
-        .overlay { position: fixed; inset: 0; background: rgba(0, 30, 60, 0.5); display: none; z-index: 1500; backdrop-filter: blur(8px); }
+        .overlay { position: fixed; inset: 0; background: rgba(0, 20, 40, 0.6); display: none; z-index: 1500; backdrop-filter: blur(10px); }
         .overlay.active { display: block; }
 
         @media (min-width: 1024px) {
-            #lyricDrawer { width: 600px; right: -600px; left: auto; height: 100vh; border-radius: 30px 0 0 30px; }
+            #lyricDrawer { width: 550px; right: -550px; left: auto; height: 100vh; border-radius: 30px 0 0 30px; }
             #lyricDrawer.active { right: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="hymnal-header">
-        <a href="index.html" style="text-decoration:none; color:var(--sky-main); font-weight:800; font-size:11px;">← BACK TO SANCTUARY</a>
-        <h1 class="ethiopic" style="font-size: 34px; color: var(--sky-deep); margin-top:10px;">የመዝሙር መዝገብ</h1>
+    <header>
+        <a href="index.html" style="text-decoration:none; color:var(--sky-main); font-weight:800; font-size:11px; letter-spacing: 1px;">← RETURN HOME</a>
+        <h1 class="ethiopic" style="font-size: 32px; color: var(--sky-deep); margin-top:8px;">የመዝሙር መዝገብ</h1>
         <div class="search-container">
-            <input type="text" id="mezmurSearch" class="search-input" placeholder="Search mezmurs..." onkeyup="filterMezmurs()">
+            <input type="text" id="mezmurSearch" class="search-input" placeholder="Search by title or category..." onkeyup="filterMezmurs()">
         </div>
-    </div>
+    </header>
 
     <div class="category-scroll">
         <div class="cat-chip active" onclick="setCategory('all', this)">All Mezmurs</div>
         <div class="cat-chip" onclick="setCategory('St. Mary', this)">ድንግል ማርያም</div>
-        <div class="cat-chip" onclick="setCategory('St. Gabriel', this)">ቅዱስ ገብርኤል</div>
         <div class="cat-chip" onclick="setCategory('St. Michael', this)">ቅዱስ ሚካኤል</div>
-        <div class="cat-chip" onclick="setCategory('Feasts', this)">በዓላት</div>
+        <div class="cat-chip" onclick="setCategory('St. Gabriel', this)">ቅዱስ ገብርኤል</div>
+        <div class="cat-chip" onclick="setCategory('Fast', this)">የጾም መዝሙራት</div>
     </div>
 
     <div class="mezmur-grid" id="mezmurList">
-        <div class="mezmur-card" data-category="St. Mary" onclick="openLyrics('ማርያም ደስ ይበልሽ', 'ማርያም ደስ ይበልሽ በዲንግልና\nየአምላክ እናት መሆንሽ ነውና\n\nበቅዱሳን መላእክት የምትመሰገኚ\nከፍጥረታት ሁሉ በላይ የሆንሽ\nየአለም ሁሉ መመኪያ እመቤታችን\nድንግል ማርያም ሆይ ሰላም ላንቺ ይሁን።', 'St. Mary', 'https://www.youtube.com/embed/CMSl9QCcIHg')">
+        <div class="mezmur-card" data-category="St. Mary" onclick="openLyrics('ማርያም ደስ ይበልሽ', 'ማርያም ደስ ይበልሽ በዲንግልና\nየአምላክ እናት መሆንሽ ነውና\n\nበቅዱሳን መላእክት የምትመሰገኚ\nከፍጥረታት ሁሉ በላይ የሆንሽ\nየአለም ሁሉ መመኪያ እመቤታችን\nድንግል ማርያም ሆይ ሰላም ላንቺ ይሁን።\n\nእመቤታችን ሆይ በጸሎትሽ አስቢን\nከመከራ ስጋ ከመከራ ነፍስ ጠብቂን።', 'St. Mary', 'https://www.youtube.com/embed/CMSl9QCcIHg')">
             <div class="m-icon">✥</div>
             <div class="m-info">
                 <span class="m-title ethiopic">ማርያም ደስ ይበልሽ</span>
-                <span class="m-meta">Category: St. Mary • Video Practice</span>
+                <span class="m-meta">St. Mary • Video Lesson</span>
             </div>
             <div style="opacity: 0.2;">▶</div>
         </div>
@@ -134,7 +152,7 @@
             <div class="m-icon">✥</div>
             <div class="m-info">
                 <span class="m-title ethiopic">ገብርኤል ኃያል</span>
-                <span class="m-meta">Category: St. Gabriel • Audio Only</span>
+                <span class="m-meta">St. Gabriel • Audio Guide</span>
             </div>
             <div style="opacity: 0.2;">▶</div>
         </div>
@@ -146,18 +164,22 @@
         <div class="drawer-close" onclick="closeLyrics()">&times;</div>
         
         <div class="drawer-scroll-area">
-            <div style="text-align: center; margin-bottom: 30px;">
-                <span id="l-cat" style="font-size: 10px; font-weight: 800; color: var(--holy-gold); text-transform: uppercase;">CATEGORY</span>
-                <h2 id="l-title" class="ethiopic" style="color: var(--sky-main); font-size: 32px; margin-top: 5px;">Title</h2>
-                <div style="width: 40px; height: 3px; background: var(--sky-bg); margin: 20px auto;"></div>
+            <div class="lyric-title-block">
+                <span id="l-cat" style="font-size: 10px; font-weight: 800; color: var(--holy-gold); letter-spacing: 2px;">CATEGORY</span>
+                <h2 id="l-title" class="ethiopic" style="color: var(--sky-main); font-size: 30px; margin-top: 5px;">Title</h2>
             </div>
+            
             <p id="l-body" class="ethiopic lyric-body">Lyrics...</p>
+            
+            <div class="lyric-spacer"></div>
         </div>
 
         <div class="media-player-container">
-            <p style="font-size: 9px; font-weight: 800; margin-bottom: 10px; color: var(--text-soft); letter-spacing: 1px;">PRACTICE PLAYER</p>
-            <div id="media-content" class="player-wrapper">
-                </div>
+            <div class="player-inner">
+                <span class="player-label" id="playerType">PRACTICE PLAYER</span>
+                <div id="media-content">
+                    </div>
+            </div>
         </div>
     </div>
 
@@ -187,14 +209,17 @@
             document.getElementById('l-cat').innerText = category;
             
             const mediaBox = document.getElementById('media-content');
+            const typeLabel = document.getElementById('playerType');
             
-            // Logic to detect if it's YouTube or Audio File
             if (mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be')) {
-                mediaBox.innerHTML = `<iframe src="${mediaUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                typeLabel.innerText = "VIDEO LESSON GUIDE";
+                mediaBox.innerHTML = `<div class="video-wrapper"><iframe src="${mediaUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
             } else if (mediaUrl.includes('.mp3') || mediaUrl.includes('.wav')) {
-                mediaBox.innerHTML = `<audio controls><source src="${mediaUrl}" type="audio/mpeg">Your browser does not support audio.</audio>`;
+                typeLabel.innerText = "AUDIO PRACTICE GUIDE";
+                mediaBox.innerHTML = `<audio controls><source src="${mediaUrl}" type="audio/mpeg"></audio>`;
             } else {
-                mediaBox.innerHTML = `<p style="font-size:12px; color:var(--text-soft);">Media for this Mezmur is being updated.</p>`;
+                typeLabel.innerText = "NO MEDIA AVAILABLE";
+                mediaBox.innerHTML = `<p style="font-size:11px; color:var(--text-soft); text-align:center;">Practice audio coming soon.</p>`;
             }
 
             document.getElementById('lyricDrawer').classList.add('active');
@@ -205,7 +230,7 @@
         function closeLyrics() {
             document.getElementById('lyricDrawer').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
-            document.getElementById('media-content').innerHTML = ""; // Stop the music/video
+            document.getElementById('media-content').innerHTML = ""; // Stop playback
             document.body.style.overflow = 'auto';
         }
     </script>

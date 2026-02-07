@@ -4,225 +4,184 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Ministry Hub - Debre Genet Winnipeg</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700;900&family=Montserrat:wght@300;500;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
-  /* --- SACRED PALETTE & FONTS --- */
+  /* --- SACRED REFINED PALETTE --- */
   :root {
-    --text-primary: #630F16;      /* Deep Burgundy */
-    --accent-gold: #D4A017;       /* Gold */
-    --bg-page: #F9E8B2;           /* Page Background */
-    --bg-card: #FFF8E1;           /* Cream Card */
-    --white: #ffffff;
-    --glass: rgba(99, 15, 22, 0.96);
-    --glow: rgba(212, 160, 23, 0.45); /* Sham Glow */
-    --subtle-silver: #C0C0C0;     /* Subtle Silver Grey */
+    --primary: #83161D;      /* Royal Burgundy */
+    --accent: #C5A059;       /* Deep Gold */
+    --gold-light: #F4E4BC;   /* Silk Gold */
+    --bg-light: #FFFFFF;     /* Pure White */
+    --bg-alt: #FDFBF7;       /* Off-white/Cream */
+    --text-main: #2D2424;    /* Soft Black */
+    --text-muted: #6D5D5D;
+    --shadow: 0 10px 40px rgba(0,0,0,0.06);
   }
 
   /* 1. GLOBAL LAYOUT */
   * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
   body { 
     margin: 0; padding: 0; 
-    background: var(--bg-page); 
-    font-family: 'Nyala', 'Abyssinica SIL', serif; 
-    color: var(--text-primary);
+    background: var(--bg-light); 
+    font-family: 'Noto Serif Ethiopic', serif; 
+    color: var(--text-main);
     overflow-x: hidden;
-    line-height: 1.6;
-    position: relative;
+    line-height: 1.7;
   }
   
   body::after {
     content: "✥"; position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%); font-size: 60vh;
-    color: var(--accent-gold); opacity: 0.04; z-index: -1; pointer-events: none;
+    color: var(--accent); opacity: 0.03; z-index: -1; pointer-events: none;
   }
 
-  /* 2. NAVIGATION */
+  /* 2. NAVIGATION (Synced with other pages) */
   .main-nav {
-    position: fixed; top: 0; width: 100%; height: 80px;
-    background: var(--glass);
+    position: fixed; top: 0; width: 100%; height: 90px;
+    background: rgba(255, 255, 255, 0.96);
     display: flex; justify-content: space-between; align-items: center;
     padding: 0 5%; z-index: 9999;
-    border-bottom: 3px solid var(--accent-gold);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
     backdrop-filter: blur(12px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
-  
-  .nav-brand-group { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-  .logo-sample {
-    width: 45px; height: 45px; background: var(--accent-gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px; color: var(--text-primary); border: 2px solid white;
-  }
-  .nav-brand-text { color: var(--accent-gold); font-weight: 900; font-size: 18px; letter-spacing: 1px; }
 
-  .nav-links { display: flex; gap: 5px; height: 100%; align-items: center; }
+  .nav-brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-sample {
+    width: 42px; height: 42px; background: var(--primary); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: var(--gold-light); transform: rotate(45deg);
+  }
+  .logo-sample span { transform: rotate(-45deg); display: block; }
+  .nav-brand-text { color: var(--primary); font-weight: 800; font-size: 16px; font-family: 'Montserrat'; line-height: 1.2; }
+
+  .nav-links { display: flex; gap: 2px; height: 100%; align-items: center; }
   .menu-item { position: relative; height: 100%; display: flex; align-items: center; }
   .menu-item > a {
-    color: #FDF5E6; text-decoration: none; font-weight: bold; font-size: 12px;
-    padding: 0 15px; text-transform: uppercase; transition: 0.3s;
-    height: 100%; display: flex; align-items: center;
+    color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 12px;
+    padding: 0 15px; text-transform: uppercase; transition: 0.3s; font-family: 'Montserrat';
   }
 
-  .active-page {
-    background: var(--accent-gold) !important;
-    color: var(--text-primary) !important;
-  }
+  .active-page { background: var(--gold-light) !important; color: var(--primary) !important; border-radius: 4px; }
 
   .sub-menu {
-    position: absolute; top: 80px; left: 0;
-    background: var(--glass); min-width: 220px;
-    display: none; flex-direction: column;
-    border: 1px solid var(--accent-gold); border-top: none;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    position: absolute; top: 90px; left: 0; background: var(--bg-light); min-width: 220px;
+    display: none; flex-direction: column; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    border-radius: 0 0 8px 8px; border-top: 3px solid var(--accent);
+    padding: 10px 0;
   }
   .sub-menu a {
-    color: #FDF5E6; padding: 12px 20px; text-decoration: none;
-    font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-main); padding: 12px 25px; text-decoration: none; font-size: 11px; 
+    text-transform: uppercase; font-weight: 600; border-bottom: 1px solid #f9f9f9;
   }
-  .sub-menu a:hover { background: var(--accent-gold); color: var(--text-primary); }
+  .sub-menu a:hover { background: var(--bg-alt); color: var(--accent); }
   .menu-item:hover .sub-menu { display: flex; }
 
   .btn-live {
-    background: #FF0000; color: white !important; padding: 8px 16px; border-radius: 50px;
-    display: flex; align-items: center; gap: 8px; font-weight: 900 !important; 
-    margin-left: 10px; border: 1px solid white; text-decoration: none; font-size: 11px;
+    background: #E31C25; color: white !important; padding: 8px 16px; border-radius: 50px;
+    display: flex; align-items: center; gap: 8px; font-weight: 800 !important; 
+    margin-left: 15px; text-decoration: none; font-size: 10px; font-family: 'Montserrat';
   }
 
-  .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
+  .menu-toggle { display: none; color: var(--primary); font-size: 28px; cursor: pointer; }
 
   @media (max-width: 1100px) {
     .menu-toggle { display: block; z-index: 10001; }
     .nav-links {
-      position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
-      background: var(--text-primary); flex-direction: column;
-      align-items: flex-start; padding: 100px 30px; transition: 0.4s ease-in-out;
-      overflow-y: auto;
+      position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+      background: var(--bg-light); flex-direction: column;
+      padding: 100px 40px; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     }
     .nav-links.active { right: 0; }
     .menu-item { width: 100%; height: auto; flex-direction: column; align-items: flex-start; }
-    .menu-item > a { width: 100%; height: 50px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); justify-content: space-between; }
-    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); }
+    .menu-item > a { width: 100%; padding: 20px 0; font-size: 18px; border-bottom: 1px solid #f0f0f0; }
+    .sub-menu { position: static; display: none; width: 100%; box-shadow: none; background: #fafafa; }
     .menu-item.open .sub-menu { display: flex; }
   }
 
-  /* 3. HUB CONTENT */
+  /* 3. HUB HERO */
   .hub-hero {
-    background: var(--bg-card);
     text-align: center;
-    padding: 140px 20px 80px 20px;
-    border-bottom: 8px double var(--accent-gold);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    box-shadow: 0 0 20px var(--glow);
+    padding: 160px 5% 100px 5%;
+    background: linear-gradient(to bottom, var(--bg-alt), var(--bg-light));
+    border-bottom: 1px solid #f0f0f0;
   }
 
   .scripture-wrap {
-    width: 90%; max-width: 800px; margin: 0 auto 40px auto; padding: 30px;
-    text-align: center; border: 2px solid var(--accent-gold); position: relative; 
-    background: var(--bg-card);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 850px; margin: 0 auto 50px auto; padding: 40px;
+    background: var(--bg-light); border: 1px solid var(--gold-light);
+    border-radius: 24px; position: relative; box-shadow: var(--shadow);
   }
   .scripture-wrap::before {
-    content: "✥"; position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
-    background: var(--bg-card); padding: 0 15px; color: var(--text-primary); font-size: 28px;
+    content: "✥"; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-light); color: var(--accent); font-size: 24px; padding: 0 15px;
   }
-  .d-am { color: var(--text-primary); font-size: clamp(18px, 4vw, 24px); font-weight: bold; margin-bottom: 12px; display: block; }
-  .d-en { color: #555; font-size: 16px; font-style: italic; display: block; line-height: 1.4; }
-  .verse-ref { display: block; margin-top: 10px; font-size: 12px; font-weight: bold; color: var(--accent-gold); text-transform: uppercase; }
+  .d-am { color: var(--primary); font-size: clamp(20px, 4vw, 26px); font-weight: 800; margin-bottom: 15px; display: block; }
+  .d-en { 
+    color: var(--text-muted); font-size: 18px; font-style: italic; display: block; 
+    line-height: 1.5; font-family: 'Playfair Display'; 
+  }
+  .verse-ref { display: block; margin-top: 15px; font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; font-family: 'Montserrat'; letter-spacing: 2px; }
 
-  .section-header { text-align: center; margin-bottom: 30px; }
-  .main-title-am { color: var(--text-primary); font-size: clamp(35px, 8vw, 55px); font-weight: bold; margin: 0; }
-  .main-title-en { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; font-weight: 800; margin-top: 10px; }
+  .main-title-am { color: var(--primary); font-size: clamp(40px, 8vw, 65px); font-weight: 900; margin-bottom: 10px; }
+  .main-title-en { color: var(--accent); font-size: 14px; text-transform: uppercase; letter-spacing: 6px; font-weight: 800; font-family: 'Montserrat'; }
 
   .hub-description {
-    max-width: 750px;
-    margin: 20px auto 0 auto;
-    font-size: clamp(16px, 3vw, 19px);
-    line-height: 1.6;
-    color: #444;
-    text-align: center;
+    max-width: 750px; margin: 30px auto 0; font-size: 18px; color: var(--text-muted); text-align: center;
   }
 
   /* 4. MINISTRY SECTIONS */
-  .ministry-section { width: 100%; padding: 40px 15px; }
-  .ministry-section:nth-child(even) { background: rgba(212, 160, 23, 0.05); }
-
-  .content-wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column; 
-    background: var(--bg-card);
-    border: 1px solid var(--accent-gold);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 0 15px var(--glow);
-    overflow: hidden;
-    border-radius: 12px;
-  }
-
-  .ministry-text { 
-    width: 100%; 
-    padding: 40px 30px; 
-    text-align: center;
-    order: 1; 
-  }
-  .image-wrap {
-    width: 100%; height: 300px;
-    position: relative; overflow: hidden; background: #000;
-    order: 2; 
-  }
-
-  .ministry-text h2 { color: var(--text-primary); font-size: 32px; margin: 0 0 8px 0; }
-  .en-head { color: var(--accent-gold); font-size: 13px; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 20px; letter-spacing: 3px; }
+  .ministry-section { padding: 40px 5%; }
+  .ministry-section:nth-child(even) { background: rgba(197, 160, 89, 0.03); }
   
-  .am-desc { font-size: 18px; line-height: 1.6; margin-bottom: 12px; color: #222; }
-  .en-desc { font-size: 15px; font-style: italic; margin-bottom: 30px; color: #666; }
+  .content-wrapper {
+    max-width: 1150px; margin: 0 auto;
+    display: flex; flex-direction: column;
+    background: var(--bg-light); border: 1px solid #f0f0f0;
+    box-shadow: var(--shadow); border-radius: 30px; overflow: hidden;
+  }
+
+  .ministry-text { padding: 50px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .image-wrap { width: 100%; height: 350px; position: relative; overflow: hidden; background: #000; }
+
+  .ministry-text h2 { color: var(--primary); font-size: 32px; font-weight: 800; margin: 0 0 5px 0; }
+  .en-head { color: var(--accent); font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 3px; font-family: 'Montserrat'; }
+  
+  .am-desc { font-size: 18px; margin-bottom: 15px; color: var(--text-main); font-weight: 600; }
+  .en-desc { font-size: 16px; font-style: italic; margin-bottom: 35px; color: var(--text-muted); font-family: 'Playfair Display'; }
 
   /* 5. BUTTONS */
-  .button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-  }
+  .button-group { display: flex; flex-wrap: wrap; gap: 15px; }
   .btn {
-    display: inline-block;
-    padding: 14px 28px;
-    text-decoration: none;
-    font-weight: 900;
-    font-size: 12px;
-    text-transform: uppercase;
-    transition: 0.3s ease;
-    letter-spacing: 2px;
-    border: 2px solid var(--accent-gold);
+    padding: 14px 28px; text-decoration: none; font-weight: 800; font-size: 11px;
+    text-transform: uppercase; transition: 0.3s; letter-spacing: 1px;
+    font-family: 'Montserrat'; border-radius: 4px; display: inline-block;
   }
-  .btn-burgundy { background: var(--text-primary); color: var(--white) !important; }
-  .btn-burgundy:hover { background: var(--accent-gold); color: var(--text-primary) !important; box-shadow: 0 0 15px var(--accent-gold); }
+  .btn-burgundy { background: var(--primary); color: white !important; }
+  .btn-burgundy:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(131, 22, 29, 0.2); }
   
-  .btn-gold { background: transparent; color: var(--text-primary); }
-  .btn-gold:hover { background: var(--accent-gold); color: var(--white) !important; }
+  .btn-gold { border: 1px solid var(--gold-light); color: var(--primary); }
+  .btn-gold:hover { background: var(--gold-light); }
 
-  /* 6. SLIDESHOW */
+  /* 6. SLIDESHOW IMAGES */
   .slide {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-size: cover; background-position: center;
-    opacity: 0; transition: opacity 1s ease-in-out;
+    opacity: 0; transition: opacity 1.2s ease-in-out;
   }
   .slide.active { opacity: 1; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* 7. DESKTOP ADAPTATION */
+  /* 7. DESKTOP ROW ADAPTATION */
   @media (min-width: 900px) {
-    .content-wrapper { flex-direction: row; height: 450px; }
+    .content-wrapper { flex-direction: row; height: 500px; }
     .ministry-section:nth-child(even) .content-wrapper { flex-direction: row-reverse; }
-    .image-wrap { width: 45%; height: 100%; order: unset; }
-    .ministry-text { width: 55%; text-align: left; padding: 60px; display: flex; flex-direction: column; justify-content: center; order: unset; }
-    .button-group { justify-content: flex-start; }
+    .image-wrap { width: 45%; height: 100%; }
+    .ministry-text { width: 55%; padding: 80px; }
   }
 
-  .footer { 
-    width: 100%; text-align: center; padding: 60px 20px; 
-    background: var(--bg-card); border-top: 4px solid var(--accent-gold); 
-    color: var(--text-primary); font-size: 13px; line-height: 1.8;
+  footer {
+    text-align: center; padding: 80px 5%; background: var(--bg-alt);
+    border-top: 1px solid #f0f0f0; color: var(--text-muted); font-size: 13px; line-height: 1.8;
   }
 </style>
 </head>
@@ -230,22 +189,39 @@
 
 <nav class="main-nav">
   <a href="index.html" class="nav-brand-group">
-    <div class="logo-sample">✥</div>
-    <div class="nav-brand-text">DEBRE GENET</div>
+    <div class="logo-sample"><span>✥</span></div>
+    <div class="nav-brand-text">DEBRE GENET<br><small style="font-weight:400; font-size:10px; letter-spacing:2px">WINNIPEG</small></div>
   </a>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <div class="nav-links" id="navLinks">
-    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">HOME ▾</a>
-      <div class="sub-menu"><a href="clergy.html">CLERGY</a><a href="services.html">SERVICES</a><a href="about.html">ABOUT US</a><a href="faith.html">OUR FAITH</a></div>
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">HOME</a>
+      <div class="sub-menu">
+        <a href="clergy.html">CLERGY</a>
+        <a href="services.html">SERVICES</a>
+        <a href="about.html">ABOUT US</a>
+        <a href="faith.html">OUR FAITH</a>
+      </div>
     </div>
-    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES ▾</a>
-      <div class="sub-menu"><a href="ministry-hub.html">Ministry Hub</a><a href="sunday-school.html">Sunday School</a><a href="abinet.html">Abinet School</a><a href="care.html">Pastorial Care</a><a href="sponsorship.html">Sponsorship</a></div>
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES</a>
+      <div class="sub-menu">
+        <a href="ministry-hub.html">Ministry Hub</a>
+        <a href="sunday-school.html">Sunday School</a>
+        <a href="abinet.html">Abinet School</a>
+        <a href="care.html">Pastorial Care</a>
+        <a href="sponsorship.html">Sponsorship</a>
+      </div>
     </div>
-    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR ▾</a>
-      <div class="sub-menu"><a href="full-calendar.html">Monthly Calendar</a><a href="upcoming.html">Upcoming Events</a></div>
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR</a>
+      <div class="sub-menu">
+        <a href="full-calendar.html">Monthly Calendar</a>
+        <a href="upcoming.html">Upcoming Events</a>
+      </div>
     </div>
-    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS ▾</a>
-      <div class="sub-menu"><a href="donations.html">Donations</a><a href="building.html">Building Project</a></div>
+    <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS</a>
+      <div class="sub-menu">
+        <a href="donations.html">Donations</a>
+        <a href="building.html">Building Project</a>
+      </div>
     </div>
     <div class="menu-item"><a href="contact.html">CONTACT US</a></div>
     <a href="https://youtube.com/live" target="_blank" class="btn-live">● LIVE NOW</a>
@@ -259,17 +235,15 @@
       <span class="verse-ref">፩ ጴጥሮስ ፬፡፲ | 1 Peter 4:10</span>
   </div>
 
-  <div class="section-header">
-      <div class="main-title-am">የአገልግሎት ማዕከል</div>
-      <div class="main-title-en">Ministry Hub</div>
-  </div>
+  <h1 class="main-title-am">የአገልግሎት ማዕከል</h1>
+  <h2 class="main-title-en">Ministry Hub</h2>
   
   <div class="hub-description">
     <strong>Serve, grow, and connect.</strong> Explore the various ways our parish serves the community and nurtures the faithful. <br>
     <strong>ያገልግሉ፣ ያድጉ፣ ይገናኙ።</strong> ደብራችን ማህበረሰቡን የሚያገለግልባቸውን መንገዶች ይረዱ።
   </div>
 
-  <a href="/church-website/volunteer-registration" class="btn btn-burgundy" style="margin-top: 40px; padding: 18px 45px;">Serve With Us / አብረውን ያገልግሉ</a>
+  <a href="contact.html" class="btn btn-burgundy" style="margin-top: 40px; padding: 18px 45px;">Serve With Us / አብረውን ያገልግሉ</a>
 </header>
 
 <section class="ministry-section">
@@ -280,13 +254,13 @@
       <p class="am-desc">ለህፃናት እና ለወጣቶች የተዘጋጀ መንፈሳዊ ትምህርት።</p>
       <p class="en-desc">Structured spiritual education for children and youth based on the teachings of the Church.</p>
       <div class="button-group">
-          <a href="/sunday-school" class="btn btn-burgundy">Learn More</a>
+          <a href="sunday-school.html" class="btn btn-burgundy">Learn More</a>
           <a href="mailto:office@stmarywinnipeg.ca" class="btn btn-gold">Contact Lead</a>
       </div>
     </div>
     <div class="image-wrap" data-slideshow>
-      <div class="slide active"> <img src="kids.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
-      <div class="slide"> <img src="kids2.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
+      <div class="slide active"><img src="kids.jpg" alt="Sunday School"></div>
+      <div class="slide"><img src="kids2.jpg" alt="Teaching"></div>
     </div>
   </div>
 </section>
@@ -299,13 +273,13 @@
       <p class="am-desc">የዜማ፣ የቅኔ እና የስርዓተ ማህሌት ጥልቅ ትምህርት።</p>
       <p class="en-desc">Traditional liturgical studies, Zema, and Ge'ez language training for all ages.</p>
       <div class="button-group">
-          <a href="/abinet" class="btn btn-burgundy">Learn More</a>
+          <a href="abinet.html" class="btn btn-burgundy">Learn More</a>
           <a href="mailto:office@stmarywinnipeg.ca" class="btn btn-gold">Contact Lead</a>
       </div>
     </div>
     <div class="image-wrap" data-slideshow>
-      <div class="slide active"> <img src="kids.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
-      <div class="slide"> <img src="kids2.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
+      <div class="slide active"><img src="kids.jpg" alt="Abinet School"></div>
+      <div class="slide"><img src="kids2.jpg" alt="Sacred Moments"></div>
     </div>
   </div>
 </section>
@@ -318,13 +292,13 @@
       <p class="am-desc">በክርስቶስ ላይ የተመሰረቱ ቤቶችን እና ትዳሮችን መደገፍ።</p>
       <p class="en-desc">Supporting Christ-centered homes through marriage counseling and parenting seminars.</p>
       <div class="button-group">
-          <a href="/family" class="btn btn-burgundy">Learn More</a>
+          <a href="family.html" class="btn btn-burgundy">Learn More</a>
           <a href="mailto:office@stmarywinnipeg.ca" class="btn btn-gold">Contact Lead</a>
       </div>
     </div>
     <div class="image-wrap" data-slideshow>
-      <div class="slide active"> <img src="kids.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
-      <div class="slide"> <img src="kids2.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
+      <div class="slide active"><img src="kids.jpg" alt="Family Moments"></div>
+      <div class="slide"><img src="kids2.jpg" alt="Church Family"></div>
     </div>
   </div>
 </section>
@@ -337,13 +311,13 @@
       <p class="am-desc">ለአዲስ መጤዎች ድጋፍ እና ማህበረሰባዊ አገልግሎት።</p>
       <p class="en-desc">Assisting newcomers with settlement and providing community outreach programs.</p>
       <div class="button-group">
-          <a href="/sponsorship" class="btn btn-burgundy">Learn More</a>
+          <a href="sponsorship.html" class="btn btn-burgundy">Learn More</a>
           <a href="mailto:office@stmarywinnipeg.ca" class="btn btn-gold">Contact Lead</a>
       </div>
     </div>
     <div class="image-wrap" data-slideshow>
-      <div class="slide active"> <img src="kids.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
-      <div class="slide"> <img src="kids2.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
+      <div class="slide active"><img src="kids.jpg" alt="Outreach"></div>
+      <div class="slide"><img src="kids2.jpg" alt="Community"></div>
     </div>
   </div>
 </section>
@@ -356,21 +330,21 @@
       <p class="am-desc">መንፈሳዊ ምክር፣ ምስጢራት እና ለታመሙ የሚደረግ ጉብኝት።</p>
       <p class="en-desc">Confession, spiritual guidance, and pastoral support for our congregation.</p>
       <div class="button-group">
-          <a href="/pastoral" class="btn btn-burgundy">Learn More</a>
+          <a href="care.html" class="btn btn-burgundy">Learn More</a>
           <a href="mailto:office@stmarywinnipeg.ca" class="btn btn-gold">Contact Lead</a>
       </div>
     </div>
     <div class="image-wrap" data-slideshow>
-      <div class="slide active"> <img src="kids.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
-      <div class="slide"> <img src="kids2.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
+      <div class="slide active"><img src="kids.jpg" alt="Pastoral Care"></div>
+      <div class="slide"><img src="kids2.jpg" alt="Blessings"></div>
     </div>
   </div>
 </section>
 
-<footer class="footer">
+<footer>
   353 Mountain Ave, Winnipeg, MB R2W 1J9<br>
   Debre Genet EOTC Winnipeg © 2026<br>
-  <strong>May the grace of God be with you.</strong>
+  <strong>May the grace of God be with you. / የእግዚአብሔር ጸጋ ከሁላችሁ ጋር ይሁን።</strong>
 </footer>
 
 <script>
@@ -383,45 +357,36 @@
       const parent = el.parentElement;
       const isOpen = parent.classList.contains('open');
       document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
-      if (!isOpen) {
-        parent.classList.add('open');
-      }
+      if (!isOpen) parent.classList.add('open');
     } 
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Highlighting current active page in menu
     const currentUrl = window.location.href.toLowerCase();
-    const allLinks = document.querySelectorAll(".nav-links a");
-    
-    allLinks.forEach(link => {
-      const linkHref = link.getAttribute("href").toLowerCase();
-      if (currentUrl.endsWith(linkHref)) {
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      const href = link.getAttribute("href")?.toLowerCase();
+      if (href && currentUrl.endsWith(href)) {
         link.classList.add("active-page");
-        const subMenu = link.closest(".sub-menu");
-        if (subMenu) {
-          subMenu.previousElementSibling.classList.add("active-page");
-        }
+        const sub = link.closest(".sub-menu");
+        if (sub) sub.previousElementSibling.classList.add("active-page");
       }
     });
 
-    // Slideshow Script
-    document.querySelectorAll('[data-slideshow]').forEach(container => {
-      const slides = container.querySelectorAll('.slide');
-      let current = 0;
-      if(slides.length > 1) {
+    // Slideshow Logic
+    document.querySelectorAll('[data-slideshow]').forEach(wrap => {
+      const slides = wrap.querySelectorAll('.slide');
+      if (slides.length > 1) {
+        let idx = 0;
         setInterval(() => {
-          slides[current].classList.remove('active');
-          current = (current + 1) % slides.length;
-          slides[current].classList.add('active');
-        }, 4000);
+          slides[idx].classList.remove('active');
+          idx = (idx + 1) % slides.length;
+          slides[idx].classList.add('active');
+        }, 5000);
       }
     });
   });
 </script>
 
 </body>
-
 </html>
-
-
-

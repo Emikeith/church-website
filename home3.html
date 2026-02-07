@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debre Genet EOTC Winnipeg | Sacred Sanctuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;700;900&family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #520a0f;      /* Royal Deep Red */
+            --primary-light: #8b151e;
+            --accent: #d4af37;       /* Metallic Gold */
+            --accent-glow: #ffdf00;
+            --text-dark: #2d2d2d;
+            --off-white: #fcfaf2;
+            --glass: rgba(255, 255, 255, 0.08);
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--off-white);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
+        .english-header { font-family: 'Cinzel', serif; letter-spacing: 2px; }
+
+        /* --- PRELOADER ANIMATION --- */
+        .harag-border {
+            height: 8px;
+            background: repeating-linear-gradient(90deg, var(--accent), var(--accent) 20px, var(--primary) 20px, var(--primary) 40px);
+            width: 100%;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 5%; transition: var(--transition);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        nav.scrolled {
+            background: rgba(82, 10, 15, 0.98);
+            padding: 10px 5%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; }
+        .logo-icon {
+            font-size: 30px; border: 2px solid var(--accent);
+            width: 50px; height: 50px; display: grid; place-items: center;
+            border-radius: 50%; background: rgba(0,0,0,0.2);
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: white; text-decoration: none; font-size: 13px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%;
+            height: 2px; background: var(--accent); transition: var(--transition);
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh; width: 100%; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            color: white; overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; filter: brightness(0.4) sepia(0.2);
+        }
+
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle, transparent 20%, var(--primary) 150%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            z-index: 1; text-align: center; max-width: 900px; padding: 20px;
+            transform: translateY(30px); opacity: 0; animation: fadeInUp 1.5s forwards;
+        }
+
+        @keyframes fadeInUp { to { transform: translateY(0); opacity: 1; } }
+
+        .hero-content h1 {
+            font-size: clamp(50px, 8vw, 100px); font-weight: 900;
+            background: linear-gradient(to bottom, #fff, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p { font-size: 18px; letter-spacing: 5px; margin-bottom: 30px; color: var(--accent); }
+
+        .btn-gold {
+            padding: 15px 40px; background: var(--accent); color: var(--primary);
+            text-decoration: none; font-weight: 900; border-radius: 0;
+            display: inline-block; transition: var(--transition);
+            border: 2px solid var(--accent);
+        }
+        .btn-gold:hover { background: transparent; color: var(--accent); }
+
+        /* --- CONTENT CARDS --- */
+        .main-container { max-width: 1300px; margin: -100px auto 100px; position: relative; z-index: 2; padding: 0 20px; }
+
+        .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+        .feature-card {
+            background: white; padding: 40px; text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--accent); transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .feature-card:hover { transform: translateY(-15px); }
+        .feature-card i { font-size: 40px; color: var(--primary); margin-bottom: 20px; display: block; }
+        
+        /* --- BUILDING PROJECT (Visual focus) --- */
+        .building-section {
+            margin-top: 100px; display: grid; grid-template-columns: 1fr 1fr;
+            background: var(--primary); color: white; border-radius: 4px; overflow: hidden;
+        }
+        .building-img { background: url('https://images.unsplash.com/photo-1545642433-89914101e149?q=80&w=2070&auto=format&fit=crop') center/cover; min-height: 400px; }
+        .building-text { padding: 60px; }
+
+        .progress-container { margin: 30px 0; background: rgba(255,255,255,0.1); height: 10px; border-radius: 10px; }
+        .progress-bar { 
+            height: 100%; background: var(--accent); width: 65%; border-radius: 10px;
+            box-shadow: 0 0 20px var(--accent-glow); position: relative;
+        }
+
+        /* --- SECTION HEADINGS --- */
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 40px; color: var(--primary); }
+        .section-title .divider { 
+            width: 80px; height: 3px; background: var(--accent); margin: 15px auto; 
+        }
+
+        footer {
+            background: #1a0305; color: white; padding: 100px 5% 40px; text-align: center;
+            border-top: 10px solid var(--accent);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .featured-grid { grid-template-columns: 1fr; }
+            .building-section { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="harag-border"></div>
+
+    <nav id="navbar">
+        <a href="#" class="logo-area">
+            <div class="logo-icon">✥</div>
+            <div>
+                <div style="font-weight: 900; letter-spacing: 1px;">DEBRE GENET</div>
+                <div style="font-size: 10px; color: var(--accent);">WINNIPEG, MB</div>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Our Faith</a>
+            <a href="#">Ministries</a>
+            <a href="#">Sacred Events</a>
+            <a href="#">Donate</a>
+            <a href="#" style="color: var(--accent-glow);">● YouTube Live</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <iframe class="hero-video" 
+            src="https://www.youtube.com/embed/CMSl9QCcIHg?autoplay=1&mute=1&controls=0&loop=1&playlist=CMSl9QCcIHg&showinfo=0" 
+            frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        
+        <div class="hero-content">
+            <p class="english-header">Established 1997</p>
+            <h1>ደብረ ገነት</h1>
+            <h2 class="english-header" style="font-size: 24px;">Ethiopian Orthodox Tewahedo Cathedral</h2>
+            <p style="letter-spacing: 2px; font-weight: 300; margin-top: 10px;">St. Mary • St. Gabriel • St. Arsema</p>
+            <div style="margin-top: 40px;">
+                <a href="#about" class="btn-gold">ENTER SANCTUARY</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-container">
+        <div class="featured-grid">
+            <div class="feature-card">
+                <div style="font-size: 40px; margin-bottom: 20px;">⛪</div>
+                <h3 class="ethiopic">የቅዳሴ መርሃ ግብር</h3>
+                <p class="english-header" style="font-size: 12px; font-weight: bold; color: var(--accent);">Divine Liturgy</p>
+                <p style="font-size: 14px; margin-top: 15px;">Join us every Sunday morning from 6:00 AM - 10:30 AM for a sacred encounter with the Divine.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 40px; margin-bottom: 20px;">📖</div>
+                <h3 class="ethiopic">ሰንበት ትምህርት ቤት</h3>
+                <p class="english-header" style="font-size: 12px; font-weight: bold; color: var(--accent);">Sunday School</p>
+                <p style="font-size: 14px; margin-top: 15px;">Nurturing the next generation in the ancient wisdom and traditions of our Holy Church.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 40px; margin-bottom: 20px;">🕯️</div>
+                <h3 class="ethiopic">ምሥጢራተ ቤተክርስቲያን</h3>
+                <p class="english-header" style="font-size: 12px; font-weight: bold; color: var(--accent);">Holy Sacraments</p>
+                <p style="font-size: 14px; margin-top: 15px;">Baptism, Matrimony, and Pastoral care provided by our dedicated clergy.</p>
+            </div>
+        </div>
+
+        <div class="building-section">
+            <div class="building-img"></div>
+            <div class="building-text">
+                <p class="english-header" style="color: var(--accent); font-size: 14px;">Our Legacy</p>
+                <h2 class="ethiopic" style="font-size: 45px; margin: 10px 0;">የሕንፃ ግንባታ</h2>
+                <h3 class="english-header">New Cathedral Project</h3>
+                <p style="margin: 20px 0; opacity: 0.8; font-weight: 300;">Help us build a lasting sanctuary for the Ethiopian community in Winnipeg. Your contribution creates a home for generations to come.</p>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                    <span>Raised: $780,000</span>
+                    <span style="color: var(--accent);">Goal: $1.2M</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <a href="#" class="btn-gold" style="margin-top: 20px; width: 100%; text-align: center;">SUPPORT THE VISION</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div style="font-size: 50px; color: var(--accent); margin-bottom: 30px;">✥</div>
+        <h2 class="english-header">Debre Genet EOTC Winnipeg</h2>
+        <p style="opacity: 0.6; margin: 20px 0;">353 Mountain Ave, Winnipeg, MB R2W 1J9</p>
+        
+        <div style="display: flex; justify-content: center; gap: 20px; margin: 40px 0;">
+            <a href="#" style="color: var(--accent); text-decoration: none;">FACEBOOK</a>
+            <a href="#" style="color: var(--accent); text-decoration: none;">YOUTUBE</a>
+            <a href="#" style="color: var(--accent); text-decoration: none;">TELEGRAM</a>
+        </div>
+
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; font-size: 11px; opacity: 0.4;">
+            © 2026 DEBRE GENET ETHIOPIAN ORTHODOX TEWAHEDO CHURCH. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

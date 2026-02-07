@@ -7,121 +7,122 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sky-bg: #F4F8FB;
+            --sky-bg: #F8FAFC;
             --sky-main: #0077CC;
-            --sky-deep: #003366;
-            --holy-gold: #D4AF37;
-            --text-dark: #1A2530;
-            --text-soft: #607D8B;
+            --sky-deep: #002D55;
+            --holy-gold: #C5A028;
+            --text-dark: #1E293B;
             --white: #FFFFFF;
-            --glass-bg: rgba(255, 255, 255, 0.92);
-            --shadow: 0 12px 40px rgba(0, 119, 204, 0.12);
+            --player-height: 240px; /* Fixed height for player logic */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--sky-bg); font-family: 'Montserrat', sans-serif; color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+        body { background-color: var(--sky-bg); font-family: 'Montserrat', sans-serif; color: var(--text-dark); overflow-x: hidden; }
         .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
 
-        /* --- STICKY HEADER --- */
+        /* --- HEADER --- */
         header {
             background: var(--white);
-            padding: 30px 20px 15px;
+            padding: 25px 20px;
             text-align: center;
-            border-bottom: 1px solid #E1F0FF;
+            border-bottom: 1px solid #E2E8F0;
             position: sticky; top: 0; z-index: 1000;
         }
 
-        .search-container { max-width: 600px; margin: 15px auto 0; position: relative; }
         .search-input {
-            width: 100%; padding: 16px 25px; border-radius: 50px;
-            border: 2px solid var(--sky-bg); background: var(--sky-bg);
-            font-size: 16px; outline: none; transition: 0.3s;
+            width: 100%; max-width: 500px; padding: 14px 25px; border-radius: 50px;
+            border: 2px solid #F1F5F9; background: #F1F5F9;
+            font-size: 16px; outline: none; margin-top: 15px; transition: 0.3s;
         }
-        .search-input:focus { border-color: var(--sky-main); background: #fff; box-shadow: var(--shadow); }
+        .search-input:focus { border-color: var(--sky-main); background: #fff; }
 
-        /* --- CATEGORY CAROUSEL --- */
-        .category-scroll {
+        /* --- CATEGORIES --- */
+        .cat-scroll {
             display: flex; gap: 10px; overflow-x: auto;
             padding: 15px 5%; background: var(--white);
-            scrollbar-width: none; border-bottom: 1px solid #E1F0FF;
+            scrollbar-width: none; border-bottom: 1px solid #E2E8F0;
         }
-        .category-scroll::-webkit-scrollbar { display: none; }
         .cat-chip {
-            padding: 8px 18px; border-radius: 50px; background: var(--sky-bg);
+            padding: 8px 18px; border-radius: 50px; background: #F1F5F9;
             color: var(--sky-deep); font-size: 11px; font-weight: 800;
-            white-space: nowrap; cursor: pointer; transition: 0.3s; border: 1.5px solid transparent;
+            white-space: nowrap; cursor: pointer; transition: 0.2s;
         }
-        .cat-chip.active { background: var(--sky-main); color: var(--white); border-color: var(--sky-main); }
+        .cat-chip.active { background: var(--sky-main); color: var(--white); }
 
-        /* --- MEZMUR LIST --- */
-        .mezmur-grid { max-width: 850px; margin: 20px auto; padding: 0 20px 100px; }
+        /* --- LIST --- */
+        .mezmur-grid { max-width: 800px; margin: 20px auto; padding: 0 20px 100px; }
         .mezmur-card {
-            background: var(--white); border-radius: 20px; padding: 20px;
+            background: var(--white); border-radius: 15px; padding: 20px;
             margin-bottom: 12px; display: flex; align-items: center; gap: 15px;
-            box-shadow: var(--shadow); cursor: pointer; transition: 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); cursor: pointer;
         }
-        .mezmur-card:hover { transform: translateX(8px); border-left: 4px solid var(--sky-main); }
-        .m-icon { width: 45px; height: 45px; background: #E1F0FF; color: var(--sky-main); border-radius: 12px; display: grid; place-items: center; font-weight: 800; }
-        .m-info { flex: 1; }
-        .m-title { font-size: 17px; font-weight: 700; color: var(--sky-deep); display: block; }
-        .m-meta { font-size: 10px; color: var(--holy-gold); font-weight: 800; text-transform: uppercase; }
 
-        /* --- MODERN LYRIC DRAWER --- */
+        /* --- THE MASTER DRAWER --- */
         #lyricDrawer {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 95vh;
-            background: var(--white); z-index: 2000; border-radius: 30px 30px 0 0;
-            box-shadow: 0 -20px 60px rgba(0,0,0,0.2); transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 96vh;
+            background: var(--white); z-index: 2000; border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 50px rgba(0,0,0,0.2); transition: 0.5s cubic-bezier(0.32, 1, 0.23, 1);
             display: flex; flex-direction: column;
         }
         #lyricDrawer.active { bottom: 0; }
 
-        .drawer-top-bar {
-            width: 100%; padding: 15px; display: flex; justify-content: center; position: relative;
+        .drawer-nav {
+            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #F1F5F9;
         }
-        .drawer-handle { width: 40px; height: 5px; background: #EEE; border-radius: 10px; }
-        .drawer-close { position: absolute; right: 20px; top: 10px; font-size: 28px; color: var(--text-soft); cursor: pointer; }
 
-        /* Scroll Area with Visual Indicators */
-        .drawer-scroll-area { 
-            padding: 20px 25px; overflow-y: scroll; flex: 1; 
-            scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+        /* --- SCROLL AREA WITH GRADIENT MASK --- */
+        .lyric-viewport {
+            flex: 1;
+            overflow-y: auto;
             position: relative;
+            padding: 30px 25px;
+            /* The "Better Fix": A mask that fades content as it approaches the player */
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            scroll-behavior: smooth;
         }
 
-        .lyric-header { text-align: center; margin-bottom: 30px; }
         .lyric-body {
-            white-space: pre-line; font-size: 21px; line-height: 2.3;
-            color: var(--text-dark); text-align: center; max-width: 550px; margin: 0 auto;
+            white-space: pre-line; font-size: 22px; line-height: 2.2;
+            color: var(--text-dark); text-align: center; padding-bottom: 50px;
         }
 
-        /* The Bouncing Hint */
-        .scroll-hint {
-            position: sticky; bottom: 20px; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center;
-            color: var(--sky-main); font-size: 9px; font-weight: 800;
-            opacity: 1; animation: bounce 2s infinite; pointer-events: none;
-            transition: 0.5s opacity; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 20px;
-        }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translate(-50%, 0);} 40% {transform: translate(-50%, -8px);} }
+        /* Safe Space: Exactly the height of the player bar */
+        .scroll-buffer { height: var(--player-height); width: 100%; }
 
-        /* --- MEDIA PLAYER --- */
-        .media-player-container {
-            background: var(--glass-bg); backdrop-filter: blur(25px);
-            padding: 15px 20px 40px; border-top: 1px solid rgba(0, 119, 204, 0.1);
-            z-index: 2050;
+        /* --- FLOATING PLAYER BAR --- */
+        .player-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid #F1F5F9;
+            padding: 20px;
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+            z-index: 2100;
         }
-        .player-inner { max-width: 500px; margin: 0 auto; }
-        .video-wrapper { width: 100%; aspect-ratio: 16/9; border-radius: 15px; overflow: hidden; background: #000; box-shadow: var(--shadow); }
-        .video-wrapper iframe { width: 100%; height: 100%; border: none; }
         
-        /* Spacer to prevent overlap */
-        .lyric-spacer { height: 150px; }
+        .player-content { max-width: 500px; margin: 0 auto; }
+        .video-box { width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #000; }
+        .video-box iframe { width: 100%; height: 100%; border: none; }
 
-        .overlay { position: fixed; inset: 0; background: rgba(0, 20, 40, 0.6); display: none; z-index: 1500; backdrop-filter: blur(10px); }
+        /* --- SCROLL HINT (AUTO-HIDE) --- */
+        .scroll-indicator {
+            position: absolute; bottom: calc(var(--player-height) + 20px);
+            left: 50%; transform: translateX(-50%);
+            background: var(--sky-main); color: #white; padding: 6px 15px;
+            border-radius: 20px; font-size: 10px; font-weight: 800; color: white;
+            box-shadow: 0 4px 12px rgba(0, 119, 204, 0.3);
+            pointer-events: none; transition: 0.4s; z-index: 2200;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce { 0%, 100% {bottom: calc(var(--player-height) + 20px);} 50% {bottom: calc(var(--player-height) + 35px);} }
+
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: none; z-index: 1500; }
         .overlay.active { display: block; }
 
-        @media (min-width: 1024px) {
-            #lyricDrawer { width: 550px; right: -550px; left: auto; height: 100vh; border-radius: 30px 0 0 30px; }
+        @media (min-width: 768px) {
+            #lyricDrawer { width: 500px; right: -500px; left: auto; border-radius: 25px 0 0 25px; }
             #lyricDrawer.active { right: 0; }
         }
     </style>
@@ -129,127 +130,132 @@
 <body>
 
     <header>
-        <a href="index.html" style="text-decoration:none; color:var(--sky-main); font-weight:800; font-size:10px; letter-spacing:1px;">← DEBRE GENET EOTC</a>
-        <h1 class="ethiopic" style="font-size: 32px; color: var(--sky-deep); margin-top:5px;">የመዝሙር መዝገብ</h1>
-        <div class="search-container">
-            <input type="text" id="mezmurSearch" class="search-input" placeholder="Search mezmurs..." onkeyup="filterMezmurs()">
-        </div>
+        <div class="ethiopic" style="color: var(--sky-main); font-weight: bold;">ደብረ ገነት</div>
+        <h1 class="ethiopic" style="font-size: 28px;">የመዝሙር መዝገብ</h1>
+        <input type="text" id="search" class="search-input" placeholder="ፈልግ (Search)..." onkeyup="doSearch()">
     </header>
 
-    <div class="category-scroll" id="catBar">
-        <div class="cat-chip active" onclick="setCategory('all', this)">ALL MEZMURS</div>
-        <div class="cat-chip" onclick="setCategory('St. Mary', this)">ድንግል ማርያም</div>
-        <div class="cat-chip" onclick="setCategory('St. Michael', this)">ቅዱስ ሚካኤል</div>
-        <div class="cat-chip" onclick="setCategory('St. Gabriel', this)">ቅዱስ ገብርኤል</div>
-        <div class="cat-chip" onclick="setCategory('Lent', this)">የጾም መዝሙራት</div>
+    <div class="cat-scroll">
+        <div class="cat-chip active" onclick="filterCat('all', this)">ሁሉም (All)</div>
+        <div class="cat-chip" onclick="filterCat('Mary', this)">ድንግል ማርያም</div>
+        <div class="cat-chip" onclick="filterCat('Michael', this)">ቅዱስ ሚካኤል</div>
+        <div class="cat-chip" onclick="filterCat('Gabriel', this)">ቅዱስ ገብርኤል</div>
     </div>
 
-    <div class="mezmur-grid" id="mezmurList">
-        <div class="mezmur-card" data-category="St. Mary" onclick="openLyrics('ማርያም ደስ ይበልሽ', 'ማርያም ደስ ይበልሽ በዲንግልና\nየአምላክ እናት መሆንሽ ነውና\n\nበቅዱሳን መላእክት የምትመሰገኚ\nከፍጥረታት ሁሉ በላይ የሆንሽ\nየአለም ሁሉ መመኪያ እመቤታችን\nድንግል ማርያም ሆይ ሰላም ላንቺ ይሁን።\n\nእመቤታችን ሆይ በጸሎትሽ አስቢን\nከመከራ ስጋ ከመከራ ነፍስ ጠብቂን።', 'St. Mary', 'https://www.youtube.com/embed/CMSl9QCcIHg')">
-            <div class="m-icon">✥</div>
-            <div class="m-info">
-                <span class="m-title ethiopic">ማርያም ደስ ይበልሽ</span>
-                <span class="m-meta">St. Mary • Video Practice</span>
+    <div class="mezmur-grid" id="list">
+        <div class="mezmur-card" data-cat="Mary" onclick="viewMezmur('ማርያም ደስ ይበልሽ', lyricData.m1, 'ድንግል ማርያም', 'https://www.youtube.com/embed/CMSl9QCcIHg')">
+            <div style="font-size: 24px; margin-right: 15px;">📜</div>
+            <div>
+                <b class="ethiopic">ማርያም ደስ ይበልሽ</b><br>
+                <small style="color: var(--holy-gold); font-weight: 800;">VIDEO PRACTICE</small>
             </div>
-            <div style="opacity: 0.2;">▶</div>
-        </div>
-
-        <div class="mezmur-card" data-category="St. Gabriel" onclick="openLyrics('ገብርኤል ኃያል', 'ገብርኤል ኃያል መልአከ ሰላም\nበቅዱሳን መላእክት ዘንድ የምትታወቅ\n\nበእሳት ውስጥ የነበሩትን ወጣቶች\nያዳንካቸው አንተ ነህና\nበእኛም ላይ ጠብቅን መከራን አርቅልን።', 'St. Gabriel', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
-            <div class="m-icon">✥</div>
-            <div class="m-info">
-                <span class="m-title ethiopic">ገብርኤል ኃያል</span>
-                <span class="m-meta">St. Gabriel • Audio Guide</span>
-            </div>
-            <div style="opacity: 0.2;">▶</div>
         </div>
     </div>
 
-    <div class="overlay" id="overlay" onclick="closeLyrics()"></div>
-    
+    <div class="overlay" id="overlay" onclick="closeMezmur()"></div>
+
     <div id="lyricDrawer">
-        <div class="drawer-top-bar">
-            <div class="drawer-handle"></div>
-            <div class="drawer-close" onclick="closeLyrics()">&times;</div>
+        <div class="drawer-nav">
+            <span id="l-cat" style="font-size: 10px; font-weight: 800; color: var(--holy-gold);">CATEGORY</span>
+            <div onclick="closeMezmur()" style="cursor:pointer; font-size: 20px;">✕</div>
         </div>
-        
-        <div class="drawer-scroll-area" id="lyricArea" onscroll="handleScroll()">
-            <div class="lyric-header">
-                <span id="l-cat" style="font-size: 10px; font-weight: 800; color: var(--holy-gold); letter-spacing: 2px;">CATEGORY</span>
-                <h2 id="l-title" class="ethiopic" style="color: var(--sky-main); font-size: 30px; margin-top: 5px;">Title</h2>
-            </div>
+
+        <div class="lyric-viewport" id="viewport" onscroll="handleLyricsScroll()">
+            <div id="scrollHint" class="scroll-indicator">ተጨማሪ ግጥም ለማየት ወደ ታች ይውረዱ (Scroll for more) ↓</div>
             
-            <p id="l-body" class="ethiopic lyric-body">Lyrics...</p>
-            <div class="lyric-spacer"></div>
-
-            <div class="scroll-hint" id="scrollHint">
-                <span>SCROLL FOR FULL LYRICS</span>
-                <span>↓</span>
-            </div>
+            <h2 id="l-title" class="ethiopic" style="text-align:center; color: var(--sky-main); margin-bottom: 20px;"></h2>
+            <p id="l-body" class="ethiopic lyric-body"></p>
+            
+            <div class="scroll-buffer"></div>
         </div>
 
-        <div class="media-player-container">
-            <div class="player-inner" id="media-content">
-                </div>
+        <div class="player-bar">
+            <div class="player-content">
+                <p style="text-align:center; font-size: 9px; font-weight: 800; color: var(--sky-main); margin-bottom: 10px;">የልምምድ ማጫወቻ (PRACTICE PLAYER)</p>
+                <div id="media-box" class="video-box"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        let currentCategory = 'all';
+        // Store lyrics in a clean object for 600+ scale
+        const lyricData = {
+            m1: `ማርያም ደስ ይበልሽ በዲንግልና
+የአምላክ እናት መሆንሽ ነውና
 
-        function setCategory(cat, el) {
-            document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            currentCategory = cat;
-            filterMezmurs();
-        }
+በቅዱሳን መላእክት የምትመሰገኚ
+ከፍጥረታት ሁሉ በላይ የሆንሽ
+የአለም ሁሉ መመኪያ እመቤታችን
+ድንግል ማርያም ሆይ ሰላም ላንቺ ይሁን።
 
-        function filterMezmurs() {
-            let input = document.getElementById('mezmurSearch').value.toLowerCase();
-            let cards = document.getElementsByClassName('mezmur-card');
-            for (let card of cards) {
-                let title = card.querySelector('.m-title').innerText.toLowerCase();
-                let cat = card.getAttribute('data-category');
-                card.style.display = (title.includes(input) && (currentCategory === 'all' || cat === currentCategory)) ? "flex" : "none";
-            }
-        }
+እመቤታችን ሆይ በጸሎትሽ አስቢን
+ከመከራ ስጋ ከመከራ ነፍስ ጠብቂን።
 
-        function openLyrics(title, lyrics, category, mediaUrl) {
+[Chorus Repeated]
+ሰላም ላንቺ ይሁን
+ጸጋን የተመላሽ
+እግዚአብሔር ካንቺ ጋር ነውና።
+
+ከሴቶች ሁሉ ተለይተሽ የተባረክሽ ነሽ
+የማህጸንሽም ፍሬ የተባረከ ነው።
+
+ድንግል ሆይ ለምኚልን
+ወደ ተወደደው ልጅሽ
+ምህረቱን እንዲልክልን።`
+        };
+
+        function viewMezmur(title, body, cat, url) {
             document.getElementById('l-title').innerText = title;
-            document.getElementById('l-body').innerText = lyrics;
-            document.getElementById('l-cat').innerText = category;
+            document.getElementById('l-body').innerText = body;
+            document.getElementById('l-cat').innerText = cat;
             
-            // Show scroll hint and reset position
-            document.getElementById('lyricArea').scrollTop = 0;
-            document.getElementById('scrollHint').style.opacity = "1";
-
-            const mediaBox = document.getElementById('media-content');
-            if (mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be')) {
-                mediaBox.innerHTML = `<div class="video-wrapper"><iframe src="${mediaUrl}?autoplay=0" allow="encrypted-media" allowfullscreen></iframe></div>`;
-            } else if (mediaUrl.includes('.mp3')) {
-                mediaBox.innerHTML = `<audio controls style="width:100%"><source src="${mediaUrl}" type="audio/mpeg"></audio>`;
+            const media = document.getElementById('media-box');
+            if(url.includes('youtube')) {
+                media.innerHTML = `<iframe src="${url}"></iframe>`;
             } else {
-                mediaBox.innerHTML = `<p style="text-align:center; font-size:11px; color:var(--text-soft);">Media guide coming soon.</p>`;
+                media.innerHTML = `<audio controls style="width:100%"><source src="${url}"></audio>`;
             }
 
             document.getElementById('lyricDrawer').classList.add('active');
             document.getElementById('overlay').classList.add('active');
+            document.getElementById('viewport').scrollTop = 0;
+            document.getElementById('scrollHint').style.opacity = "1";
             document.body.style.overflow = 'hidden';
         }
 
-        function handleScroll() {
-            const scrollArea = document.getElementById('lyricArea');
+        function handleLyricsScroll() {
+            const v = document.getElementById('viewport');
             const hint = document.getElementById('scrollHint');
-            // Hide hint if user scrolls down more than 50px
-            if (scrollArea.scrollTop > 50) {
+            // Hide hint after scrolling 60px
+            if (v.scrollTop > 60) {
                 hint.style.opacity = "0";
+                hint.style.pointerEvents = "none";
             }
         }
 
-        function closeLyrics() {
+        function closeMezmur() {
             document.getElementById('lyricDrawer').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
-            document.getElementById('media-content').innerHTML = ""; // Stop audio/video
+            document.getElementById('media-box').innerHTML = "";
             document.body.style.overflow = 'auto';
+        }
+
+        function doSearch() {
+            let q = document.getElementById('search').value.toLowerCase();
+            let cards = document.querySelectorAll('.mezmur-card');
+            cards.forEach(c => {
+                let t = c.innerText.toLowerCase();
+                c.style.display = t.includes(q) ? "flex" : "none";
+            });
+        }
+
+        function filterCat(cat, el) {
+            document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            let cards = document.querySelectorAll('.mezmur-card');
+            cards.forEach(c => {
+                c.style.display = (cat === 'all' || c.dataset.cat === cat) ? "flex" : "none";
+            });
         }
     </script>
 </body>

@@ -212,7 +212,7 @@
             const typeLabel = document.getElementById('playerType');
             
             if (mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be')) {
-                typeLabel.innerText = "VIDEO LESSON GUIDE";
+                typeLabel.innerText = "VIDEO PRACTICE GUIDE";
                 mediaBox.innerHTML = `<div class="video-wrapper"><iframe src="${mediaUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
             } else if (mediaUrl.includes('.mp3') || mediaUrl.includes('.wav')) {
                 typeLabel.innerText = "AUDIO PRACTICE GUIDE";
@@ -236,4 +236,5 @@
     </script>
 </body>
 </html>
+
 

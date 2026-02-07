@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacred Mezmurs | Debre Genet EOTC Winnipeg</title>
+    <title>Sacred Mezmurs | Debre Genet Winnipeg</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,15 +14,15 @@
             --text-dark: #1A2530;
             --text-soft: #607D8B;
             --white: #FFFFFF;
-            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.92);
             --shadow: 0 12px 40px rgba(0, 119, 204, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--sky-bg); font-family: 'Montserrat', sans-serif; color: var(--text-dark); line-height: 1.6; }
+        body { background-color: var(--sky-bg); font-family: 'Montserrat', sans-serif; color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
         .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- STICKY HEADER --- */
         header {
             background: var(--white);
             padding: 30px 20px 15px;
@@ -39,6 +39,7 @@
         }
         .search-input:focus { border-color: var(--sky-main); background: #fff; box-shadow: var(--shadow); }
 
+        /* --- CATEGORY CAROUSEL --- */
         .category-scroll {
             display: flex; gap: 10px; overflow-x: auto;
             padding: 15px 5%; background: var(--white);
@@ -48,68 +49,73 @@
         .cat-chip {
             padding: 8px 18px; border-radius: 50px; background: var(--sky-bg);
             color: var(--sky-deep); font-size: 11px; font-weight: 800;
-            white-space: nowrap; cursor: pointer; transition: 0.3s;
-            border: 1px solid transparent;
+            white-space: nowrap; cursor: pointer; transition: 0.3s; border: 1.5px solid transparent;
         }
         .cat-chip.active { background: var(--sky-main); color: var(--white); border-color: var(--sky-main); }
 
         /* --- MEZMUR LIST --- */
-        .mezmur-grid { max-width: 800px; margin: 20px auto; padding: 0 20px 100px; }
+        .mezmur-grid { max-width: 850px; margin: 20px auto; padding: 0 20px 100px; }
         .mezmur-card {
             background: var(--white); border-radius: 20px; padding: 20px;
             margin-bottom: 12px; display: flex; align-items: center; gap: 15px;
             box-shadow: var(--shadow); cursor: pointer; transition: 0.3s;
         }
-        .mezmur-card:hover { transform: translateX(5px); }
-        .m-icon { width: 45px; height: 45px; background: var(--sky-light); color: var(--sky-main); border-radius: 12px; display: grid; place-items: center; font-weight: 800; }
+        .mezmur-card:hover { transform: translateX(8px); border-left: 4px solid var(--sky-main); }
+        .m-icon { width: 45px; height: 45px; background: #E1F0FF; color: var(--sky-main); border-radius: 12px; display: grid; place-items: center; font-weight: 800; }
         .m-info { flex: 1; }
         .m-title { font-size: 17px; font-weight: 700; color: var(--sky-deep); display: block; }
-        .m-meta { font-size: 10px; color: var(--holy-gold); font-weight: 800; text-transform: uppercase; margin-top: 2px; }
+        .m-meta { font-size: 10px; color: var(--holy-gold); font-weight: 800; text-transform: uppercase; }
 
         /* --- MODERN LYRIC DRAWER --- */
         #lyricDrawer {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 94vh;
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 95vh;
             background: var(--white); z-index: 2000; border-radius: 30px 30px 0 0;
-            box-shadow: 0 -20px 60px rgba(0,0,0,0.15); transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex; flex-direction: column; overflow: hidden;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.2); transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex; flex-direction: column;
         }
         #lyricDrawer.active { bottom: 0; }
 
-        .drawer-close { position: absolute; top: 20px; right: 25px; font-size: 32px; color: var(--text-soft); cursor: pointer; z-index: 2100; }
+        .drawer-top-bar {
+            width: 100%; padding: 15px; display: flex; justify-content: center; position: relative;
+        }
+        .drawer-handle { width: 40px; height: 5px; background: #EEE; border-radius: 10px; }
+        .drawer-close { position: absolute; right: 20px; top: 10px; font-size: 28px; color: var(--text-soft); cursor: pointer; }
 
-        /* Scrollable Lyric Section */
+        /* Scroll Area with Visual Indicators */
         .drawer-scroll-area { 
-            padding: 60px 25px 40px; 
-            overflow-y: auto; 
-            flex: 1; 
-            -webkit-overflow-scrolling: touch;
+            padding: 20px 25px; overflow-y: scroll; flex: 1; 
+            scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+            position: relative;
         }
 
-        .lyric-title-block { text-align: center; margin-bottom: 40px; }
+        .lyric-header { text-align: center; margin-bottom: 30px; }
         .lyric-body {
-            white-space: pre-line; font-size: 20px; line-height: 2.2;
+            white-space: pre-line; font-size: 21px; line-height: 2.3;
             color: var(--text-dark); text-align: center; max-width: 550px; margin: 0 auto;
         }
 
-        /* Essential Spacer: Prevents lyrics from being hidden by the player */
-        .lyric-spacer { height: 250px; width: 100%; }
+        /* The Bouncing Hint */
+        .scroll-hint {
+            position: sticky; bottom: 20px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center;
+            color: var(--sky-main); font-size: 9px; font-weight: 800;
+            opacity: 1; animation: bounce 2s infinite; pointer-events: none;
+            transition: 0.5s opacity; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 20px;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translate(-50%, 0);} 40% {transform: translate(-50%, -8px);} }
 
-        /* --- FLOATING MEDIA PLAYER --- */
+        /* --- MEDIA PLAYER --- */
         .media-player-container {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            padding: 20px 20px 40px; /* Extra bottom padding for mobile home indicators */
-            border-top: 1px solid rgba(0, 119, 204, 0.1);
+            background: var(--glass-bg); backdrop-filter: blur(25px);
+            padding: 15px 20px 40px; border-top: 1px solid rgba(0, 119, 204, 0.1);
             z-index: 2050;
         }
         .player-inner { max-width: 500px; margin: 0 auto; }
-        .player-label { font-size: 9px; font-weight: 800; color: var(--sky-main); letter-spacing: 2px; text-align: center; margin-bottom: 12px; display: block; }
-        
         .video-wrapper { width: 100%; aspect-ratio: 16/9; border-radius: 15px; overflow: hidden; background: #000; box-shadow: var(--shadow); }
         .video-wrapper iframe { width: 100%; height: 100%; border: none; }
         
-        audio { width: 100%; height: 45px; border-radius: 50px; }
+        /* Spacer to prevent overlap */
+        .lyric-spacer { height: 150px; }
 
         .overlay { position: fixed; inset: 0; background: rgba(0, 20, 40, 0.6); display: none; z-index: 1500; backdrop-filter: blur(10px); }
         .overlay.active { display: block; }
@@ -123,27 +129,27 @@
 <body>
 
     <header>
-        <a href="index.html" style="text-decoration:none; color:var(--sky-main); font-weight:800; font-size:11px; letter-spacing: 1px;">← RETURN HOME</a>
-        <h1 class="ethiopic" style="font-size: 32px; color: var(--sky-deep); margin-top:8px;">የመዝሙር መዝገብ</h1>
+        <a href="index.html" style="text-decoration:none; color:var(--sky-main); font-weight:800; font-size:10px; letter-spacing:1px;">← DEBRE GENET EOTC</a>
+        <h1 class="ethiopic" style="font-size: 32px; color: var(--sky-deep); margin-top:5px;">የመዝሙር መዝገብ</h1>
         <div class="search-container">
-            <input type="text" id="mezmurSearch" class="search-input" placeholder="Search by title or category..." onkeyup="filterMezmurs()">
+            <input type="text" id="mezmurSearch" class="search-input" placeholder="Search mezmurs..." onkeyup="filterMezmurs()">
         </div>
     </header>
 
-    <div class="category-scroll">
-        <div class="cat-chip active" onclick="setCategory('all', this)">All Mezmurs</div>
+    <div class="category-scroll" id="catBar">
+        <div class="cat-chip active" onclick="setCategory('all', this)">ALL MEZMURS</div>
         <div class="cat-chip" onclick="setCategory('St. Mary', this)">ድንግል ማርያም</div>
         <div class="cat-chip" onclick="setCategory('St. Michael', this)">ቅዱስ ሚካኤል</div>
         <div class="cat-chip" onclick="setCategory('St. Gabriel', this)">ቅዱስ ገብርኤል</div>
-        <div class="cat-chip" onclick="setCategory('Fast', this)">የጾም መዝሙራት</div>
+        <div class="cat-chip" onclick="setCategory('Lent', this)">የጾም መዝሙራት</div>
     </div>
 
     <div class="mezmur-grid" id="mezmurList">
-        <div class="mezmur-card" data-category="St. Mary" onclick="openLyrics('ማርያም ደስ ይበልሽ', 'ማርያም ደስ ይበልሽ በድንግልና\nየአምላክ እናት መሆንሽ ነውና\n\nበቅዱሳን መላእክት የምትመሰገኚ\nከፍጥረታት ሁሉ በላይ የሆንሽ\nየአለም ሁሉ መመኪያ እመቤታችን\nድንግል ማርያም ሆይ ሰላም ላንቺ ይሁን።\n\nእመቤታችን ሆይ በጸሎትሽ አስቢን\nከመከራ ስጋ ከመከራ ነፍስ ጠብቂን።', 'St. Mary', 'https://www.youtube.com/embed/CMSl9QCcIHg')">
+        <div class="mezmur-card" data-category="St. Mary" onclick="openLyrics('ማርያም ደስ ይበልሽ', 'ማርያም ደስ ይበልሽ በዲንግልና\nየአምላክ እናት መሆንሽ ነውና\n\nበቅዱሳን መላእክት የምትመሰገኚ\nከፍጥረታት ሁሉ በላይ የሆንሽ\nየአለም ሁሉ መመኪያ እመቤታችን\nድንግል ማርያም ሆይ ሰላም ላንቺ ይሁን።\n\nእመቤታችን ሆይ በጸሎትሽ አስቢን\nከመከራ ስጋ ከመከራ ነፍስ ጠብቂን።', 'St. Mary', 'https://www.youtube.com/embed/CMSl9QCcIHg')">
             <div class="m-icon">✥</div>
             <div class="m-info">
                 <span class="m-title ethiopic">ማርያም ደስ ይበልሽ</span>
-                <span class="m-meta">St. Mary • Video Guide</span>
+                <span class="m-meta">St. Mary • Video Practice</span>
             </div>
             <div style="opacity: 0.2;">▶</div>
         </div>
@@ -161,25 +167,29 @@
     <div class="overlay" id="overlay" onclick="closeLyrics()"></div>
     
     <div id="lyricDrawer">
-        <div class="drawer-close" onclick="closeLyrics()">&times;</div>
+        <div class="drawer-top-bar">
+            <div class="drawer-handle"></div>
+            <div class="drawer-close" onclick="closeLyrics()">&times;</div>
+        </div>
         
-        <div class="drawer-scroll-area">
-            <div class="lyric-title-block">
+        <div class="drawer-scroll-area" id="lyricArea" onscroll="handleScroll()">
+            <div class="lyric-header">
                 <span id="l-cat" style="font-size: 10px; font-weight: 800; color: var(--holy-gold); letter-spacing: 2px;">CATEGORY</span>
                 <h2 id="l-title" class="ethiopic" style="color: var(--sky-main); font-size: 30px; margin-top: 5px;">Title</h2>
             </div>
             
             <p id="l-body" class="ethiopic lyric-body">Lyrics...</p>
-            
             <div class="lyric-spacer"></div>
+
+            <div class="scroll-hint" id="scrollHint">
+                <span>SCROLL FOR FULL LYRICS</span>
+                <span>↓</span>
+            </div>
         </div>
 
         <div class="media-player-container">
-            <div class="player-inner">
-                <span class="player-label" id="playerType">PRACTICE PLAYER</span>
-                <div id="media-content">
-                    </div>
-            </div>
+            <div class="player-inner" id="media-content">
+                </div>
         </div>
     </div>
 
@@ -208,18 +218,17 @@
             document.getElementById('l-body').innerText = lyrics;
             document.getElementById('l-cat').innerText = category;
             
+            // Show scroll hint and reset position
+            document.getElementById('lyricArea').scrollTop = 0;
+            document.getElementById('scrollHint').style.opacity = "1";
+
             const mediaBox = document.getElementById('media-content');
-            const typeLabel = document.getElementById('playerType');
-            
             if (mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be')) {
-                typeLabel.innerText = "VIDEO PRACTICE GUIDE";
-                mediaBox.innerHTML = `<div class="video-wrapper"><iframe src="${mediaUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
-            } else if (mediaUrl.includes('.mp3') || mediaUrl.includes('.wav')) {
-                typeLabel.innerText = "AUDIO PRACTICE GUIDE";
-                mediaBox.innerHTML = `<audio controls><source src="${mediaUrl}" type="audio/mpeg"></audio>`;
+                mediaBox.innerHTML = `<div class="video-wrapper"><iframe src="${mediaUrl}?autoplay=0" allow="encrypted-media" allowfullscreen></iframe></div>`;
+            } else if (mediaUrl.includes('.mp3')) {
+                mediaBox.innerHTML = `<audio controls style="width:100%"><source src="${mediaUrl}" type="audio/mpeg"></audio>`;
             } else {
-                typeLabel.innerText = "NO MEDIA AVAILABLE";
-                mediaBox.innerHTML = `<p style="font-size:11px; color:var(--text-soft); text-align:center;">Practice audio coming soon.</p>`;
+                mediaBox.innerHTML = `<p style="text-align:center; font-size:11px; color:var(--text-soft);">Media guide coming soon.</p>`;
             }
 
             document.getElementById('lyricDrawer').classList.add('active');
@@ -227,14 +236,21 @@
             document.body.style.overflow = 'hidden';
         }
 
+        function handleScroll() {
+            const scrollArea = document.getElementById('lyricArea');
+            const hint = document.getElementById('scrollHint');
+            // Hide hint if user scrolls down more than 50px
+            if (scrollArea.scrollTop > 50) {
+                hint.style.opacity = "0";
+            }
+        }
+
         function closeLyrics() {
             document.getElementById('lyricDrawer').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
-            document.getElementById('media-content').innerHTML = ""; // Stop playback
+            document.getElementById('media-content').innerHTML = ""; // Stop audio/video
             document.body.style.overflow = 'auto';
         }
     </script>
 </body>
 </html>
-
-

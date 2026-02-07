@@ -99,6 +99,40 @@
 
   .menu-toggle { display: none; color: var(--primary); font-size: 28px; cursor: pointer; }
 
+  /* --- BOTTOM NAVIGATION (MOBILE ONLY) --- */
+  .mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+    z-index: 2000;
+    padding: 10px 0 25px 0; /* Extra bottom padding for modern notch phones */
+    justify-content: space-around;
+    border-top: 1px solid #eee;
+  }
+  .bottom-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-family: 'Montserrat';
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .bottom-nav-link span {
+    font-size: 20px;
+    margin-bottom: 2px;
+    color: var(--primary);
+  }
+  .bottom-nav-link.active {
+    color: var(--accent);
+  }
+
   /* 3. HERO SECTION */
   .hero-vid-section {
     position: relative; height: 90vh; width: 100%; overflow: hidden;
@@ -170,6 +204,7 @@
 
   /* 7. MOBILE RESPONSIVE */
   @media (max-width: 1100px) {
+    body { padding-bottom: 80px; } /* Create space for bottom nav */
     .menu-toggle { display: block; }
     .nav-links {
       position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
@@ -183,6 +218,8 @@
     .menu-item.open .sub-menu { display: flex; }
     .hero-vid-section { height: 70vh; }
     .container { margin-top: -40px; }
+    
+    .mobile-bottom-nav { display: flex; }
   }
 
   footer { 
@@ -203,9 +240,7 @@
     <div class="menu-item has-sub">
       <a href="javascript:void(0)" onclick="toggleSub(this)">HOME</a>
       <div class="sub-menu">
-        <a href="home2.html">Home2</a>
-        <a href="home3.html">Home3</a>
-        <a href="home4.html">Home4</a>
+        <a href="index.html">Main Home</a>
         <a href="clergy.html">Clergy</a>
         <a href="services.html">Services</a>
         <a href="about.html">About Us</a>
@@ -238,6 +273,13 @@
     <div class="menu-item"><a href="contact.html">CONTACT</a></div>
     <a href="https://youtube.com/live" target="_blank" class="btn-live">● LIVE NOW</a>
   </div>
+</nav>
+
+<nav class="mobile-bottom-nav">
+  <a href="index.html" class="bottom-nav-link active"><span>🏠</span>Home</a>
+  <a href="upcoming.html" class="bottom-nav-link"><span>📅</span>Events</a>
+  <a href="donations.html" class="bottom-nav-link"><span>🙏</span>Donate</a>
+  <a href="contact.html" class="bottom-nav-link"><span>📍</span>Visit</a>
 </nav>
 
 <section class="hero-vid-section">
@@ -384,4 +426,3 @@
 </script>
 </body>
 </html>
-

@@ -15,6 +15,7 @@
     --glass: rgba(99, 15, 22, 0.96);
     --glow: rgba(212, 160, 23, 0.45); /* Sham Glow */
     --subtle-silver: #C0C0C0;     /* Subtle Silver Grey */
+    --text-soft: #5D6D7E;
   }
 
   /* 1. GLOBAL LAYOUT */
@@ -27,6 +28,7 @@
     overflow-x: hidden;
     line-height: 1.6;
     position: relative;
+    padding-bottom: 80px; /* Space for mobile nav */
   }
   
   body::after {
@@ -89,6 +91,18 @@
 
   .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
 
+  /* MOBILE APP BAR */
+  .mobile-nav {
+    position: fixed; bottom: 0; width: 100%;
+    background: rgba(255, 248, 225, 0.98); 
+    backdrop-filter: blur(15px);
+    display: flex; justify-content: space-around;
+    padding: 12px 0 25px; border-top: 2px solid var(--accent-gold); z-index: 10000;
+  }
+  .nav-item { text-align: center; text-decoration: none; color: var(--text-soft); font-size: 10px; font-weight: 600; }
+  .nav-item.active { color: var(--text-primary); }
+  .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; font-style: normal; }
+
   @media (max-width: 1100px) {
     .menu-toggle { display: block; z-index: 10001; }
     .nav-links {
@@ -102,6 +116,10 @@
     .menu-item > a { width: 100%; height: 50px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); justify-content: space-between; }
     .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); }
     .menu-item.open .sub-menu { display: flex; }
+  }
+
+  @media (min-width: 1101px) {
+    .mobile-nav { display: none; }
   }
 
   /* 3. HUB CONTENT */
@@ -236,7 +254,7 @@
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <div class="nav-links" id="navLinks">
     <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">HOME ▾</a>
-      <div class="sub-menu"><a href="clergy.html">CLERGY</a><a href="services.html">SERVICES</a><a href="about.html">ABOUT US</a><a href="faith.html">OUR FAITH</a></div>
+      <div class="sub-menu"><a href="index.html">HOME</a><a href="clergy.html">CLERGY</a><a href="services.html">SERVICES</a><a href="about.html">ABOUT US</a><a href="faith.html">OUR FAITH</a></div>
     </div>
     <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">MINISTRIES ▾</a>
       <div class="sub-menu"><a href="ministry-hub.html">Ministry Hub</a><a href="sunday-school.html">Sunday School</a><a href="abinet.html">Abinet School</a><a href="care.html">Pastorial Care</a><a href="sponsorship.html">Sponsorship</a></div>
@@ -373,6 +391,13 @@
   <strong>May the grace of God be with you.</strong>
 </footer>
 
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item"><i>🏠</i>Home</a>
+    <a href="full-calendar.html" class="nav-item"><i>📅</i>Events</a>
+    <a href="donations.html" class="nav-item"><i>❤️</i>Donate</a>
+    <a href="contact.html" class="nav-item"><i>📍</i>Visit</a>
+</nav>
+
 <script>
   function toggleMenu() { 
     document.getElementById('navLinks').classList.toggle('active'); 
@@ -392,16 +417,25 @@
   document.addEventListener("DOMContentLoaded", () => {
     const currentUrl = window.location.href.toLowerCase();
     const allLinks = document.querySelectorAll(".nav-links a");
+    const mobileLinks = document.querySelectorAll(".mobile-nav .nav-item");
     
+    // Desktop & Main Nav Highlight
     allLinks.forEach(link => {
       const linkHref = link.getAttribute("href").toLowerCase();
-      if (currentUrl.endsWith(linkHref)) {
+      if (currentUrl.endsWith(linkHref) || (linkHref === "ministry-hub.html" && currentUrl.includes("ministry"))) {
         link.classList.add("active-page");
         const subMenu = link.closest(".sub-menu");
         if (subMenu) {
           subMenu.previousElementSibling.classList.add("active-page");
         }
       }
+    });
+
+    // Mobile Bottom Nav Highlight
+    mobileLinks.forEach(link => {
+        if (currentUrl.endsWith(link.getAttribute("href").toLowerCase())) {
+            link.classList.add("active");
+        }
     });
 
     // Slideshow Script
@@ -420,7 +454,4 @@
 </script>
 
 </body>
-
 </html>
-
-

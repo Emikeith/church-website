@@ -6,31 +6,32 @@
     <title>Sacred Gallery | Debre Genet EOTC Winnipeg</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* --- SACRED PALETTE (Matched to Home Page) --- */
         :root {
-            --sky-bg: #F8FBFF;
-            --sky-main: #0077CC;
-            --sky-deep: #004477;
-            --holy-gold: #D4AF37;
-            --text-dark: #2C3E50;
-            --text-soft: #5D6D7E;
+            --bg-page: #F9E8B2;           /* Page Background */
+            --bg-card: #FFF8E1;           /* Cream Card */
+            --text-primary: #630F16;      /* Deep Burgundy */
+            --accent-gold: #D4A017;       /* Gold */
             --white: #FFFFFF;
-            --shadow: 0 15px 35px rgba(0, 119, 204, 0.1);
+            --glass: rgba(99, 15, 22, 0.96);
+            --shadow: 0 15px 35px rgba(99, 15, 22, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background-color: var(--sky-bg);
+            background-color: var(--bg-page);
             font-family: 'Montserrat', sans-serif;
-            color: var(--text-dark);
-            padding-bottom: 60px;
+            color: var(--text-primary);
+            padding-bottom: 80px; /* Space for App Menu */
+            line-height: 1.6;
         }
 
         .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
 
         /* --- HEADER --- */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--glass);
             backdrop-filter: blur(10px);
             padding: 15px 5%;
             display: flex;
@@ -38,28 +39,30 @@
             align-items: center;
             position: sticky;
             top: 0; z-index: 1000;
-            border-bottom: 1px solid #E1F0FF;
+            border-bottom: 3px solid var(--accent-gold);
         }
 
         .btn-back {
             text-decoration: none;
-            color: var(--sky-main);
+            color: var(--white);
             font-weight: 800;
-            font-size: 12px;
+            font-size: 11px;
             display: flex;
             align-items: center;
             gap: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* --- GALLERY TITLE --- */
         .gallery-header {
             text-align: center;
             padding: 60px 20px 40px;
-            background: linear-gradient(to bottom, #E1F0FF, var(--sky-bg));
+            background: linear-gradient(to bottom, rgba(212, 160, 23, 0.1), var(--bg-page));
         }
 
-        .gallery-header h1 { font-size: 32px; color: var(--sky-deep); margin-bottom: 10px; }
-        .gallery-header p { font-size: 14px; color: var(--text-soft); letter-spacing: 1px; }
+        .gallery-header h1 { font-size: 32px; color: var(--text-primary); margin-bottom: 10px; font-weight: 900; }
+        .gallery-header p { font-size: 14px; color: var(--text-primary); opacity: 0.8; letter-spacing: 1px; font-weight: 500; }
 
         /* --- CATEGORY FILTERS --- */
         .filter-container {
@@ -73,22 +76,24 @@
         }
 
         .filter-btn {
-            background: var(--white);
-            border: 1px solid var(--sky-main);
-            color: var(--sky-main);
+            background: var(--bg-card);
+            border: 1.5px solid var(--accent-gold);
+            color: var(--text-primary);
             padding: 8px 20px;
             border-radius: 50px;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 10px;
+            font-weight: 800;
             cursor: pointer;
             white-space: nowrap;
             transition: 0.3s;
+            text-transform: uppercase;
         }
 
         .filter-btn.active {
-            background: var(--sky-main);
+            background: var(--text-primary);
             color: var(--white);
-            box-shadow: 0 5px 15px rgba(0, 119, 204, 0.3);
+            box-shadow: 0 5px 15px rgba(99, 15, 22, 0.3);
+            border-color: var(--text-primary);
         }
 
         /* --- MASONRY GRID --- */
@@ -96,23 +101,24 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            columns: 2; /* 2 columns on mobile */
+            columns: 2;
             column-gap: 15px;
         }
 
         .photo-card {
             break-inside: avoid;
             margin-bottom: 15px;
-            background: var(--white);
-            border-radius: 15px;
+            background: var(--bg-card);
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: 0.3s ease;
             position: relative;
+            border: 1px solid rgba(212, 160, 23, 0.3);
         }
 
-        .photo-card:hover { transform: translateY(-5px); }
+        .photo-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
 
         .photo-card img {
             width: 100%;
@@ -123,20 +129,41 @@
         .photo-info {
             padding: 12px;
             background: var(--white);
+            text-align: center;
         }
 
         .photo-info span {
             font-size: 10px;
             font-weight: 800;
-            color: var(--holy-gold);
+            color: var(--text-primary);
             display: block;
             text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- APP-STYLE BOTTOM NAVIGATION (Mobile Only) --- */
+        .bottom-app-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
+            background: var(--bg-card); display: flex; justify-content: space-around;
+            align-items: center; z-index: 10005; border-top: 2px solid var(--accent-gold);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
+        .app-item {
+            text-decoration: none; display: flex; flex-direction: column;
+            align-items: center; color: var(--text-primary); flex: 1;
+        }
+        .app-item span.icon { font-size: 1.4rem; margin-bottom: 2px; }
+        .app-item span.label { font-size: 9px; font-weight: 800; text-transform: uppercase; }
+        
+        @media (min-width: 1101px) { 
+            .bottom-app-nav { display: none; } 
+            body { padding-bottom: 40px; }
         }
 
         /* --- LIGHTBOX --- */
         #lightbox {
             position: fixed; inset: 0;
-            background: rgba(0, 15, 30, 0.95);
+            background: rgba(44, 7, 10, 0.98);
             backdrop-filter: blur(15px);
             display: none;
             justify-content: center;
@@ -149,14 +176,14 @@
         
         #lightbox img {
             max-width: 100%;
-            max-height: 85vh;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            max-height: 80vh;
+            border-radius: 8px;
+            border: 3px solid var(--accent-gold);
         }
 
         .close-btn {
             position: absolute; top: 25px; right: 25px;
-            color: white; font-size: 35px; cursor: pointer;
+            color: var(--accent-gold); font-size: 35px; cursor: pointer;
         }
 
         @keyframes zoomIn {
@@ -169,7 +196,6 @@
             .album-container { columns: 3; }
             .gallery-header h1 { font-size: 48px; }
         }
-
         @media (min-width: 1024px) {
             .album-container { columns: 4; }
         }
@@ -177,16 +203,35 @@
 </head>
 <body>
 
+    <nav class="bottom-app-nav">
+        <a href="index.html" class="app-item">
+            <span class="icon">🏠</span>
+            <span class="label">Home</span>
+        </a>
+        <a href="upcoming.html" class="app-item">
+            <span class="icon">📅</span>
+            <span class="label">Events</span>
+        </a>
+        <a href="donations.html" class="app-item">
+            <span class="icon">❤️</span>
+            <span class="label">Donate</span>
+        </a>
+        <a href="contact.html" class="app-item">
+            <span class="icon">📍</span>
+            <span class="label">Visit</span>
+        </a>
+    </nav>
+
     <header>
         <a href="index.html" class="btn-back">✕ CLOSE ALBUM</a>
         <div style="text-align: right;">
-            <div class="ethiopic" style="font-size: 12px; color: var(--sky-main);">ደብረ ገነት</div>
-            <div style="font-size: 8px; font-weight: 800; color: var(--holy-gold);">GALLERY</div>
+            <div class="ethiopic" style="font-size: 14px; color: var(--white); font-weight: 700;">ደብረ ገነት</div>
+            <div style="font-size: 9px; font-weight: 800; color: var(--accent-gold); letter-spacing: 1px;">GALLERY</div>
         </div>
     </header>
 
     <div class="gallery-header">
-        <span style="font-size: 10px; font-weight: 800; color: var(--sky-main); letter-spacing: 3px;">THE SACRED COLLECTION</span>
+        <span style="font-size: 11px; font-weight: 800; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase;">The Sacred Collection</span>
         <h1 class="ethiopic">የፎቶ መዝገብ</h1>
         <p>Capturing the spiritual essence of our community in Winnipeg.</p>
     </div>
@@ -229,40 +274,37 @@
             <img src="group.jpg" alt="Community gathering">
             <div class="photo-info"><span>Believers</span></div>
         </div>
-        
-        </div>
+    </div>
 
     <div id="lightbox" onclick="closeLightbox()">
         <span class="close-btn">&times;</span>
         <img id="lightboxImg" src="">
     </div>
 
-    <footer style="text-align: center; padding: 60px 20px; opacity: 0.6;">
-        <p style="font-size: 11px; font-weight: 700;">✥ DEBRE GENET EOTC WINNIPEG ✥</p>
-        <p style="font-size: 10px; margin-top: 5px;">Glory be to the Father, the Son, and the Holy Spirit.</p>
+    <footer style="text-align: center; padding: 60px 20px; opacity: 0.8; color: var(--text-primary);">
+        <p style="font-size: 12px; font-weight: 800; letter-spacing: 2px;">✥ DEBRE GENET EOTC WINNIPEG ✥</p>
+        <p style="font-size: 11px; margin-top: 5px; font-style: italic;">Glory be to the Father, the Son, and the Holy Spirit.</p>
     </footer>
 
     <script>
-        // Lightbox Logic
         function openLightbox(element) {
             const imgSrc = element.querySelector('img').src;
             const lb = document.getElementById('lightbox');
             document.getElementById('lightboxImg').src = imgSrc;
             lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
-        // Filtering Logic
         function filterGallery(category) {
-            // Update buttons
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Filter items
             const items = document.querySelectorAll('.photo-card');
             items.forEach(item => {
                 if (category === 'all' || item.getAttribute('data-category') === category) {

@@ -2,7 +2,7 @@
 <html lang="am">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Liturgical Calendar - Debre Genet</title>
 <style>
   /* --- GLOBAL BRANDING --- */
@@ -13,18 +13,22 @@
     --bg-card: #FFF8E1;           /* Cream Card */
     --white: #ffffff;
     --glass: rgba(99, 15, 22, 0.96);
-    --subtle-silver: #C0C0C0;
+    --text-soft: #5D6D7E;
   }
 
+  /* 1. GLOBAL LAYOUT */
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+  
   body { 
     margin: 0; padding: 0; 
     background: var(--bg-page); 
     font-family: 'Nyala', 'Abyssinica SIL', serif; 
     color: var(--text-primary);
     overflow-x: hidden;
+    padding-bottom: 80px; /* Space for mobile bottom nav */
   }
 
-  /* 1. NAVIGATION (Same as Sponsorship Page) */
+  /* 2. NAVIGATION */
   .main-nav {
     position: fixed; top: 0; width: 100%; height: 80px;
     background: var(--glass);
@@ -70,25 +74,12 @@
     background: #FF0000; color: white !important; padding: 8px 16px; border-radius: 50px;
     display: flex; align-items: center; gap: 8px; font-weight: 900 !important; 
     margin-left: 10px; border: 1px solid white; text-decoration: none; font-size: 11px;
+    flex-shrink: 0;
   }
 
   .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
 
-  @media (max-width: 1100px) {
-    .menu-toggle { display: block; z-index: 10001; }
-    .nav-links {
-      position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
-      background: var(--text-primary); flex-direction: column;
-      align-items: flex-start; padding: 100px 30px; transition: 0.4s ease-in-out;
-    }
-    .nav-links.active { right: 0; }
-    .menu-item { width: 100%; height: auto; flex-direction: column; align-items: flex-start; }
-    .menu-item > a { width: 100%; height: 50px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); justify-content: space-between; }
-    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); }
-    .menu-item.open .sub-menu { display: flex; }
-  }
-
-  /* 2. CALENDAR PAGE WRAPPER */
+  /* 3. CALENDAR PAGE WRAPPER */
   .wrapper { max-width: 1100px; margin: 100px auto 40px auto; padding: 20px; box-sizing: border-box; }
   
   .section-header { 
@@ -100,6 +91,7 @@
     border-bottom: 8px double var(--accent-gold); 
     box-sizing: border-box;
     margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   }
   .info-title { color: var(--text-primary); font-size: clamp(24px, 5vw, 32px); font-weight: bold; margin: 0; }
   .info-subtitle { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 3px; margin-top: 8px; font-weight: 800; }
@@ -168,7 +160,7 @@
   }
   
   .cell { 
-    background: var(--white); 
+    background: var(--bg-card); /* Changed from White to Cream Card */
     padding: 8px; 
     position: relative; 
     display: flex; 
@@ -196,13 +188,12 @@
   .tag-gen { background: #F3E5F5; color: #7B1FA2; border: 1px solid #E1BEE7; }
 
   /* MODAL */
-  .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(99, 15, 22, 0.8); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(99, 15, 22, 0.8); z-index: 10001; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
   .modal-content { 
     background: var(--bg-card); 
     padding: 30px; 
     width: 90%; 
     max-width: 450px; 
-    border-radius: 0; 
     border: 2px solid var(--accent-gold);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     max-height: 85vh; 
@@ -222,11 +213,43 @@
   }
   .jump-btn:hover { background: var(--accent-gold); color: var(--text-primary); }
 
+  /* --- MOBILE BOTTOM NAV --- */
+  .mobile-nav {
+    position: fixed; bottom: 0; width: 100%;
+    background: rgba(255, 248, 225, 0.98); 
+    backdrop-filter: blur(15px);
+    display: flex; justify-content: space-around;
+    padding: 12px 0 25px; border-top: 2px solid var(--accent-gold); z-index: 10000;
+  }
+  .nav-item { text-align: center; text-decoration: none; color: var(--text-soft); font-size: 10px; font-weight: 600; }
+  .nav-item.active { color: var(--text-primary); }
+  .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; font-style: normal; }
+
+  @media (max-width: 1100px) {
+    .menu-toggle { display: block; z-index: 10001; }
+    .nav-links {
+      position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+      background: var(--text-primary); flex-direction: column;
+      align-items: flex-start; padding: 100px 30px; transition: 0.4s ease-in-out;
+      overflow-y: auto;
+    }
+    .nav-links.active { right: 0; }
+    .menu-item { width: 100%; height: auto; flex-direction: column; align-items: flex-start; }
+    .menu-item > a { width: 100%; height: 50px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); justify-content: space-between; }
+    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); }
+    .menu-item.open .sub-menu { display: flex; }
+  }
+
+  @media (min-width: 1101px) {
+    .mobile-nav { display: none; }
+  }
+
   @media (max-width: 600px) {
     .grid { grid-auto-rows: minmax(80px, auto); }
     .day-greg { font-size: 14px; }
     .tag { font-size: 8px; }
     .nav-btn { padding: 8px 10px; font-size: 12px; }
+    .wrapper { margin-top: 80px; padding: 10px; }
   }
 </style>
 </head>
@@ -246,7 +269,7 @@
       <div class="sub-menu"><a href="ministry-hub.html">Ministry Hub</a><a href="sunday-school.html">Sunday School</a><a href="abinet.html">አብነት School</a><a href="pastoral-care.html">Pastoral Care</a><a href="sponsorship.html">Sponsorship</a></div>
     </div>
     <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">CALENDAR ▾</a>
-      <div class="sub-menu"><a href="full-calendar.html">Monthly Calendar</a><a href="upcoming.html">Upcoming Events</a></div>
+      <div class="sub-menu"><a href="full-calendar.html" class="active-page">Monthly Calendar</a><a href="upcoming.html">Upcoming Events</a></div>
     </div>
     <div class="menu-item"><a href="javascript:void(0)" onclick="toggleSub(this)">PAYMENTS ▾</a>
       <div class="sub-menu"><a href="donations.html">Donations</a><a href="building.html">Building Project</a></div>
@@ -282,6 +305,13 @@
   
   <button class="jump-btn" onclick="goToday()">Jump to Today / ወደ ዛሬ ተመለስ</button>
 </div>
+
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item"><i>🏠</i>Home</a>
+    <a href="full-calendar.html" class="nav-item active"><i>📅</i>Events</a>
+    <a href="donations.html" class="nav-item"><i>❤️</i>Donate</a>
+    <a href="contact.html" class="nav-item"><i>📍</i>Visit</a>
+</nav>
 
 <div id="detailsModal" class="modal" onclick="this.style.display='none'">
   <div class="modal-content" onclick="event.stopPropagation()">
@@ -364,7 +394,7 @@
     const days = new Date(y, m + 1, 0).getDate();
     const todayStr = new Date().toISOString().split('T')[0];
 
-    for(let i=0; i<first; i++) grid.innerHTML += `<div class="cell" style="background:#F2F2F2"></div>`;
+    for(let i=0; i<first; i++) grid.innerHTML += `<div class="cell" style="background:rgba(0,0,0,0.05)"></div>`;
 
     for(let d=1; d<=days; d++) {
       const dObj = new Date(y, m, d);
@@ -431,7 +461,6 @@
   function goToday() { curr = new Date(); render(); }
   function moveMonth(dir) { curr.setMonth(curr.getMonth() + dir); render(); }
   
-  /* INITIALIZE SCRIPT */
   loadData();
 </script>
 </body>

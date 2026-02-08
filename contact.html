@@ -8,15 +8,17 @@
   /* --- SACRED PALETTE & FONTS --- */
   :root {
     --text-primary: #630F16;      
-    --accent-gold: #D4A017;       
-    --bg-page: #F9E8B2;           
-    --bg-card: #FFF8E1;           
+    --accent-gold: #D4A017;        
+    --bg-page: #F9E8B2;            
+    --bg-card: #FFF8E1;            
     --white: #ffffff;
     --glass: rgba(99, 15, 22, 0.96);
     --glow: rgba(212, 160, 23, 0.45);
+    --text-soft: #5D6D7E;
   }
 
-  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+  
   body { 
     margin: 0; padding: 0; 
     background: var(--bg-page); 
@@ -24,6 +26,7 @@
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
+    padding-bottom: 80px; /* Space for mobile nav */
   }
   
   body::after {
@@ -115,15 +118,19 @@
   }
 
   .contact-card { 
-    background: var(--white); padding: 30px; 
+    background: var(--bg-card); /* Removed white, using creamy gold */
+    padding: 30px; 
     border-radius: 8px; border-left: 5px solid var(--text-primary);
     box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
+    border-top: 1px solid rgba(212, 160, 23, 0.1);
+    border-right: 1px solid rgba(212, 160, 23, 0.1);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.1);
   }
-  .contact-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px var(--glow); }
+  .contact-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px var(--glow); border-color: var(--accent-gold); }
 
   .ministry-title { 
     font-size: 20px; font-weight: bold; margin-bottom: 15px; color: var(--text-primary);
-    display: block; border-bottom: 1px solid #eee; padding-bottom: 10px;
+    display: block; border-bottom: 1px solid var(--accent-gold); padding-bottom: 10px;
   }
   .contact-detail { margin-bottom: 12px; font-size: 15px; }
   .contact-detail strong { color: var(--accent-gold); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
@@ -135,20 +142,39 @@
     box-shadow: 0 15px 40px rgba(0,0,0,0.1); height: 450px;
   }
 
+  /* --- MOBILE BOTTOM NAV --- */
+  .mobile-nav {
+    position: fixed; bottom: 0; width: 100%;
+    background: rgba(255, 248, 225, 0.98); 
+    backdrop-filter: blur(15px);
+    display: flex; justify-content: space-around;
+    padding: 12px 0 25px; border-top: 2px solid var(--accent-gold); z-index: 10000;
+  }
+  .nav-item { text-align: center; text-decoration: none; color: var(--text-soft); font-size: 10px; font-weight: 600; }
+  .nav-item.active { color: var(--text-primary); }
+  .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; font-style: normal; }
+
   @media (max-width: 1100px) {
     .menu-toggle { display: block; }
     .nav-links {
       position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
       background: var(--text-primary); flex-direction: column;
-      align-items: flex-start; padding: 100px 30px; transition: 0.4s;
+      align-items: flex-start; padding: 100px 30px; transition: 0.4s; overflow-y: auto;
     }
     .nav-links.active { right: 0; }
-    .menu-item { width: 100%; }
-    .menu-item > a { width: 100%; height: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .menu-item { width: 100%; height: auto; flex-direction: column; align-items: flex-start; }
+    .menu-item > a { width: 100%; height: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); justify-content: space-between; }
+    .sub-menu { position: static; display: none; width: 100%; background: rgba(0,0,0,0.2); }
+    .menu-item.open .sub-menu { display: flex; }
+  }
+
+  @media (min-width: 1101px) {
+    .mobile-nav { display: none; }
+    body { padding-bottom: 0; }
   }
 
   .footer { 
-    width: 100%; text-align: center; padding: 60px 20px; 
+    width: 100%; text-align: center; padding: 60px 20px 100px 20px; 
     background: var(--bg-card); border-top: 4px solid var(--accent-gold); 
     color: var(--text-primary); font-size: 14px;
   }
@@ -243,7 +269,7 @@
 
 <div class="map-outer">
   <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2568.513224765636!2d-97.1353235234857!3d49.9265144714972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42ea2f7d1f5b0001%3A0x8898b0f836592655!2s353%20Mountain%20Ave%2C%20Winnipeg%2C%20MB%20R2W%201J9!5e0!3m2!1sen!2sca!4v1700000000000!5m2!1sen!2sca" 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2568.52627993414!2d-97.1448658!3d49.9264426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52ea717cc4366627%3A0x6e9a7e6b668f128e!2s353%20Mountain%20Ave%2C%20Winnipeg%2C%20MB%20R2W%201J9!5e0!3m2!1sen!2sca!4v1700000000000!5m2!1sen!2sca" 
     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
   </iframe>
 </div>
@@ -253,6 +279,13 @@
   Debre Genet EOTC Winnipeg © 2026<br><br>
   <strong>"Peace be to this house." - Luke 10:5</strong>
 </footer>
+
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item"><i>🏠</i>Home</a>
+    <a href="full-calendar.html" class="nav-item"><i>📅</i>Events</a>
+    <a href="donations.html" class="nav-item"><i>❤️</i>Donate</a>
+    <a href="contact.html" class="nav-item active"><i>📍</i>Visit</a>
+</nav>
 
 <script>
   function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
@@ -268,4 +301,3 @@
 
 </body>
 </html>
-

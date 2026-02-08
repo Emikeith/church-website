@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Gallery | Debre Genet EOTC Winnipeg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sky-bg: #F8FBFF;
+            --sky-main: #0077CC;
+            --sky-deep: #004477;
+            --holy-gold: #D4AF37;
+            --text-dark: #2C3E50;
+            --text-soft: #5D6D7E;
+            --white: #FFFFFF;
+            --shadow: 0 15px 35px rgba(0, 119, 204, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--sky-bg);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            padding-bottom: 60px;
+        }
+
+        .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0; z-index: 1000;
+            border-bottom: 1px solid #E1F0FF;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--sky-main);
+            font-weight: 800;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* --- GALLERY TITLE --- */
+        .gallery-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(to bottom, #E1F0FF, var(--sky-bg));
+        }
+
+        .gallery-header h1 { font-size: 32px; color: var(--sky-deep); margin-bottom: 10px; }
+        .gallery-header p { font-size: 14px; color: var(--text-soft); letter-spacing: 1px; }
+
+        /* --- CATEGORY FILTERS --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding: 10px 20px;
+            scrollbar-width: none;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid var(--sky-main);
+            color: var(--sky-main);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active {
+            background: var(--sky-main);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 119, 204, 0.3);
+        }
+
+        /* --- MASONRY GRID --- */
+        .album-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            columns: 2; /* 2 columns on mobile */
+            column-gap: 15px;
+        }
+
+        .photo-card {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .photo-card:hover { transform: translateY(-5px); }
+
+        .photo-card img {
+            width: 100%;
+            display: block;
+            transition: 0.5s;
+        }
+
+        .photo-info {
+            padding: 12px;
+            background: var(--white);
+        }
+
+        .photo-info span {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--holy-gold);
+            display: block;
+            text-transform: uppercase;
+        }
+
+        /* --- LIGHTBOX --- */
+        #lightbox {
+            position: fixed; inset: 0;
+            background: rgba(0, 15, 30, 0.95);
+            backdrop-filter: blur(15px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        #lightbox.active { display: flex; animation: zoomIn 0.3s ease; }
+        
+        #lightbox img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            position: absolute; top: 25px; right: 25px;
+            color: white; font-size: 35px; cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (min-width: 768px) {
+            .album-container { columns: 3; }
+            .gallery-header h1 { font-size: 48px; }
+        }
+
+        @media (min-width: 1024px) {
+            .album-container { columns: 4; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="btn-back">✕ CLOSE ALBUM</a>
+        <div style="text-align: right;">
+            <div class="ethiopic" style="font-size: 12px; color: var(--sky-main);">ደብረ ገነት</div>
+            <div style="font-size: 8px; font-weight: 800; color: var(--holy-gold);">GALLERY</div>
+        </div>
+    </header>
+
+    <div class="gallery-header">
+        <span style="font-size: 10px; font-weight: 800; color: var(--sky-main); letter-spacing: 3px;">THE SACRED COLLECTION</span>
+        <h1 class="ethiopic">የፎቶ መዝገብ</h1>
+        <p>Capturing the spiritual essence of our community in Winnipeg.</p>
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterGallery('all')">ALL PHOTOS</button>
+        <button class="filter-btn" onclick="filterGallery('timket')">TIMKET</button>
+        <button class="filter-btn" onclick="filterGallery('sunday-school')">SUNDAY SCHOOL</button>
+        <button class="filter-btn" onclick="filterGallery('service')">HOLY SERVICE</button>
+        <button class="filter-btn" onclick="filterGallery('events')">COMMUNITY</button>
+    </div>
+
+    <div class="album-container" id="galleryGrid">
+        <div class="photo-card" data-category="timket" onclick="openLightbox(this)">
+            <img src="group1.jpg" alt="Timket Celebration">
+            <div class="photo-info"><span>Timket 2024</span></div>
+        </div>
+
+        <div class="photo-card" data-category="service" onclick="openLightbox(this)">
+            <img src="wedding.jpg" alt="Holy Matrimony">
+            <div class="photo-info"><span>Sacraments</span></div>
+        </div>
+
+        <div class="photo-card" data-category="sunday-school" onclick="openLightbox(this)">
+            <img src="kids2.jpg" alt="Children Learning">
+            <div class="photo-info"><span>Youth Ministry</span></div>
+        </div>
+
+        <div class="photo-card" data-category="sunday-school" onclick="openLightbox(this)">
+            <img src="kids.jpg" alt="Choir">
+            <div class="photo-info"><span>Sunday School</span></div>
+        </div>
+
+        <div class="photo-card" data-category="service" onclick="openLightbox(this)">
+            <img src="baptism.jpg" alt="Baptism">
+            <div class="photo-info"><span>Spiritual Birth</span></div>
+        </div>
+
+        <div class="photo-card" data-category="events" onclick="openLightbox(this)">
+            <img src="group.jpg" alt="Community gathering">
+            <div class="photo-info"><span>Believers</span></div>
+        </div>
+        
+        </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightboxImg" src="">
+    </div>
+
+    <footer style="text-align: center; padding: 60px 20px; opacity: 0.6;">
+        <p style="font-size: 11px; font-weight: 700;">✥ DEBRE GENET EOTC WINNIPEG ✥</p>
+        <p style="font-size: 10px; margin-top: 5px;">Glory be to the Father, the Son, and the Holy Spirit.</p>
+    </footer>
+
+    <script>
+        // Lightbox Logic
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = imgSrc;
+            lb.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Filtering Logic
+        function filterGallery(category) {
+            // Update buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter items
+            const items = document.querySelectorAll('.photo-card');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

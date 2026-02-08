@@ -2,7 +2,7 @@
 <html lang="am">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Administration & Clergy - Debre Genet Winnipeg</title>
 <style>
   /* --- SACRED PALETTE & FONTS --- */
@@ -13,11 +13,13 @@
     --bg-card: #FFF8E1;           /* Cream Card */
     --white: #ffffff;
     --glass: rgba(99, 15, 22, 0.96);
-    --glow: rgba(212, 160, 23, 0.45); /* Sham Glow */
+    --glow: rgba(212, 160, 23, 0.45); 
+    --text-soft: #5D6D7E;
   }
 
   /* 1. GLOBAL LAYOUT */
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  
   body { 
     margin: 0; padding: 0; 
     background: var(--bg-page); 
@@ -25,6 +27,7 @@
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
+    padding-bottom: 80px; /* Space for mobile nav */
   }
   
   body::after {
@@ -60,11 +63,7 @@
     height: 100%; display: flex; align-items: center;
   }
 
-  /* GOLD BACKGROUND FOR ACTIVE PAGE */
-  .active-page {
-    background: var(--accent-gold) !important;
-    color: var(--text-primary) !important;
-  }
+  .active-page { background: var(--accent-gold) !important; color: var(--text-primary) !important; }
 
   .sub-menu {
     position: absolute; top: 80px; left: 0;
@@ -80,7 +79,19 @@
   .sub-menu a:hover { background: var(--accent-gold); color: var(--text-primary); }
   .menu-item:hover .sub-menu { display: flex; }
 
-    .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
+  .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
+
+  /* 3. MOBILE APP BAR */
+  .mobile-nav {
+    position: fixed; bottom: 0; width: 100%;
+    background: rgba(255, 248, 225, 0.98); 
+    backdrop-filter: blur(15px);
+    display: flex; justify-content: space-around;
+    padding: 12px 0 25px; border-top: 2px solid var(--accent-gold); z-index: 10000;
+  }
+  .nav-item { text-align: center; text-decoration: none; color: var(--text-soft); font-size: 10px; font-weight: 600; }
+  .nav-item.active { color: var(--text-primary); }
+  .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; font-style: normal; }
 
   @media (max-width: 1100px) {
     .menu-toggle { display: block; z-index: 10001; }
@@ -97,7 +108,11 @@
     .menu-item.open .sub-menu { display: flex; }
   }
 
-  /* 3. CONTENT */
+  @media (min-width: 1101px) {
+    .mobile-nav { display: none; }
+  }
+
+  /* 4. CONTENT */
   .container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 120px 5% 60px 5%; }
 
   .scripture-wrap {
@@ -122,7 +137,7 @@
   .main-title-am { font-size: clamp(35px, 8vw, 60px); font-weight: 900; margin: 0; color: var(--text-primary); }
   .main-title-en { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 4px; font-weight: 800; }
 
-  /* 4. LEADER CARDS */
+  /* 5. LEADER CARDS */
   .leader-card {
     width: 100%; max-width: 1200px; background-color: var(--bg-card); 
     border: 1px solid var(--accent-gold); display: flex; flex-direction: column; 
@@ -184,7 +199,7 @@
       <div class="sub-menu"><a href="donations.html">Donations</a><a href="building.html">Building Project</a></div>
     </div>
     <div class="menu-item"><a href="contact.html">CONTACT US</a></div>
-    </div>
+  </div>
 </nav>
 
 <div class="container">
@@ -229,58 +244,39 @@
     </div>
   </div>
 
-  <div class="leader-card">
-    <div class="image-wrap">
-      <div class="slider-img img-1"> <img src="sample1.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
-      <div class="slider-img img-2"> <img src="sample2.jpg" alt="Sacred Moments" style="width: 100%; height: 100%; object-fit: cover;"></div>
-    </div>
-    <div class="content-side">
-      <div class="orthodox-icon" style="color: var(--text-primary);">✥</div>
-      <div class="name-am">ቀሲስ (ስም)</div>
-      <div class="title-en">Assistant Priest</div>
-      <p class="bio-am">በቅዳሴ እና በትምህርተ ወንጌል ምእመናንን በማገልገል ላይ ይገኛሉ።</p>
-      <p class="bio-en">Dedicated to serving the congregation through the holy sacraments and spiritual teaching.</p>
-      <a href="#" class="btn">Full Biography</a>
-    </div>
-  </div>
-
   <footer>Debre Genet EOTC Winnipeg © 2026</footer>
 </div>
+
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item"><i>🏠</i>Home</a>
+    <a href="full-calendar.html" class="nav-item"><i>📅</i>Events</a>
+    <a href="donations.html" class="nav-item"><i>❤️</i>Donate</a>
+    <a href="contact.html" class="nav-item"><i>📍</i>Visit</a>
+</nav>
 
 <script>
   function toggleMenu() { 
     document.getElementById('navLinks').classList.toggle('active'); 
   }
 
-  // UPDATED: Shrinks on second click and closes any other open menu
   function toggleSub(el) { 
     if (window.innerWidth <= 1100) {
       const parent = el.parentElement;
       const isOpen = parent.classList.contains('open');
-      
-      // Close all open menus
       document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
-      
-      // If the clicked one wasn't open, open it. (If it was open, it stays closed/shrunk)
-      if (!isOpen) {
-        parent.classList.add('open');
-      }
+      if (!isOpen) { parent.classList.add('open'); }
     } 
   }
 
-  // UPDATED: Robust Active Page detection with Gold Background
+  // Robust Active Page detection with Gold Background
   document.addEventListener("DOMContentLoaded", () => {
     const currentUrl = window.location.href.toLowerCase();
     const allLinks = document.querySelectorAll(".nav-links a");
     
     allLinks.forEach(link => {
       const linkHref = link.getAttribute("href").toLowerCase();
-      
-      // Check if URL ends with the link destination (handles clergy.html, /clergy.html, etc.)
       if (currentUrl.endsWith(linkHref) || (linkHref === "clergy.html" && currentUrl.includes("clergy"))) {
         link.classList.add("active-page");
-        
-        // Highlight the parent (e.g., "HOME") if the link is in a sub-menu
         const subMenu = link.closest(".sub-menu");
         if (subMenu) {
           subMenu.previousElementSibling.classList.add("active-page");
@@ -291,6 +287,3 @@
 </script>
 </body>
 </html>
-
-
-

@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Upcoming Events - Debre Genet Winnipeg</title>
 <style>
-  /* --- SACRED PALETTE & FONTS (Ministry Hub Style) --- */
+  /* --- SACRED PALETTE & FONTS --- */
   :root {
     --text-primary: #630F16;      /* Deep Burgundy */
     --accent-gold: #D4A017;       /* Gold */
     --bg-page: #F9E8B2;           /* Page Background */
     --bg-card: #FFF8E1;           /* Cream Card */
-    --white: #ffffff;
+    --white-alt: #FEF9E7;         /* Off-white substitute */
     --glass: rgba(99, 15, 22, 0.96);
     --glow: rgba(212, 160, 23, 0.45);
+    --text-soft: #5D6D7E;
   }
 
   /* 1. GLOBAL LAYOUT */
@@ -25,6 +26,7 @@
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
+    padding-bottom: 90px; /* Space for mobile app bar */
   }
   
   body::after {
@@ -33,7 +35,7 @@
     color: var(--accent-gold); opacity: 0.04; z-index: -1; pointer-events: none;
   }
 
-  /* 2. NAVIGATION (Identical to Ministry Hub) */
+  /* 2. NAVIGATION (Desktop & Mobile Dropdown) */
   .main-nav {
     position: fixed; top: 0; width: 100%; height: 80px;
     background: var(--glass);
@@ -48,7 +50,7 @@
   .logo-sample {
     width: 45px; height: 45px; background: var(--accent-gold); border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 28px; color: var(--text-primary); border: 2px solid white;
+    font-size: 28px; color: var(--text-primary); border: 2px solid var(--bg-card);
   }
   .nav-brand-text { color: var(--accent-gold); font-weight: 900; font-size: 18px; letter-spacing: 1px; }
 
@@ -79,11 +81,23 @@
   .btn-live {
     background: #FF0000; color: white !important; padding: 8px 16px; border-radius: 50px;
     display: flex; align-items: center; gap: 8px; font-weight: 900 !important; 
-    margin-left: 10px; border: 1px solid white; text-decoration: none; font-size: 11px;
+    margin-left: 10px; border: 1px solid var(--bg-card); text-decoration: none; font-size: 11px;
     flex-shrink: 0;
   }
 
   .menu-toggle { display: none; color: var(--accent-gold); font-size: 32px; cursor: pointer; }
+
+  /* 3. MOBILE APP BAR (Bottom) */
+  .mobile-nav {
+    position: fixed; bottom: 0; width: 100%;
+    background: var(--bg-card); 
+    display: flex; justify-content: space-around;
+    padding: 12px 0 25px; border-top: 2px solid var(--accent-gold); z-index: 10000;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+  }
+  .nav-item { text-align: center; text-decoration: none; color: var(--text-soft); font-size: 10px; font-weight: 600; }
+  .nav-item.active { color: var(--text-primary); }
+  .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; font-style: normal; }
 
   @media (max-width: 1100px) {
     .menu-toggle { display: block; z-index: 10001; }
@@ -100,7 +114,9 @@
     .menu-item.open .sub-menu { display: flex; }
   }
 
-  /* 3. CONTENT AREA STYLING */
+  @media (min-width: 1101px) { .mobile-nav { display: none; } }
+
+  /* 4. CONTENT STYLING */
   .hero-section {
     background: var(--bg-card);
     text-align: center;
@@ -114,12 +130,8 @@
   .main-title-am { color: var(--text-primary); font-size: clamp(35px, 8vw, 55px); font-weight: bold; margin: 0; }
   .main-title-en { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; font-weight: 800; margin-top: 10px; }
 
-  .intro-text {
-    max-width: 750px; margin: 25px auto 0 auto;
-    font-size: 18px; line-height: 1.7; color: #444;
-  }
+  .intro-text { max-width: 750px; margin: 25px auto 0 auto; font-size: 18px; line-height: 1.7; color: #444; }
 
-  /* 4. SERVICES GRID (Regular Schedule) */
   .group-title {
     width: 100%; background: var(--text-primary); color: var(--accent-gold);
     text-align: center; padding: 25px 0; margin: 40px 0; border-top: 3px solid var(--accent-gold); border-bottom: 3px solid var(--accent-gold);
@@ -139,21 +151,21 @@
   .service-name { color: var(--text-primary); font-size: 22px; font-weight: bold; margin-bottom: 8px; }
   .service-time { color: #666; font-size: 16px; font-style: italic; }
 
-  /* 5. EVENTS LIST (Dynamic) */
+  /* 5. EVENTS LIST */
   .events-container { width: 95%; max-width: 900px; margin: 0 auto; }
   .event-item {
-    background: var(--white); margin-bottom: 35px; padding: 40px;
+    background: var(--bg-card); margin-bottom: 35px; padding: 40px;
     border-left: 12px solid var(--text-primary);
-    border-top: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;
+    border-top: 1px solid var(--accent-gold); border-right: 1px solid var(--accent-gold); border-bottom: 1px solid var(--accent-gold);
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   }
   .greg-date-large { color: var(--text-primary); font-size: 24px; font-weight: bold; display: block; }
   .eth-date-sub { color: var(--accent-gold); font-size: 13px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; display: block; }
   .event-title { font-size: clamp(22px, 5vw, 30px); color: #111; margin-bottom: 10px; font-weight: bold; line-height: 1.2; }
-  .event-meta { font-size: 15px; color: #777; font-style: italic; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 15px; }
+  .event-meta { font-size: 15px; color: #777; font-style: italic; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 15px; margin-bottom: 15px; }
   .event-notes { font-size: 17px; line-height: 1.8; color: #444; }
 
-  .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--text-primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 50px auto; }
+  .loader { border: 4px solid var(--bg-card); border-top: 4px solid var(--text-primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 50px auto; }
   @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
   .footer { 
@@ -224,10 +236,17 @@
 </div>
 
 <footer class="footer">
-  353 Mountain Ave, Winnipeg, MB R2W 1J9<br>
-  Debre Genet EOTC Winnipeg © 2026<br>
+  353 Mountain Ave, Winnipeg, MB R2W 1J9<br><br>
+  Debre Genet EOTC Winnipeg © 2026<br><br>
   <strong>May the grace of God be with you.</strong>
 </footer>
+
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-item"><i>🏠</i><div>Home</div></a>
+  <a href="upcoming.html" class="nav-item active"><i>📅</i><div>Events</div></a>
+  <a href="ministry-hub.html" class="nav-item"><i>⛪</i><div>Ministries</div></a>
+  <a href="donations.html" class="nav-item"><i>🤲</i><div>Give</div></a>
+</nav>
 
 <script>
   /* MENU LOGIC */
@@ -309,4 +328,3 @@
 
 </body>
 </html>
-

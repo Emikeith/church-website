@@ -7,53 +7,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0077CC;
-            --primary-light: #E1F0FF;
-            --gold: #C5A028;
-            --bg: #F8FAFC;
-            --card: #FFFFFF;
-            --text: #0F172A;
-            --text-soft: #64748B;
+            /* SACRED PALETTE UPDATED */
+            --primary: #630F16;           /* Deep Burgundy */
+            --primary-light: #F9E8B2;     /* Pale Cream/Gold */
+            --gold: #D4A017;              /* Metallic Gold */
+            --bg: #F9E8B2;                /* Page Background */
+            --card: #FFF8E1;              /* Cream Card */
+            --text: #3D0A0E;              /* Darker Burgundy for text */
+            --text-soft: #8B5E3C;         /* Earthy Brown */
+            --white: #FFFFFF;
+            --nav-height: 75px;           /* Bottom Nav Height */
             --safe-bottom: env(safe-area-inset-bottom);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg); font-family: 'Montserrat', sans-serif; color: var(--text); line-height: 1.6; }
+        body { background-color: var(--bg); font-family: 'Montserrat', sans-serif; color: var(--text); line-height: 1.6; padding-bottom: var(--nav-height); }
         .ethiopic { font-family: 'Noto Serif Ethiopic', serif; }
 
         header {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(99, 15, 22, 0.96);
             backdrop-filter: blur(20px);
             padding: 20px 20px 15px;
             position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--gold);
         }
-        .brand { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; display: block; text-align: center; }
-        h1 { font-size: 24px; text-align: center; margin-bottom: 15px; color: var(--text); }
+        .brand { font-size: 10px; font-weight: 800; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; display: block; text-align: center; }
+        h1 { font-size: 24px; text-align: center; margin-bottom: 15px; color: var(--white); }
 
         .search-container { position: relative; max-width: 600px; margin: 0 auto; }
         .search-input {
-            width: 100%; padding: 14px 20px 14px 45px; border-radius: 16px;
-            border: none; background: var(--bg); font-size: 16px; outline: none;
-            transition: all 0.3s; border: 2px solid transparent;
+            width: 100%; padding: 14px 20px 14px 45px; border-radius: 50px;
+            border: 2px solid var(--gold); background: var(--card); font-size: 16px; outline: none;
+            transition: all 0.3s; color: var(--text);
         }
-        .search-input:focus { background: #fff; border-color: var(--primary); box-shadow: 0 10px 25px rgba(0,119,204,0.1); }
-        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); opacity: 0.4; }
+        .search-input:focus { background: #fff; box-shadow: 0 10px 25px rgba(99, 15, 22, 0.15); }
+        .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); opacity: 0.6; }
 
-        .cat-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 15px 20px; scrollbar-width: none; }
+        .cat-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 15px 20px; scrollbar-width: none; background: rgba(212, 160, 23, 0.1); }
         .cat-scroll::-webkit-scrollbar { display: none; }
         .cat-chip {
             padding: 10px 20px; border-radius: 12px; background: var(--card);
             color: var(--text-soft); font-size: 12px; font-weight: 600;
-            white-space: nowrap; cursor: pointer; border: 1px solid #E2E8F0; transition: 0.2s;
+            white-space: nowrap; cursor: pointer; border: 1px solid var(--gold); transition: 0.2s;
         }
         .cat-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); transform: scale(1.05); }
 
-        .grid { max-width: 600px; margin: 0 auto; padding: 0 20px 120px; }
+        .grid { max-width: 600px; margin: 0 auto; padding: 0 20px 40px; }
         .card {
             background: var(--card); border-radius: 20px; padding: 18px;
             margin-bottom: 12px; display: flex; align-items: center; gap: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 15, 22, 0.08); transition: 0.3s;
+            border-left: 5px solid var(--gold);
             animation: slideUp 0.5s ease backwards;
         }
         .card:active { transform: scale(0.97); background: var(--primary-light); }
@@ -61,50 +65,96 @@
             width: 50px; height: 50px; border-radius: 14px;
             background: var(--primary-light); display: flex;
             align-items: center; justify-content: center; font-size: 20px;
+            border: 1px solid var(--gold);
         }
         .m-title { font-size: 17px; font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
         .m-sub { font-size: 11px; font-weight: 800; color: var(--gold); text-transform: uppercase; }
 
+        /* --- DRAWER --- */
         #drawer {
             position: fixed; bottom: -100%; left: 0; width: 100%; height: 96vh;
             background: var(--card); z-index: 2000; border-radius: 32px 32px 0 0;
             transition: 0.6s cubic-bezier(0.32, 1, 0.23, 1);
             display: flex; flex-direction: column;
+            box-shadow: 0 -15px 50px rgba(0,0,0,0.3);
         }
         #drawer.active { bottom: 0; }
-        .handle { width: 40px; height: 5px; background: #E2E8F0; border-radius: 10px; margin: 12px auto; }
+        .handle { width: 40px; height: 5px; background: var(--gold); border-radius: 10px; margin: 12px auto; opacity: 0.5; }
         .drawer-header { padding: 0 25px 15px; display: flex; justify-content: space-between; align-items: center; }
 
         .viewport { flex: 1; overflow-y: auto; padding: 20px 25px; position: relative; }
-        .lyric-text { white-space: pre-line; font-size: 21px; line-height: 2.2; text-align: center; padding-bottom: 40px; color: var(--text); }
+        .lyric-text { white-space: pre-line; font-size: 21px; line-height: 2.2; text-align: center; padding-bottom: 40px; color: var(--text); font-weight: 600; }
 
         #scrollHint {
             position: sticky; bottom: 20px; margin: 0 auto; width: fit-content;
             padding: 10px 20px; background: var(--primary); color: white;
             border-radius: 50px; font-size: 11px; font-weight: 700;
-            box-shadow: 0 10px 20px rgba(0,119,204,0.3); z-index: 10;
+            box-shadow: 0 10px 20px rgba(99, 15, 22, 0.3); z-index: 10;
             display: none; align-items: center; gap: 8px; animation: bounce 2s infinite;
         }
 
+        /* --- UPDATED PLAYER AREA TO PREVENT OVERLAP --- */
         .player-area {
-            background: #F8FAFC; border-top: 1px solid #EDF2F7;
-            padding: 20px 20px calc(20px + var(--safe-bottom));
+            background: var(--white); border-top: 3px solid var(--gold);
+            /* Padding bottom includes nav height + extra cushion */
+            padding: 20px 20px calc(var(--nav-height) + var(--safe-bottom) + 10px);
         }
         .media-container { max-width: 500px; margin: 0 auto; border-radius: 16px; overflow: hidden; }
         audio { width: 100%; height: 50px; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(8px); display: none; z-index: 1500; }
+        /* --- APP NAVIGATION --- */
+        .bottom-app-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height);
+            background: var(--card); display: flex; justify-content: space-around;
+            align-items: center; z-index: 10005; border-top: 2px solid var(--gold);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
+        .app-item {
+            text-decoration: none; display: flex; flex-direction: column;
+            align-items: center; color: var(--text); flex: 1;
+        }
+        .app-item span.icon { font-size: 1.4rem; margin-bottom: 2px; }
+        .app-item span.label { font-size: 9px; font-weight: 800; text-transform: uppercase; }
+
+        .overlay { position: fixed; inset: 0; background: rgba(61, 10, 14, 0.6); backdrop-filter: blur(8px); display: none; z-index: 1500; }
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        .skeleton { height: 80px; background: #eee; margin-bottom: 12px; border-radius: 20px; animation: pulse 1.5s infinite; }
+        .skeleton { height: 80px; background: rgba(212, 160, 23, 0.1); margin-bottom: 12px; border-radius: 20px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        @media (min-width: 768px) {
+            .bottom-app-nav { display: none; }
+            body { padding-bottom: 0; }
+            .player-area { padding-bottom: 30px; }
+            #drawer { width: 500px; right: -550px; left: auto; border-radius: 32px 0 0 32px; }
+            #drawer.active { right: 0; }
+        }
     </style>
 </head>
 <body>
+
+    <nav class="bottom-app-nav">
+        <a href="index.html" class="app-item">
+            <span class="icon">🏠</span>
+            <span class="label">Home</span>
+        </a>
+        <a href="upcoming.html" class="app-item">
+            <span class="icon">📅</span>
+            <span class="label">Events</span>
+        </a>
+        <a href="donations.html" class="app-item">
+            <span class="icon">❤️</span>
+            <span class="label">Donate</span>
+        </a>
+        <a href="contact.html" class="app-item">
+            <span class="icon">📍</span>
+            <span class="label">Visit</span>
+        </a>
+    </nav>
 
     <header>
         <span class="brand">Debre Genet Winnipeg</span>
@@ -131,11 +181,11 @@
         <div class="handle"></div>
         <div class="drawer-header">
             <span id="l-cat" style="font-size: 11px; font-weight: 800; color: var(--gold);">CATEGORY</span>
-            <button onclick="closeDrawer()" style="background:none; border:none; font-size: 28px; color: var(--text-soft); cursor:pointer;">&times;</button>
+            <button onclick="closeDrawer()" style="background:none; border:none; font-size: 35px; color: var(--primary); cursor:pointer; line-height:1;">&times;</button>
         </div>
         
         <div class="viewport" id="viewport" onscroll="checkScroll()">
-            <h2 id="l-title" class="ethiopic" style="text-align:center; margin-bottom: 20px; font-size: 26px;"></h2>
+            <h2 id="l-title" class="ethiopic" style="text-align:center; margin-bottom: 20px; font-size: 26px; color: var(--primary);"></h2>
             <p id="l-body" class="ethiopic lyric-text"></p>
             <div id="scrollHint">ሙሉውን ለማየት ወደ ታች ይውረዱ ↓</div>
         </div>
@@ -146,7 +196,6 @@
     </div>
 
     <script>
-        // UPDATED LINK: Changed from /pubhtml to /pub?output=csv
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQsq3NgPNxQbtyDSL6yGGslLfyjiDkR-1qPZivnk4f0xko9eaqWkOTxD8K83xi2qXno4EEorjQPEJgQ/pub?output=csv';
 
         let allMezmurs = [];
@@ -155,12 +204,9 @@
             try {
                 const res = await fetch(SHEET_CSV_URL);
                 const csvText = await res.text();
-                
-                // Enhanced CSV Parser for complex text and quotes
                 const rows = parseCSV(csvText);
                 const temp = [];
                 
-                // Starting from i=1 to skip the header row
                 for(let i = 1; i < rows.length; i++) {
                     if (rows[i].length < 4) continue;
                     temp.push({
@@ -177,11 +223,10 @@
                 document.getElementById('loadingArea').style.display = 'none';
                 document.getElementById('mezmurList').style.display = 'block';
             } catch (e) {
-                document.getElementById('loadingArea').innerHTML = "<p style='text-align:center; padding: 20px;'>Error loading mezmurs. Please ensure your Google Sheet is published as CSV.</p>";
+                document.getElementById('loadingArea').innerHTML = "<p style='text-align:center; padding: 20px;'>Error loading mezmurs.</p>";
             }
         }
 
-        // Professional CSV Parser to handle lyrics with commas and newlines
         function parseCSV(str) {
             const arr = [];
             let quote = false;
@@ -209,7 +254,7 @@
                         <span class="m-title ethiopic">${m.title}</span>
                         <span class="m-sub">${m.displayCat}</span>
                     </div>
-                    <div style="color:#CBD5E1">❯</div>
+                    <div style="color:var(--gold)">❯</div>
                 </div>
             `).join('');
         }
@@ -219,7 +264,8 @@
             const bar = document.getElementById('catBar');
             cats.forEach(c => {
                 if(!c) return;
-                const label = allMezmurs.find(m => m.cat === c).displayCat;
+                const match = allMezmurs.find(m => m.cat === c);
+                const label = match ? match.displayCat : c;
                 bar.innerHTML += `<div class="cat-chip" onclick="filterCat('${c}', this)">${label}</div>`;
             });
         }

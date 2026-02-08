@@ -8,15 +8,19 @@
   /* --- SACRED PALETTE & FONTS --- */
   :root {
     --text-primary: #630F16;      
-    --accent-gold: #D4A017;       
-    --bg-page: #F9E8B2;           
-    --bg-card: #FFF8E1;           
+    --accent-gold: #D4A017;        
+    --bg-page: #F9E8B2;            
+    --bg-card: #FFF8E1;            
     --white: #ffffff;
     --glass: rgba(99, 15, 22, 0.96);
     --glow: rgba(212, 160, 23, 0.45);
+    --sky-main: #0077CC; /* From first code for nav items */
+    --sky-light: #E1F0FF;
+    --text-soft: #5D6D7E;
   }
 
-  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+  
   body { 
     margin: 0; padding: 0; 
     background: var(--bg-page); 
@@ -24,6 +28,7 @@
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
+    padding-bottom: 80px; /* Space for mobile nav */
   }
   
   body::after {
@@ -100,7 +105,7 @@
   .verse-am { font-size: 22px; font-weight: bold; display: block; margin-bottom: 8px; }
   .verse-en { font-style: italic; color: #555; display: block; margin-bottom: 5px; }
 
-  /* --- MOTIVATION SECTION (BILINGUAL) --- */
+  /* --- MOTIVATION SECTION --- */
   .motivation-container {
     max-width: 1100px; margin: 50px auto; padding: 0 20px;
     display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -120,7 +125,7 @@
   .m-text-am { font-size: 17px; color: #444; line-height: 1.4; display: block; margin-bottom: 8px; }
   .m-text-en { font-size: 14px; color: #666; font-style: italic; line-height: 1.4; display: block; }
 
-  /* --- ZEFFY CONTAINER --- */
+  /* --- ZEFFY CONTAINER (FIXED SCROLLING) --- */
   .payment-header { text-align: center; margin: 60px 20px 30px 20px; }
   .payment-box {
     width: 95%; max-width: 900px; margin: 0 auto 80px auto;
@@ -128,7 +133,23 @@
     overflow: hidden; border: 4px solid var(--accent-gold);
     box-shadow: 0 20px 60px rgba(99, 15, 22, 0.2);
   }
-  .zeffy-iframe { width: 100%; height: 1200px; border: none; }
+  /* Crucial change: auto height and scrolling="yes" to ensure credit card info is reachable */
+  .zeffy-iframe { 
+    width: 100%; 
+    height: 1200px; /* High height to show full form */
+    border: none; 
+  }
+
+  /* --- MOBILE BOTTOM NAV (APP STYLE) --- */
+  .mobile-nav {
+    position: fixed; bottom: 0; width: 100%;
+    background: rgba(255,255,255,0.98); backdrop-filter: blur(15px);
+    display: flex; justify-content: space-around;
+    padding: 12px 0 25px; border-top: 2px solid var(--accent-gold); z-index: 10000;
+  }
+  .nav-item { text-align: center; text-decoration: none; color: var(--text-soft); font-size: 10px; font-weight: 600; }
+  .nav-item.active { color: var(--text-primary); }
+  .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; font-style: normal; }
 
   @media (max-width: 1100px) {
     .menu-toggle { display: block; }
@@ -144,8 +165,13 @@
     .menu-item.open .sub-menu { display: flex; }
   }
 
+  @media (min-width: 1101px) {
+    .mobile-nav { display: none; }
+    body { padding-bottom: 0; }
+  }
+
   .footer { 
-    width: 100%; text-align: center; padding: 60px 20px; 
+    width: 100%; text-align: center; padding: 60px 20px 100px 20px; 
     background: var(--bg-card); border-top: 4px solid var(--accent-gold); 
     color: var(--text-primary); font-size: 14px;
   }
@@ -225,8 +251,7 @@
     class="zeffy-iframe"
     allowpaymentrequest 
     allowtransparency="true"
-    scrolling="no">
-  </iframe>
+    scrolling="yes"> </iframe>
 </div>
 
 <footer class="footer">
@@ -234,6 +259,13 @@
   Debre Genet EOTC Winnipeg © 2026<br><br>
   <strong>"Give, and it will be given to you." - Luke 6:38</strong>
 </footer>
+
+<nav class="mobile-nav">
+    <a href="index.html" class="nav-item"><i>🏠</i>Home</a>
+    <a href="full-calendar.html" class="nav-item"><i>📅</i>Events</a>
+    <a href="donations.html" class="nav-item active"><i>❤️</i>Donate</a>
+    <a href="contact.html" class="nav-item"><i>📍</i>Visit</a>
+</nav>
 
 <script>
   function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
